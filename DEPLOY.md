@@ -27,7 +27,8 @@ In Cloudflare Pages project → **Custom domains** → add your domain (e.g. `ah
 3. **Location:** Google Meet (add video conferencing)
 4. Set your available hours
 5. Copy the **booking page** link
-6. Paste in `js/config.js` → `googleBookingUrl: 'YOUR_LINK_HERE'`
+6. Paste short link in `js/config.js` → `googleBookingUrl`
+7. Open that link once in the browser, copy the full `calendar.google.com/calendar/appointments/schedules/...` URL from the address bar, and set `googleBookingEmbedUrl` (required for Safari on Mac iframe embed)
 
 Clients pick date/time on your site; they get **email + Google Meet link** automatically. Meetings no longer use WhatsApp.
 

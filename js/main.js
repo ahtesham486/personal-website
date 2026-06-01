@@ -39,37 +39,65 @@
     });
   }
 
+  function resolveBookingEmbedUrl(raw, embedRaw) {
+    const prefer = (embedRaw || '').trim() || (raw || '').trim();
+    if (!prefer) return '';
+
+    try {
+      const u = new URL(prefer);
+
+      if (u.hostname.includes('calendar.app.google')) {
+        return '';
+      }
+
+      if (u.hostname.includes('calendar.google.com') && u.pathname.includes('/appointments/')) {
+        u.searchParams.set('gv', 'true');
+        return u.toString();
+      }
+
+      if (u.hostname.includes('calendly.com')) {
+        return prefer.includes('?') ? `${prefer}&embed_type=Inline` : `${prefer}?embed_type=Inline`;
+      }
+
+      return prefer;
+    } catch {
+      return '';
+    }
+  }
+
   function initBookingWidget() {
     const frame = document.getElementById('bookingFrame');
     const placeholder = document.getElementById('bookingPlaceholder');
     const openLink = document.getElementById('bookingOpenLink');
     const raw = (cfg.googleBookingUrl || '').trim();
-    if (!raw) return;
+    const embedRaw = (cfg.googleBookingEmbedUrl || '').trim();
+    if (!raw && !embedRaw) return;
+
+    const pageUrl = raw || embedRaw;
+    const embedUrl = resolveBookingEmbedUrl(raw, embedRaw);
 
     if (openLink) {
-      openLink.href = raw;
+      openLink.href = pageUrl;
       openLink.classList.remove('hidden');
     }
+    if (!frame) return;
 
-    if (!frame || !placeholder) return;
-
-    try {
-      const u = new URL(raw);
-      if (u.hostname.includes('calendar.google.com')) {
-        u.searchParams.set('gv', 'true');
-        frame.src = u.toString();
-      } else if (u.hostname.includes('calendar.app.google')) {
-        frame.src = raw;
-      } else if (u.hostname.includes('calendly.com')) {
-        frame.src = raw.includes('?') ? `${raw}&embed_type=Inline` : `${raw}?embed_type=Inline`;
-      } else {
-        frame.src = raw;
+    if (!embedUrl) {
+      if (placeholder) {
+        placeholder.classList.remove('hidden');
+        placeholder.innerHTML =
+          '<p class="booking-placeholder-title">Add embed URL in config</p>' +
+          '<p>Set <code>googleBookingEmbedUrl</code> in <code>js/config.js</code> to your full ' +
+          '<code>calendar.google.com/calendar/appointments/schedules/…</code> link (required for Safari).</p>';
       }
-      frame.classList.remove('hidden');
-      placeholder.classList.add('hidden');
-    } catch {
-      /* invalid URL */
+      frame.classList.add('hidden');
+      return;
     }
+
+    if (placeholder) placeholder.classList.add('hidden');
+
+    frame.src = embedUrl;
+    frame.classList.remove('hidden');
   }
 
   // Header scroll effect

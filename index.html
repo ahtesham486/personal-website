@@ -413,18 +413,17 @@
               id="bookingOpenLink"
               class="btn btn-primary booking-open-link"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
             >
               Open calendar in new tab
             </a>
             <div class="booking-placeholder hidden" id="bookingPlaceholder" aria-hidden="true"></div>
             <iframe
               id="bookingFrame"
-              class="booking-frame"
-              src="https://calendar.app.google/SY15mssjkE73fTrZ8"
+              class="booking-frame hidden"
               title="Book a free 15-minute consultation with Ahtasham Aslam"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
+              allow="fullscreen; clipboard-write"
+              referrerpolicy="strict-origin-when-cross-origin"
             ></iframe>
           </div>
 

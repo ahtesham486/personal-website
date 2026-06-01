@@ -1152,6 +1152,7 @@ ul { list-style: none; }
   height: min(620px, 75vh);
   border: none;
   display: block;
+  flex: 1;
 }
 
 .booking-placeholder {
