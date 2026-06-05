@@ -40,13 +40,17 @@ export function setCharTimeline(
     },
   });
 
-  // Hide monitor screen on load (prevents white box on home)
+  let screenLight: any = null;
+  let monitor: any = null;
+
+  // Hide monitor on home load (prevents white box), reveal on scroll in About
   character?.children.forEach((object: any) => {
     if (object.name === "Plane004") {
       object.children.forEach((child: any) => {
         child.material.transparent = true;
         child.material.opacity = 0;
         if (child.material.name === "Material.027") {
+          monitor = child;
           child.material.color.set("#FFFFFF");
         }
       });
@@ -55,6 +59,7 @@ export function setCharTimeline(
       object.material.transparent = true;
       object.material.opacity = 0;
       object.material.emissive.set("#C8BFFF");
+      screenLight = object;
       gsap.timeline({ repeat: -1, repeatRefresh: true }).to(object.material, {
         emissiveIntensity: () => intensity * 8,
         duration: () => Math.random() * 0.6,
@@ -63,9 +68,11 @@ export function setCharTimeline(
     }
   });
 
+  const neckBone = character?.getObjectByName("spine005");
+
   if (window.innerWidth > 1024) {
-    if (character) {
-      // Home — original landing scroll
+    if (character && monitor && screenLight && neckBone) {
+      // Home — landing scroll
       tl1
         .fromTo(character.rotation, { y: 0 }, { y: 0.7, duration: 1 }, 0)
         .to(camera.position, { z: 22 }, 0)
@@ -75,26 +82,58 @@ export function setCharTimeline(
         .fromTo(".about-me", { y: "-50%" }, { y: "0%" }, 0)
         .to(
           ".character-container",
-          { opacity: 0, visibility: "hidden", pointerEvents: "none", duration: 0.4 },
-          0.75
+          { opacity: 1, visibility: "visible", pointerEvents: "auto" },
+          0
         );
 
-      // About — text only, no character
+      // About — character animates with section
       tl2
-        .set(".character-container", { opacity: 0, visibility: "hidden", pointerEvents: "none" }, 0)
+        .to(
+          camera.position,
+          { z: 75, y: 8.4, duration: 6, delay: 2, ease: "power3.inOut" },
+          0
+        )
         .to(".about-section", { y: "30%", duration: 6 }, 0)
-        .to(".about-section", { opacity: 0, delay: 3, duration: 2 }, 0);
-
-      // What I Do — no character
-      tl3
-        .set(".character-container", { opacity: 0, visibility: "hidden", pointerEvents: "none" }, 0)
-        .fromTo(".whatIDO", { y: 0 }, { y: "15%", duration: 2 }, 0)
+        .to(".about-section", { opacity: 0, delay: 3, duration: 2 }, 0)
+        .fromTo(
+          ".character-model",
+          { pointerEvents: "inherit" },
+          { pointerEvents: "none", x: "-12%", delay: 2, duration: 5 },
+          0
+        )
+        .to(character.rotation, { y: 0.92, x: 0.12, delay: 3, duration: 3 }, 0)
+        .to(neckBone.rotation, { x: 0.6, delay: 2, duration: 3 }, 0)
+        .to(monitor.material, { opacity: 1, duration: 0.8, delay: 3.2 }, 0)
+        .to(screenLight.material, { opacity: 1, duration: 0.8, delay: 4.5 }, 0)
         .fromTo(
           ".what-box-in",
           { display: "none" },
-          { display: "flex", duration: 0.1, delay: 0.3 },
+          { display: "flex", duration: 0.1, delay: 6 },
           0
+        )
+        .fromTo(
+          monitor.position,
+          { y: -10, z: 2 },
+          { y: 0, z: 0, delay: 1.5, duration: 3 },
+          0
+        )
+        .fromTo(
+          ".character-rim",
+          { opacity: 1, scaleX: 1.4 },
+          { opacity: 0, scale: 0, y: "-70%", duration: 5, delay: 2 },
+          0.3
         );
+
+      // What I Do — character moves up with section
+      tl3
+        .fromTo(
+          ".character-model",
+          { y: "0%" },
+          { y: "-100%", duration: 4, ease: "none", delay: 1 },
+          0
+        )
+        .fromTo(".whatIDO", { y: 0 }, { y: "15%", duration: 2 }, 0)
+        .to(character.rotation, { x: -0.04, duration: 2, delay: 1 }, 0);
     }
   } else {
     if (character) {
@@ -106,15 +145,6 @@ export function setCharTimeline(
         },
       });
       tM2.to(".what-box-in", { display: "flex", duration: 0.1, delay: 0 }, 0);
-      gsap.to(".character-container", {
-        scrollTrigger: {
-          trigger: ".about-section",
-          start: "top 80%",
-        },
-        opacity: 0,
-        visibility: "hidden",
-        duration: 0.3,
-      });
     }
   }
 }
