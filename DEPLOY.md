@@ -1,28 +1,36 @@
-# Cloudflare Pages Deployment (Fast)
+# Cloudflare Pages — personal-website
 
-## Build settings
+## Dashboard settings (exact)
+
+Cloudflare → **Workers & Pages** → **personal-website** → **Settings** → **Build**
 
 | Setting | Value |
 |--------|--------|
-| Framework preset | **Vite** |
-| Build command | `npm run build` |
-| Build output directory | `dist` |
+| Production branch | `main` |
+| Root directory | `/` |
+| **Build command** | `npm run build` |
+| **Deploy command** | `npx wrangler deploy` |
 | Node.js version | **20** |
 
-## Performance notes
+> **Important:** `Build command` must NOT be empty. Without `npm run build`, the site serves raw source and breaks.
 
-- 3D model loads directly from `/models/character.glb` (no decrypt delay)
-- TechStack physics loads only when you scroll near that section
-- Static assets cached via `public/_headers`
-- Chunks split: three.js, gsap, react-three load separately
+`wrangler.jsonc` in this repo tells Wrangler to deploy the **`dist`** folder (Vite output), not the project root.
 
-## Local dev
+## After changing settings
+
+1. **Settings** → save build config
+2. **Deployments** → **Retry deployment** (or push a new commit to `main`)
+3. Wait until status is **Success**
+4. Click **Visit site**
+
+## Local test before push
 
 ```bash
 npm install
-npm run dev
+npm run build
+npm run preview
 ```
 
-## Edit content
+## Edit website content
 
 `src/data/siteConfig.ts`

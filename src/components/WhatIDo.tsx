@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import "./styles/WhatIDo.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { whatIDoItems } from "../data/siteConfig";
 
 const WhatIDo = () => {
   const containerRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -42,61 +43,33 @@ const WhatIDo = () => {
               <line x1="100%" y1="0" x2="100%" y2="100%" stroke="white" strokeWidth="2" strokeDasharray="7,7" />
             </svg>
           </div>
-          <div className="what-content what-noTouch" ref={(el) => setRef(el, 0)}>
-            <div className="what-border1">
-              <svg height="100%">
-                <line x1="0" y1="0" x2="100%" y2="0" stroke="white" strokeWidth="2" strokeDasharray="6,6" />
-                <line x1="0" y1="100%" x2="100%" y2="100%" stroke="white" strokeWidth="2" strokeDasharray="6,6" />
-              </svg>
-            </div>
-            <div className="what-corner"></div>
-            <div className="what-content-in">
-              <h3>DEVELOP</h3>
-              <h4>Custom Python Solutions</h4>
-              <p>
-                Backend APIs, automation scripts, data processing pipelines, and scalable tools tailored to your business workflow.
-              </p>
-              <h5>Skillset &amp; tools</h5>
-              <div className="what-content-flex">
-                <div className="what-tags">Python</div>
-                <div className="what-tags">Flask</div>
-                <div className="what-tags">Django</div>
-                <div className="what-tags">REST APIs</div>
-                <div className="what-tags">Automation</div>
-                <div className="what-tags">Web Scraping</div>
-                <div className="what-tags">Data Processing</div>
-                <div className="what-tags">AI/ML</div>
+          {whatIDoItems.map((item, index) => (
+            <div className="what-content what-noTouch" ref={(el) => setRef(el, index)} key={item.title}>
+              <div className="what-border1">
+                <svg height="100%">
+                  {index === 0 && (
+                    <line x1="0" y1="0" x2="100%" y2="0" stroke="white" strokeWidth="2" strokeDasharray="6,6" />
+                  )}
+                  <line x1="0" y1="100%" x2="100%" y2="100%" stroke="white" strokeWidth="2" strokeDasharray="6,6" />
+                </svg>
               </div>
-              <div className="what-arrow"></div>
-            </div>
-          </div>
-          <div className="what-content what-noTouch" ref={(el) => setRef(el, 1)}>
-            <div className="what-border1">
-              <svg height="100%">
-                <line x1="0" y1="100%" x2="100%" y2="100%" stroke="white" strokeWidth="2" strokeDasharray="6,6" />
-              </svg>
-            </div>
-            <div className="what-corner"></div>
-            <div className="what-content-in">
-              <h3>AUTOMATE</h3>
-              <h4>AI &amp; WhatsApp Bots</h4>
-              <p>
-                Intelligent chatbots, AI automation workflows, and WhatsApp business solutions that save time and grow revenue 24/7.
-              </p>
-              <h5>Skillset &amp; tools</h5>
-              <div className="what-content-flex">
-                <div className="what-tags">WhatsApp API</div>
-                <div className="what-tags">LLM</div>
-                <div className="what-tags">AI Chatbot</div>
-                <div className="what-tags">Order Taking</div>
-                <div className="what-tags">Google Sheets</div>
-                <div className="what-tags">Email Automation</div>
-                <div className="what-tags">Lead Scraping</div>
-                <div className="what-tags">Integrations</div>
+              <div className="what-corner"></div>
+              <div className="what-content-in">
+                <h3>{item.title}</h3>
+                <h4>{item.subtitle}</h4>
+                <p>{item.description}</p>
+                <h5>Skillset &amp; tools</h5>
+                <div className="what-content-flex">
+                  {item.tags.map((tag) => (
+                    <div className="what-tags" key={tag}>
+                      {tag}
+                    </div>
+                  ))}
+                </div>
+                <div className="what-arrow"></div>
               </div>
-              <div className="what-arrow"></div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

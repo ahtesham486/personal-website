@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Ahtasham Aslam",
   firstName: "AHTASHAM",
   lastName: "ASLAM",
-  tagline: "Python Developer · AI Automation · Web Scraping · WhatsApp Chatbots",
+  tagline: "Python Backend · AI Agents · Automation · WordPress · SEO/AEO/GEO/AIO",
   roles: ["Developer", "Automator"],
   email: "ahteshamaslam0486@gmail.com",
   whatsappNumber: "923040880677",
@@ -12,8 +12,49 @@ export const siteConfig = {
   year: new Date().getFullYear(),
 };
 
-export const aboutText =
-  "I'm Ahtasham Aslam, a Python developer specializing in AI automation, web scraping, and WhatsApp business solutions. I help businesses automate repetitive work, extract data at scale, and serve customers 24/7 through intelligent chatbots.";
+export const aboutContent = {
+  headline: "Python developer — backends, AI agents & automation.",
+  note: "WordPress & SEO · AEO · GEO · AIO",
+  skills: [
+    "Django & Flask APIs",
+    "AI Agent Builder",
+    "Model Prediction",
+    "n8n Automation",
+    "WhatsApp Bots",
+    "Web Scraping",
+  ],
+};
+
+export type WhatIDoItem = {
+  title: string;
+  subtitle: string;
+  description: string;
+  tags: string[];
+};
+
+export const whatIDoItems: WhatIDoItem[] = [
+  {
+    title: "ENGINEER",
+    subtitle: "Production-Grade Python Backends",
+    description:
+      "Django and Flask systems, clean API design, database architecture, and server-side logic built for uptime — not prototypes that break after launch.",
+    tags: ["Python", "Django", "Flask", "SQL", "REST APIs", "n8n", "Web Scraping", "Data Pipelines"],
+  },
+  {
+    title: "ORCHESTRATE",
+    subtitle: "AI Agents, Bots & Predictions",
+    description:
+      "Custom LLM agents, WhatsApp bots for sales and support, trained prediction models, and connected workflows that run your operations around the clock.",
+    tags: ["AI Agents", "LLM", "WhatsApp API", "ML Models", "Automation", "Integrations", "n8n", "Cron Jobs"],
+  },
+  {
+    title: "AMPLIFY",
+    subtitle: "WordPress & Multi-Channel Visibility",
+    description:
+      "Fast WordPress builds paired with SEO, AEO, GEO, and AIO strategy — so people discover your brand on search engines, voice assistants, and AI tools alike.",
+    tags: ["WordPress", "SEO", "AEO", "GEO", "AIO", "Schema Markup", "Core Web Vitals", "Content SEO"],
+  },
+];
 
 export const careerItems = [
   {

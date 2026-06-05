@@ -9,24 +9,15 @@ import {
   RapierRigidBody,
 } from "@react-three/rapier";
 import { isLowEndDevice } from "../utils/performance";
-
-const textureLoader = new THREE.TextureLoader();
-const imageUrls = [
-  "/images/react2.webp",
-  "/images/next2.webp",
-  "/images/node2.webp",
-  "/images/express.webp",
-  "/images/mongo.webp",
-  "/images/mysql.webp",
-  "/images/typescript.webp",
-  "/images/javascript.webp",
-];
+import { techStackItems } from "../data/techStackData";
+import { createTechTexture } from "./utils/createTechTexture";
 
 const sphereGeometry = new THREE.SphereGeometry(1, 16, 16);
-const sphereCount = isLowEndDevice() ? 6 : 10;
+const sphereCount = isLowEndDevice() ? 6 : techStackItems.length;
 
-const spheres = [...Array(sphereCount)].map(() => ({
-  scale: [0.7, 1, 0.8][Math.floor(Math.random() * 3)],
+const spheres = [...Array(sphereCount)].map((_, i) => ({
+  scale: [0.75, 0.95, 0.85][i % 3],
+  techIndex: i % techStackItems.length,
 }));
 
 type SphereProps = {
@@ -109,6 +100,7 @@ function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
 const TechStack = () => {
   const [isActive, setIsActive] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
+  const [materials, setMaterials] = useState<THREE.MeshStandardMaterial[]>([]);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -117,14 +109,27 @@ const TechStack = () => {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setShouldRender(true);
-        }
+        if (entry.isIntersecting) setShouldRender(true);
       },
       { rootMargin: "200px" }
     );
     observer.observe(el);
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    Promise.all(techStackItems.map((item) => createTechTexture(item))).then((textures) => {
+      setMaterials(
+        textures.map(
+          (texture) =>
+            new THREE.MeshStandardMaterial({
+              map: texture,
+              metalness: 0.25,
+              roughness: 0.55,
+            })
+        )
+      );
+    });
   }, []);
 
   useEffect(() => {
@@ -140,23 +145,16 @@ const TechStack = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const materials = useMemo(() => {
-    const textures = imageUrls.map((url) => textureLoader.load(url));
-    return textures.map(
-      (texture) =>
-        new THREE.MeshStandardMaterial({
-          map: texture,
-          metalness: 0.2,
-          roughness: 0.6,
-        })
-    );
-  }, []);
+  const sphereMaterials = useMemo(() => {
+    if (!materials.length) return [];
+    return spheres.map((s) => materials[s.techIndex]);
+  }, [materials]);
 
   return (
     <div className="techstack" ref={sectionRef}>
       <h2> My Techstack</h2>
 
-      {shouldRender ? (
+      {shouldRender && sphereMaterials.length > 0 ? (
         <Canvas
           gl={{ alpha: true, antialias: false, powerPreference: "high-performance" }}
           dpr={[1, 1.5]}
@@ -170,8 +168,8 @@ const TechStack = () => {
             {spheres.map((props, i) => (
               <SphereGeo
                 key={i}
-                {...props}
-                material={materials[i % materials.length]}
+                scale={props.scale}
+                material={sphereMaterials[i]}
                 isActive={isActive}
               />
             ))}
@@ -179,8 +177,19 @@ const TechStack = () => {
         </Canvas>
       ) : (
         <div className="techstack-fallback">
-          {imageUrls.map((src) => (
-            <img key={src} src={src} alt="" loading="lazy" decoding="async" />
+          {techStackItems.map((item) => (
+            <div
+              key={item.name}
+              className="techstack-fallback-pill"
+              style={{ background: item.bg, color: item.fg }}
+            >
+              {item.image ? (
+                <img src={item.image} alt={item.name} loading="lazy" decoding="async" />
+              ) : (
+                <span>{item.subtitle || item.name}</span>
+              )}
+              <small>{item.name}</small>
+            </div>
           ))}
         </div>
       )}
