@@ -7,9 +7,6 @@ export const siteConfig = {
   email: "ahteshamaslam0486@gmail.com",
   whatsappNumber: "923040880677",
   whatsappUrl: "https://wa.me/923040880677",
-  googleBookingUrl: "https://calendar.app.google/SY15mssjkE73fTrZ8",
-  googleBookingEmbedUrl:
-    "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0jv5O153QtkxfOqfALJSwH_AhoxKt3jWyaolR9Hwek0ZfK1C9jKQAhBIH1qcmPH27c6MWHa8tl",
   github: "https://github.com/ahtesham486",
   linkedin: "https://www.linkedin.com",
   year: new Date().getFullYear(),

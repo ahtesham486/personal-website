@@ -56,13 +56,6 @@ const Contact = () => {
             >
               WhatsApp <FaWhatsapp />
             </a>
-            <a
-              href="#booking"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              Book Meeting <MdArrowOutward />
-            </a>
           </div>
           <div className="contact-box">
             <h2>

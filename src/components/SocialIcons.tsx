@@ -73,8 +73,8 @@ const SocialIcons = () => {
           </a>
         </span>
       </div>
-      <a className="resume-button" href="#booking" data-cursor="disable">
-        <HoverLinks text="BOOK" />
+      <a className="resume-button" href="#contact" data-cursor="disable">
+        <HoverLinks text="CONTACT" />
       </a>
     </div>
   );

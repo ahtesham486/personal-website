@@ -1,6 +1,5 @@
 import { lazy, PropsWithChildren, Suspense, useEffect, useRef, useState } from "react";
 import About from "./About";
-import Booking from "./Booking";
 import Career from "./Career";
 import Contact from "./Contact";
 import Cursor from "./Cursor";
@@ -71,7 +70,6 @@ const MainContainer = ({ children }: PropsWithChildren) => {
                 <TechStack />
               </Suspense>
             )}
-            <Booking />
             <Contact />
           </div>
         </div>
