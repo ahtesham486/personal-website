@@ -7,6 +7,8 @@
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
   const cursorGlow = document.querySelector('.cursor-glow');
+  const cursorDot = document.querySelector('.cursor-dot');
+  const cursorRing = document.querySelector('.cursor-ring');
   const yearEl = document.getElementById('year');
 
   // Year in footer
@@ -14,6 +16,9 @@
 
   initWhatsAppLinks();
   initBookingWidget();
+  initPremiumCursor();
+  initWorkCardGlow();
+  initSmoothWheelScroll();
 
   function waUrl(text) {
     const num = (cfg.whatsappNumber || '923040880677').replace(/\D/g, '');
@@ -146,6 +151,165 @@
       requestAnimationFrame(animateGlow);
     }
     animateGlow();
+  }
+
+  function initPremiumCursor() {
+    if (!cursorDot || !cursorRing) return;
+    if (!window.matchMedia('(min-width: 769px)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let dotX = mouseX;
+    let dotY = mouseY;
+    let ringX = mouseX;
+    let ringY = mouseY;
+
+    let isActive = false;
+
+    function setVisible(v) {
+      cursorDot.style.opacity = v ? '1' : '0';
+      cursorRing.style.opacity = v ? '1' : '0';
+    }
+
+    function activateOnce() {
+      if (isActive) return;
+      isActive = true;
+      setVisible(true);
+    }
+
+    document.addEventListener(
+      'mousemove',
+      (e) => {
+        activateOnce();
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      },
+      { passive: true }
+    );
+
+    document.addEventListener(
+      'mouseleave',
+      () => {
+        setVisible(false);
+      },
+      { passive: true }
+    );
+
+    // Hover states
+    const focusSelectors = ['a', 'button', '.btn', '.service-card', '.work-card', '.product-showcase'];
+    document.querySelectorAll(focusSelectors.join(',')).forEach((el) => {
+      el.addEventListener(
+        'mouseenter',
+        () => cursorRing.classList.add('is-focus'),
+        { passive: true }
+      );
+      el.addEventListener(
+        'mouseleave',
+        () => cursorRing.classList.remove('is-focus'),
+        { passive: true }
+      );
+    });
+
+    function animate() {
+      dotX += (mouseX - dotX) * 0.35;
+      dotY += (mouseY - dotY) * 0.35;
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+
+      cursorDot.style.left = dotX + 'px';
+      cursorDot.style.top = dotY + 'px';
+      cursorRing.style.left = ringX + 'px';
+      cursorRing.style.top = ringY + 'px';
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  }
+
+  function initWorkCardGlow() {
+    const cards = document.querySelectorAll('.work-card');
+    if (!cards.length) return;
+
+    cards.forEach((card) => {
+      card.addEventListener(
+        'mousemove',
+        (e) => {
+          const r = card.getBoundingClientRect();
+          const x = ((e.clientX - r.left) / r.width) * 100;
+          const y = ((e.clientY - r.top) / r.height) * 100;
+          card.style.setProperty('--mx', `${x}%`);
+          card.style.setProperty('--my', `${y}%`);
+        },
+        { passive: true }
+      );
+    });
+  }
+
+  function initSmoothWheelScroll() {
+    // A lightweight wheel smoothing for desktop only. Avoids heavy libs.
+    if (!window.matchMedia('(min-width: 1025px)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let target = window.scrollY;
+    let current = window.scrollY;
+    let raf = 0;
+    let isLocked = false;
+
+    function clampTarget() {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      target = Math.max(0, Math.min(target, max));
+    }
+
+    function onWheel(e) {
+      // Let the user zoom normally.
+      if (e.ctrlKey) return;
+      // If user is interacting with an iframe (calendar), don't steal scroll.
+      if (document.activeElement && document.activeElement.tagName === 'IFRAME') return;
+
+      // Prevent default for smooth behavior.
+      e.preventDefault();
+
+      const delta = e.deltaY;
+      const speed = 1.15;
+      target += delta * speed;
+      clampTarget();
+
+      if (!raf) raf = requestAnimationFrame(tick);
+    }
+
+    function tick() {
+      raf = 0;
+      if (isLocked) return;
+
+      // Ease current toward target.
+      current += (target - current) * 0.12;
+      if (Math.abs(target - current) < 0.35) current = target;
+
+      window.scrollTo(0, current);
+
+      if (current !== target) raf = requestAnimationFrame(tick);
+    }
+
+    // If user jumps via hash links, sync targets.
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (raf) return;
+        target = window.scrollY;
+        current = window.scrollY;
+      },
+      { passive: true }
+    );
+
+    // Temporarily disable smooth wheel while mobile nav open.
+    const observer = new MutationObserver(() => {
+      isLocked = navLinks?.classList?.contains('open') || false;
+    });
+    if (navLinks) observer.observe(navLinks, { attributes: true, attributeFilter: ['class'] });
+
+    window.addEventListener('wheel', onWheel, { passive: false });
   }
 
   // Scroll reveal

@@ -13,6 +13,8 @@
 </head>
 <body>
   <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
 
   <!-- Navigation -->
   <header class="header" id="header">
@@ -28,6 +30,7 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
+        <li><a href="#work">Work</a></li>
         <li><a href="#products">Products</a></li>
         <li><a href="#reviews">Testimonials</a></li>
         <li><a href="#booking">Book Meeting</a></li>
@@ -40,6 +43,7 @@
     <!-- Hero -->
     <section class="hero section" id="home">
       <div class="hero-bg" aria-hidden="true">
+        <canvas class="hero-webgl" id="heroWebgl"></canvas>
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
         <div class="grid-overlay"></div>
@@ -247,6 +251,75 @@
             <h3>15-Minute Free Consultation</h3>
             <p>Not sure where to start? Book a free 15-minute meeting. I'll guide you on the best approach for your project — no obligation.</p>
             <a href="#booking" class="btn btn-primary btn-sm">Book Free Meeting</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work -->
+    <section class="section work" id="work">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Selected Work</span>
+          <h2 class="section-title">Recent <span class="gradient-text">Projects</span></h2>
+          <p class="section-desc">
+            A few real-world builds across automation, scraping, and WhatsApp business bots. Want something similar? Book a free call.
+          </p>
+        </div>
+
+        <div class="work-grid">
+          <article class="work-card reveal" data-cursor="focus">
+            <div class="work-card__top">
+              <div class="work-chip">AI Automation</div>
+              <div class="work-year">2026</div>
+            </div>
+            <h3 class="work-title">Email + Sheets Automation System</h3>
+            <p class="work-desc">
+              Automated repetitive operations: inbox → parsing → Google Sheets → alerts. Reduced manual work and improved reporting accuracy.
+            </p>
+            <div class="work-tags">
+              <span>Python</span><span>APIs</span><span>Automation</span>
+            </div>
+            <div class="work-actions">
+              <a class="work-link" href="#booking">Discuss a project →</a>
+              <a class="work-link muted" href="mailto:ahteshamaslam0486@gmail.com">Email</a>
+            </div>
+          </article>
+
+          <article class="work-card reveal delay-1" data-cursor="focus">
+            <div class="work-card__top">
+              <div class="work-chip">Web Scraping</div>
+              <div class="work-year">2026</div>
+            </div>
+            <h3 class="work-title">Lead Scraper + Cleaner Pipeline</h3>
+            <p class="work-desc">
+              Collected thousands of business leads with deduplication, validation, and export-ready formatting for outreach teams.
+            </p>
+            <div class="work-tags">
+              <span>Scraping</span><span>Data Cleaning</span><span>CSV</span>
+            </div>
+            <div class="work-actions">
+              <a class="work-link" href="#booking">Book a free call →</a>
+              <a class="work-link muted" href="#products">WhatsApp bot product</a>
+            </div>
+          </article>
+
+          <article class="work-card reveal delay-2" data-cursor="focus">
+            <div class="work-card__top">
+              <div class="work-chip">WhatsApp Bot</div>
+              <div class="work-year">2026</div>
+            </div>
+            <h3 class="work-title">WhatsApp AI Chatbot for Orders</h3>
+            <p class="work-desc">
+              Instant replies, menus, order capture, and smooth conversation handling — designed for restaurants and small stores.
+            </p>
+            <div class="work-tags">
+              <span>Chatbot</span><span>LLM</span><span>Customer Support</span>
+            </div>
+            <div class="work-actions">
+              <a class="work-link" href="#products">See features →</a>
+              <a class="work-link muted" href="https://wa.me/923040880677" target="_blank" rel="noopener">WhatsApp</a>
+            </div>
           </article>
         </div>
       </div>
@@ -506,5 +579,6 @@
 
   <script src="js/config.js"></script>
   <script src="js/main.js"></script>
+  <script type="module" src="js/three-bg.js"></script>
 </body>
 </html>
