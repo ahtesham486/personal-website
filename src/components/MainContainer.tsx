@@ -38,16 +38,15 @@ const MainContainer = ({ children }: PropsWithChildren) => {
   }, [isDesktopView]);
 
   useEffect(() => {
-    const resizeHandler = () => {
-      setSplitText();
-      setIsDesktopView(window.innerWidth > 1024);
-    };
-    resizeHandler();
-    window.addEventListener("resize", resizeHandler);
-    return () => {
-      window.removeEventListener("resize", resizeHandler);
-    };
-  }, [isDesktopView]);
+    setSplitText();
+  }, []);
+
+  useEffect(() => {
+    const onResize = () => setIsDesktopView(window.innerWidth > 1024);
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   return (
     <div className="container-main">

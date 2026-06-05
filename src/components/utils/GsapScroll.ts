@@ -6,9 +6,9 @@ export function setCharTimeline(
   camera: THREE.PerspectiveCamera
 ) {
   let intensity = 0;
-  setInterval(() => {
-    intensity = Math.random();
-  }, 600);
+  gsap.ticker.add(() => {
+    if (gsap.ticker.frame % 36 === 0) intensity = Math.random();
+  });
 
   const tl1 = gsap.timeline({
     scrollTrigger: {
@@ -72,6 +72,8 @@ export function setCharTimeline(
 
   if (window.innerWidth > 1024) {
     if (character && monitor && screenLight && neckBone) {
+      gsap.set(".character-model", { x: 0, y: 0 });
+
       // Home — landing scroll
       tl1
         .fromTo(character.rotation, { y: 0 }, { y: 0.7, duration: 1 }, 0)

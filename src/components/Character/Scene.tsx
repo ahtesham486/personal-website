@@ -109,14 +109,23 @@ const Scene = () => {
       }
       let animId = 0;
       let isVisible = true;
+      let isInView = true;
       const onVisibility = () => {
         isVisible = document.visibilityState === "visible";
       };
       document.addEventListener("visibilitychange", onVisibility);
 
+      const viewObserver = new IntersectionObserver(
+        ([entry]) => {
+          isInView = entry.isIntersecting;
+        },
+        { threshold: 0.05 }
+      );
+      if (canvasDiv.current) viewObserver.observe(canvasDiv.current);
+
       const animate = () => {
         animId = requestAnimationFrame(animate);
-        if (!isVisible) return;
+        if (!isVisible || !isInView) return;
         if (headBone) {
           handleHeadRotation(
             headBone,
@@ -138,6 +147,7 @@ const Scene = () => {
       return () => {
         sceneMounted = false;
         cancelAnimationFrame(animId);
+        viewObserver.disconnect();
         document.removeEventListener("visibilitychange", onVisibility);
         clearTimeout(debounce);
         scene.clear();

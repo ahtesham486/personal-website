@@ -1,26 +1,21 @@
 import { useEffect } from "react";
 import HoverLinks from "./HoverLinks";
-import { ScrollSmoother } from "../utils/gsapPlugins";
 import { siteConfig } from "../data/siteConfig";
-import { isLowEndDevice } from "../utils/performance";
 import { initialFX } from "./utils/initialFX";
 import "./styles/Navbar.css";
 
-export let smoother: ScrollSmoother;
+export const smoother = null;
+
+function scrollToSection(selector: string | null) {
+  if (!selector) return;
+  const target = document.querySelector(selector);
+  target?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
 const Navbar = () => {
   useEffect(() => {
-    const lowEnd = isLowEndDevice();
-    smoother = ScrollSmoother.create({
-      wrapper: "#smooth-wrapper",
-      content: "#smooth-content",
-      smooth: lowEnd ? 0.5 : 0.75,
-      effects: false,
-      autoResize: true,
-      ignoreMobileResize: true,
-    });
+    document.body.style.overflowY = "auto";
 
-    smoother.scrollTop(0);
     requestAnimationFrame(() => {
       setTimeout(() => initialFX(), 100);
     });
@@ -31,16 +26,13 @@ const Navbar = () => {
       element.addEventListener("click", (e) => {
         if (window.innerWidth > 1024) {
           e.preventDefault();
-          const elem = e.currentTarget as HTMLAnchorElement;
-          const section = elem.getAttribute("data-href");
-          smoother.scrollTo(section, true, "top top");
+          const link = e.currentTarget as HTMLAnchorElement;
+          scrollToSection(link.getAttribute("data-href"));
         }
       });
     });
-    window.addEventListener("resize", () => {
-      ScrollSmoother.refresh(true);
-    });
   }, []);
+
   return (
     <>
       <div className="header">

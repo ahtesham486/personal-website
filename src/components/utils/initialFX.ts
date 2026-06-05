@@ -1,9 +1,7 @@
 import { gsap, SplitText } from "../../utils/gsapPlugins";
-import { smoother } from "../Navbar";
 
 export function initialFX() {
   document.body.style.overflowY = "auto";
-  if (smoother) smoother.paused(false);
   document.body.style.backgroundColor = "#0b080c";
 
   const landingText = new SplitText(

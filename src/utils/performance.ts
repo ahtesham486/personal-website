@@ -10,5 +10,5 @@ export function isLowEndDevice() {
 }
 
 export function getRendererPixelRatio() {
-  return Math.min(window.devicePixelRatio || 1, isLowEndDevice() ? 1 : 1.5);
+  return Math.min(window.devicePixelRatio || 1, isLowEndDevice() ? 1 : 1.25);
 }
