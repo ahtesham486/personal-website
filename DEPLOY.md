@@ -1,39 +1,35 @@
-# Cloudflare Pages Deployment
+# Cloudflare Pages Deployment (React + Vite)
 
-## Quick deploy (drag & drop)
+## Build settings (Git deploy)
 
-1. Go to [Cloudflare Dashboard](https://dash.cloudflare.com) → **Workers & Pages** → **Create** → **Pages** → **Upload assets**
-2. Upload the entire `portfolio` folder (index.html, css/, js/, assets/)
-3. Your site will be live at `https://your-project.pages.dev`
+1. Cloudflare Dashboard → **Workers & Pages** → your project → **Settings** → **Build**
+2. Configure:
+   - **Framework preset:** Vite
+   - **Build command:** `npm run build`
+   - **Build output directory:** `dist`
+   - **Node.js version:** 18 or 20
 
-## Deploy via Git (recommended)
+## Local development
 
-1. Push this folder to GitHub
-2. Cloudflare Dashboard → **Workers & Pages** → **Create** → **Connect to Git**
-3. Select your repo
-4. Build settings:
-   - **Framework preset:** None
-   - **Build command:** (leave empty)
-   - **Build output directory:** `/` (root)
+```bash
+npm install
+npm run dev
+```
+
+Open `http://localhost:5173`
+
+## Edit your info
+
+Update `src/data/siteConfig.ts` for:
+- Name, email, WhatsApp
+- Google Calendar booking links
+- Projects, career, about text
+
+## Google Calendar booking (Safari fix)
+
+- `googleBookingUrl` — short link for "open in new tab"
+- `googleBookingEmbedUrl` — full `calendar.google.com/.../schedules/...` URL for iframe embed
 
 ## Custom domain
 
-In Cloudflare Pages project → **Custom domains** → add your domain (e.g. `ahtashamaslam.com`)
-
-## Google Calendar booking (meetings)
-
-1. Open [Google Calendar](https://calendar.google.com) → **Create** → **Appointment schedule**
-2. Name: `Free 15-Min Consultation`, Duration: **15 min**
-3. **Location:** Google Meet (add video conferencing)
-4. Set your available hours
-5. Copy the **booking page** link
-6. Paste short link in `js/config.js` → `googleBookingUrl`
-7. Open that link once in the browser, copy the full `calendar.google.com/calendar/appointments/schedules/...` URL from the address bar, and set `googleBookingEmbedUrl` (required for Safari on Mac iframe embed)
-
-Clients pick date/time on your site; they get **email + Google Meet link** automatically. Meetings no longer use WhatsApp.
-
-## Update video reviews
-
-In `index.html`, find `data-video-id="YOUR_VIDEO_ID"` and replace with your YouTube video ID.
-
-Example: `https://www.youtube.com/watch?v=abc123xyz` → use `abc123xyz`
+Cloudflare Pages project → **Custom domains** → add your domain
