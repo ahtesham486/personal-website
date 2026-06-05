@@ -25,7 +25,9 @@ const Navbar = () => {
     });
 
     smoother.scrollTop(0);
-    initialFX();
+    requestAnimationFrame(() => {
+      setTimeout(() => initialFX(), 100);
+    });
 
     const links = document.querySelectorAll(".header ul a");
     links.forEach((elem) => {

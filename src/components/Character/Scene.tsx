@@ -12,12 +12,17 @@ import {
 import setAnimations from "./utils/animationUtils";
 import { getRendererPixelRatio, isLowEndDevice } from "../../utils/performance";
 
+let sceneMounted = false;
+
 const Scene = () => {
   const canvasDiv = useRef<HTMLDivElement | null>(null);
   const hoverDivRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef(new THREE.Scene());
   const [character, setChar] = useState<THREE.Object3D | null>(null);
   useEffect(() => {
+    if (sceneMounted || !canvasDiv.current) return;
+    sceneMounted = true;
+
     if (canvasDiv.current) {
       let rect = canvasDiv.current.getBoundingClientRect();
       let container = { width: rect.width, height: rect.height };
@@ -62,6 +67,7 @@ const Scene = () => {
           screenLight = character.getObjectByName("screenlight") || null;
           light.turnOnLights();
           animations.startIntro();
+          document.querySelector(".character-container")?.classList.add("character-loaded");
           window.addEventListener("resize", () =>
             handleResize(renderer, camera, canvasDiv, character)
           );
@@ -128,6 +134,7 @@ const Scene = () => {
       };
       animate();
       return () => {
+        sceneMounted = false;
         cancelAnimationFrame(animId);
         document.removeEventListener("visibilitychange", onVisibility);
         clearTimeout(debounce);

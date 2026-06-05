@@ -5,6 +5,11 @@ export function setCharTimeline(
   character: THREE.Object3D<THREE.Object3DEventMap> | null,
   camera: THREE.PerspectiveCamera
 ) {
+  let intensity = 0;
+  setInterval(() => {
+    intensity = Math.random();
+  }, 600);
+
   const tl1 = gsap.timeline({
     scrollTrigger: {
       trigger: ".landing-section",
@@ -35,9 +40,32 @@ export function setCharTimeline(
     },
   });
 
+  // Hide monitor screen on load (prevents white box on home)
+  character?.children.forEach((object: any) => {
+    if (object.name === "Plane004") {
+      object.children.forEach((child: any) => {
+        child.material.transparent = true;
+        child.material.opacity = 0;
+        if (child.material.name === "Material.027") {
+          child.material.color.set("#FFFFFF");
+        }
+      });
+    }
+    if (object.name === "screenlight") {
+      object.material.transparent = true;
+      object.material.opacity = 0;
+      object.material.emissive.set("#C8BFFF");
+      gsap.timeline({ repeat: -1, repeatRefresh: true }).to(object.material, {
+        emissiveIntensity: () => intensity * 8,
+        duration: () => Math.random() * 0.6,
+        delay: () => Math.random() * 0.1,
+      });
+    }
+  });
+
   if (window.innerWidth > 1024) {
     if (character) {
-      // Character only on home — hide when leaving landing
+      // Home — original landing scroll
       tl1
         .fromTo(character.rotation, { y: 0 }, { y: 0.7, duration: 1 }, 0)
         .to(camera.position, { z: 22 }, 0)
@@ -47,17 +75,19 @@ export function setCharTimeline(
         .fromTo(".about-me", { y: "-50%" }, { y: "0%" }, 0)
         .to(
           ".character-container",
-          { opacity: 0, visibility: "hidden", duration: 0.4 },
-          0.6
+          { opacity: 0, visibility: "hidden", pointerEvents: "none", duration: 0.4 },
+          0.75
         );
 
-      // About section — no character
+      // About — text only, no character
       tl2
+        .set(".character-container", { opacity: 0, visibility: "hidden", pointerEvents: "none" }, 0)
         .to(".about-section", { y: "30%", duration: 6 }, 0)
         .to(".about-section", { opacity: 0, delay: 3, duration: 2 }, 0);
 
       // What I Do — no character
       tl3
+        .set(".character-container", { opacity: 0, visibility: "hidden", pointerEvents: "none" }, 0)
         .fromTo(".whatIDO", { y: 0 }, { y: "15%", duration: 2 }, 0)
         .fromTo(
           ".what-box-in",

@@ -198,7 +198,8 @@
   color: var(--accentColor);
   margin: 0;
 }
-.landing-info h2 {
+.landing-info h2,
+.landing-info-rotate {
   margin: 0;
   margin-top: -20px;
   margin-left: 20px;
