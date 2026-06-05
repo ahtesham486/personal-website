@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
 import { siteConfig } from "../data/siteConfig";
 import { isLowEndDevice } from "../utils/performance";
+import { initialFX } from "./utils/initialFX";
 import "./styles/Navbar.css";
 
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
@@ -24,7 +25,7 @@ const Navbar = () => {
     });
 
     smoother.scrollTop(0);
-    smoother.paused(true);
+    initialFX();
 
     const links = document.querySelectorAll(".header ul a");
     links.forEach((elem) => {
