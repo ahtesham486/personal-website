@@ -1,29 +1,32 @@
 # Cloudflare Pages — personal-website
 
-## Dashboard settings (exact)
+## Recommended settings (new Pages project)
 
 Cloudflare → **Workers & Pages** → **personal-website** → **Settings** → **Build**
 
 | Setting | Value |
 |--------|--------|
+| Framework preset | **Vite** (or None) |
 | Production branch | `main` |
 | Root directory | `/` |
 | **Build command** | `npm run build` |
-| **Deploy command** | `npx wrangler deploy` |
+| **Build output directory** | `dist` |
+| **Deploy command** | *(leave empty)* |
 | Node.js version | **20** |
 
-> **Important:** `Build command` must NOT be empty. Without `npm run build`, the site serves raw source and breaks.
+> Use **Build output directory = `dist`**. Do **not** use `npx wrangler deploy` unless you intentionally want a Worker project.
 
-`wrangler.jsonc` in this repo tells Wrangler to deploy the **`dist`** folder (Vite output), not the project root.
+## If build hangs at "computing gzip size"
 
-## After changing settings
+This repo disables that step in `vite.config.ts` (`reportCompressedSize: false`) so Cloudflare builds finish faster.
 
-1. **Settings** → save build config
-2. **Deployments** → **Retry deployment** (or push a new commit to `main`)
-3. Wait until status is **Success**
-4. Click **Visit site**
+## After saving settings
 
-## Local test before push
+1. **Deployments** → **Retry deployment**
+2. Wait for **Success**
+3. Click **Visit site**
+
+## Local test
 
 ```bash
 npm install
@@ -31,6 +34,6 @@ npm run build
 npm run preview
 ```
 
-## Edit website content
+## Edit content
 
 `src/data/siteConfig.ts`
