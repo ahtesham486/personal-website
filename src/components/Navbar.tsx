@@ -4,6 +4,7 @@ import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
 import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
 import { siteConfig } from "../data/siteConfig";
+import { isLowEndDevice } from "../utils/performance";
 import "./styles/Navbar.css";
 
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
@@ -11,12 +12,13 @@ export let smoother: ScrollSmoother;
 
 const Navbar = () => {
   useEffect(() => {
+    const lowEnd = isLowEndDevice();
     smoother = ScrollSmoother.create({
       wrapper: "#smooth-wrapper",
       content: "#smooth-content",
-      smooth: 1.7,
-      speed: 1.7,
-      effects: true,
+      smooth: lowEnd ? 0.8 : 1.2,
+      speed: lowEnd ? 0.8 : 1.2,
+      effects: !lowEnd,
       autoResize: true,
       ignoreMobileResize: true,
     });

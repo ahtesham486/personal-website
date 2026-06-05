@@ -1,35 +1,28 @@
-# Cloudflare Pages Deployment (React + Vite)
+# Cloudflare Pages Deployment (Fast)
 
-## Build settings (Git deploy)
+## Build settings
 
-1. Cloudflare Dashboard → **Workers & Pages** → your project → **Settings** → **Build**
-2. Configure:
-   - **Framework preset:** Vite
-   - **Build command:** `npm run build`
-   - **Build output directory:** `dist`
-   - **Node.js version:** 18 or 20
+| Setting | Value |
+|--------|--------|
+| Framework preset | **Vite** |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Node.js version | **20** |
 
-## Local development
+## Performance notes
+
+- 3D model loads directly from `/models/character.glb` (no decrypt delay)
+- TechStack physics loads only when you scroll near that section
+- Static assets cached via `public/_headers`
+- Chunks split: three.js, gsap, react-three load separately
+
+## Local dev
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open `http://localhost:5173`
+## Edit content
 
-## Edit your info
-
-Update `src/data/siteConfig.ts` for:
-- Name, email, WhatsApp
-- Google Calendar booking links
-- Projects, career, about text
-
-## Google Calendar booking (Safari fix)
-
-- `googleBookingUrl` — short link for "open in new tab"
-- `googleBookingEmbedUrl` — full `calendar.google.com/.../schedules/...` URL for iframe embed
-
-## Custom domain
-
-Cloudflare Pages project → **Custom domains** → add your domain
+`src/data/siteConfig.ts`

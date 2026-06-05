@@ -8,7 +8,7 @@ export function setCharTimeline(
   let intensity: number = 0;
   setInterval(() => {
     intensity = Math.random();
-  }, 200);
+  }, 600);
   const tl1 = gsap.timeline({
     scrollTrigger: {
       trigger: ".landing-section",
