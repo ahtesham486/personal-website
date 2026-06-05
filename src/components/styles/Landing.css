@@ -212,10 +212,19 @@
   flex-wrap: nowrap;
   text-transform: uppercase;
   letter-spacing: 2px;
+  overflow: hidden;
+}
+.landing-h2-info,
+.landing-h2-info-1,
+.landing-h2-1,
+.landing-h2-2 {
+  display: inline-block;
+  white-space: nowrap;
 }
 .landing-h2-info-1 {
   position: absolute;
   top: 0;
+  left: 0;
 }
 h2.landing-info-h2 {
   color: #c481ff;
@@ -226,10 +235,13 @@ h2.landing-info-h2 {
   font-weight: 600;
   position: relative;
   margin-left: -5px;
+  overflow: hidden;
+  min-height: 1.1em;
 }
 .landing-h2-2 {
   position: absolute;
   top: 0;
+  left: 0;
 }
 .landing-info-h2::after {
   content: "";

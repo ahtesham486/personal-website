@@ -12,7 +12,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           three: ["three"],
-          gsap: ["gsap", "gsap-trial"],
+          gsap: ["gsap"],
           r3f: ["@react-three/fiber", "@react-three/drei", "@react-three/rapier"],
         },
       },
