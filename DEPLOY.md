@@ -5,9 +5,17 @@
 | Setting | Value |
 |--------|--------|
 | Build command | `npm run build` |
-| Output directory | `out` |
+| **Output directory** | **`out`** ← NOT `dist` |
 | Node.js | **20** |
-| Deploy command | `npx wrangler deploy` (if using Workers) |
+| Deploy command | `npx wrangler deploy` |
+
+> **Important:** After migrating to Next.js, output is `out/` not `dist/`.
+> If Cloudflare still reads `dist`, update the dashboard setting and redeploy.
+
+### Fix: `_redirects` infinite loop error
+
+Do **not** use SPA mode for Next.js (multi-page site).  
+`wrangler.jsonc` uses `"not_found_handling": "404-page"` instead of `"single-page-application"`.
 
 ## Local development
 
