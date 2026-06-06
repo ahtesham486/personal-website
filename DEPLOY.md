@@ -1,39 +1,47 @@
-# Cloudflare Pages — personal-website
+# Cloudflare Deploy — Next.js Portfolio
 
-## Recommended settings (new Pages project)
-
-Cloudflare → **Workers & Pages** → **personal-website** → **Settings** → **Build**
+## Build settings (Cloudflare Pages / Workers)
 
 | Setting | Value |
 |--------|--------|
-| Framework preset | **Vite** (or None) |
-| Production branch | `main` |
-| Root directory | `/` |
-| **Build command** | `npm run build` |
-| **Build output directory** | `dist` |
-| **Deploy command** | *(leave empty)* |
-| Node.js version | **20** |
+| Build command | `npm run build` |
+| Output directory | `out` |
+| Node.js | **20** |
+| Deploy command | `npx wrangler deploy` (if using Workers) |
 
-> Use **Build output directory = `dist`**. Do **not** use `npx wrangler deploy` unless you intentionally want a Worker project.
-
-## If build hangs at "computing gzip size"
-
-This repo disables that step in `vite.config.ts` (`reportCompressedSize: false`) so Cloudflare builds finish faster.
-
-## After saving settings
-
-1. **Deployments** → **Retry deployment**
-2. Wait for **Success**
-3. Click **Visit site**
-
-## Local test
+## Local development
 
 ```bash
 npm install
-npm run build
-npm run preview
+npm run dev
 ```
 
-## Edit content
+Open http://localhost:3000
 
-`src/data/siteConfig.ts`
+## Production build
+
+```bash
+npm run build
+```
+
+Static export output → `out/` folder (used by `wrangler.jsonc`).
+
+## Add a blog post
+
+See [BLOG.md](./BLOG.md) — create a `.md` file in `content/blog/` and push to GitHub.
+
+## Edit site content
+
+- **Config & projects:** `data/siteConfig.ts`
+- **Blog posts:** `content/blog/*.md`
+- **Tech stack:** `data/techStackData.ts`
+
+## Custom domain
+
+Domain: **ahtasham.site** — connected via Cloudflare nameservers + Worker custom domain.
+
+## SEO files (auto-generated at build)
+
+- `/sitemap.xml` — all pages + blog + projects
+- `/robots.txt` — allows indexing
+- JSON-LD schema in `app/layout.tsx` and per-page metadata

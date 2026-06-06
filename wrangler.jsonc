@@ -3,7 +3,7 @@
   "name": "ai",
   "compatibility_date": "2026-06-01",
   "assets": {
-    "directory": "./dist",
+    "directory": "./out",
     "not_found_handling": "single-page-application"
   }
 }
