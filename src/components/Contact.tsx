@@ -30,15 +30,6 @@ const Contact = () => {
           <div className="contact-box">
             <h4>Social</h4>
             <a
-              href={siteConfig.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              Github <MdArrowOutward />
-            </a>
-            <a
               href={siteConfig.linkedin}
               target="_blank"
               rel="noopener noreferrer"
