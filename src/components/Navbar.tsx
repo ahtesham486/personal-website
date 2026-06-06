@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import HoverLinks from "./HoverLinks";
-import { siteConfig } from "../data/siteConfig";
 import { initialFX } from "./utils/initialFX";
 import "./styles/Navbar.css";
 
@@ -38,13 +37,6 @@ const Navbar = () => {
       <div className="header">
         <a href="/#" className="navbar-title" data-cursor="disable">
           AA.
-        </a>
-        <a
-          href={`mailto:${siteConfig.email}`}
-          className="navbar-connect"
-          data-cursor="disable"
-        >
-          {siteConfig.email}
         </a>
         <ul>
           <li>
