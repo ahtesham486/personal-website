@@ -4,6 +4,11 @@ import matter from "gray-matter";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 
+export type BlogFaq = {
+  question: string;
+  answer: string;
+};
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -12,9 +17,24 @@ export type BlogPost = {
   tags: string[];
   cover?: string;
   content: string;
+  faqs: BlogFaq[];
 };
 
 export type BlogPostMeta = Omit<BlogPost, "content">;
+
+function parseFaqs(data: Record<string, unknown>): BlogFaq[] {
+  if (!Array.isArray(data.faqs)) return [];
+  return data.faqs
+    .filter((item) => item && typeof item === "object")
+    .map((item) => {
+      const row = item as Record<string, unknown>;
+      return {
+        question: String(row.question ?? ""),
+        answer: String(row.answer ?? ""),
+      };
+    })
+    .filter((item) => item.question && item.answer);
+}
 
 function parseFile(filename: string): BlogPost {
   const slug = filename.replace(/\.md$/, "");
@@ -28,6 +48,7 @@ function parseFile(filename: string): BlogPost {
     date: String(data.date ?? new Date().toISOString().slice(0, 10)),
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     cover: data.cover ? String(data.cover) : undefined,
+    faqs: parseFaqs(data as Record<string, unknown>),
     content,
   };
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { PropsWithChildren, useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import About from "./About";
 import Career from "./Career";
 import Cursor from "./Cursor";
@@ -10,28 +9,17 @@ import HomeFooter from "./HomeFooter";
 import Landing from "./Landing";
 import Navbar from "./Navbar";
 import SocialIcons from "./SocialIcons";
-import TechStackFallback from "./TechStackFallback";
 import WhatsAppFloat from "./WhatsAppFloat";
 import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import setSplitText, { cleanupSplitText } from "./utils/splitText";
 import { gsap, ScrollTrigger } from "@/lib/gsapPlugins";
 
-const TechStack = dynamic(() => import("./TechStack"), {
-  ssr: false,
-  loading: () => (
-    <div className="techstack">
-      <h2> My Techstack</h2>
-      <TechStackFallback />
-    </div>
-  ),
-});
-
 const MainContainer = ({ children }: PropsWithChildren) => {
   const [isDesktopView, setIsDesktopView] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setSplitText(), 400);
+    const timer = setTimeout(() => setSplitText(), 250);
     return () => {
       clearTimeout(timer);
       cleanupSplitText();
@@ -63,16 +51,6 @@ const MainContainer = ({ children }: PropsWithChildren) => {
             <Career />
             <ErrorBoundary>
               <Work />
-            </ErrorBoundary>
-            <ErrorBoundary
-              fallback={
-                <div className="techstack">
-                  <h2> My Techstack</h2>
-                  <TechStackFallback />
-                </div>
-              }
-            >
-              <TechStack />
             </ErrorBoundary>
             <HomeFooter />
           </div>

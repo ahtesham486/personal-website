@@ -234,6 +234,22 @@
   color: var(--accentColor);
 }
 
+.blog-faq-section {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.blog-faq-section h2 {
+  font-size: 1.75rem;
+  margin-bottom: 24px;
+}
+
+.blog-faq-section .faq-section {
+  margin: 0;
+  padding: 0;
+}
+
 .home-fallback {
   min-height: 100vh;
   display: grid;

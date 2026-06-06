@@ -7,7 +7,7 @@ import "@/styles/content-pages.css";
 export const metadata: Metadata = {
   title: "Blog — Python, AI & Automation",
   description:
-    "Articles on Python development, WhatsApp AI bots, web scraping, SEO, AEO, GEO, and automation by Ahtasham Aslam.",
+    "SEO guides, WhatsApp bot tutorials, Python automation, AI agents, and web development articles by Ahtasham Aslam.",
   alternates: { canonical: `${siteConfig.siteUrl}/blog` },
 };
 
@@ -22,6 +22,7 @@ export default function BlogPage() {
         </Link>
         <nav className="content-nav">
           <Link href="/">Home</Link>
+          <Link href="/services">Services</Link>
           <Link href="/blog">Blog</Link>
           <Link href="/work">Work</Link>
           <Link href="/contact">Contact</Link>
@@ -31,32 +32,24 @@ export default function BlogPage() {
       <main className="content-main">
         <h1>Blog</h1>
         <p className="content-lead">
-          Python, AI agents, automation, SEO/AEO/GEO — practical notes from real projects.
+          Python, AI agents, automation, SEO/AEO/GEO — practical guides with FAQs for business owners
+          and developers.
         </p>
 
         <div className="blog-list">
           {posts.map((post) => (
             <article key={post.slug} className="blog-card">
-              {post.cover && (
-                <Link href={`/blog/${post.slug}`}>
-                  <img src={post.cover} alt={post.title} loading="lazy" />
-                </Link>
-              )}
-              <div className="blog-card-body">
-                <time dateTime={post.date}>{post.date}</time>
-                <h2>
-                  <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-                </h2>
-                <p>{post.description}</p>
-                <div className="blog-tags">
-                  {post.tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
+              <Link href={`/blog/${post.slug}`}>
+                {post.cover && (
+                  <img src={post.cover} alt={post.title} loading="lazy" decoding="async" />
+                )}
+                <div className="blog-card-body">
+                  <time dateTime={post.date}>{post.date}</time>
+                  <h2>{post.title}</h2>
+                  <p>{post.description}</p>
+                  <span className="content-link">Read article →</span>
                 </div>
-                <Link href={`/blog/${post.slug}`} className="content-link">
-                  Read article →
-                </Link>
-              </div>
+              </Link>
             </article>
           ))}
         </div>

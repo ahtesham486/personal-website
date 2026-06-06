@@ -19,6 +19,7 @@ export default function WorkIndexPage() {
         </Link>
         <nav className="content-nav">
           <Link href="/">Home</Link>
+          <Link href="/services">Services</Link>
           <Link href="/blog">Blog</Link>
           <Link href="/work">Work</Link>
           <Link href="/contact">Contact</Link>

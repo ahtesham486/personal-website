@@ -3,12 +3,27 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import BlogFaqs from "@/components/BlogFaqs";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/blog";
 import { siteConfig } from "@/data/siteConfig";
 import { JsonLd, absoluteUrl, blogPostingSchema } from "@/lib/seo";
 import "@/styles/content-pages.css";
+import "@/styles/faq.css";
 
 type Props = { params: Promise<{ slug: string }> };
+
+function blogFaqSchema(post: NonNullable<ReturnType<typeof getPostBySlug>>) {
+  if (!post.faqs.length) return null;
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: post.faqs.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+}
 
 export async function generateStaticParams() {
   return getAllPostSlugs().map((slug) => ({ slug }));
@@ -40,15 +55,18 @@ export default async function BlogPostPage({ params }: Props) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  const faqSchema = blogFaqSchema(post);
+
   return (
     <div className="content-page">
-      <JsonLd data={blogPostingSchema(post)} />
+      <JsonLd data={faqSchema ? [blogPostingSchema(post), faqSchema] : blogPostingSchema(post)} />
       <header className="content-header">
         <Link href="/" className="content-logo">
           AA.
         </Link>
         <nav className="content-nav">
           <Link href="/">Home</Link>
+          <Link href="/services">Services</Link>
           <Link href="/blog">Blog</Link>
           <Link href="/work">Work</Link>
           <Link href="/contact">Contact</Link>
@@ -66,6 +84,7 @@ export default async function BlogPostPage({ params }: Props) {
         <article className="markdown-body">
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
         </article>
+        <BlogFaqs faqs={post.faqs} />
       </main>
     </div>
   );

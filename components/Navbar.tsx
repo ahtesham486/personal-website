@@ -28,7 +28,7 @@ const Navbar = () => {
     document.body.style.overflowY = "auto";
 
     requestAnimationFrame(() => {
-      setTimeout(() => initialFX(), 200);
+      setTimeout(() => initialFX(), 80);
     });
   }, [isHome]);
 
@@ -49,6 +49,11 @@ const Navbar = () => {
                 <HoverLinks text="ABOUT" />
               </Link>
             )}
+          </li>
+          <li>
+            <Link href="/services">
+              <HoverLinks text="SERVICES" />
+            </Link>
           </li>
           <li>
             <Link href="/work">

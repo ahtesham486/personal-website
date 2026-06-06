@@ -23,12 +23,12 @@ export function initialFX() {
       { opacity: 0, y: 80, filter: "blur(5px)" },
       {
         opacity: 1,
-        duration: 1.2,
+        duration: 0.55,
         filter: "blur(0px)",
         ease: "power3.inOut",
         y: 0,
-        stagger: 0.025,
-        delay: 0.3,
+        stagger: 0.012,
+        delay: 0.08,
       }
     );
 
@@ -43,7 +43,7 @@ export function initialFX() {
           { opacity: 0, y: 80, filter: "blur(5px)" },
           {
             opacity: 1,
-            duration: 1.2,
+            duration: 0.55,
             filter: "blur(0px)",
             ease: "power3.inOut",
             y: 0,
@@ -72,10 +72,10 @@ export function initialFX() {
       { opacity: 0, y: 30 },
       {
         opacity: 1,
-        duration: 1.2,
+        duration: 0.5,
         ease: "power1.inOut",
         y: 0,
-        delay: 0.8,
+        delay: 0.25,
       }
     );
     gsap.fromTo(
@@ -83,9 +83,9 @@ export function initialFX() {
       { opacity: 0 },
       {
         opacity: 1,
-        duration: 1.2,
+        duration: 0.45,
         ease: "power1.inOut",
-        delay: 0.1,
+        delay: 0.05,
       }
     );
   } catch (err) {
@@ -105,7 +105,7 @@ function loopText(text1: SplitText, text2: SplitText) {
     { opacity: 0, y: 80 },
     {
       opacity: 1,
-      duration: 1.2,
+      duration: 0.55,
       ease: "power3.inOut",
       y: 0,
       stagger: 0.1,
@@ -117,7 +117,7 @@ function loopText(text1: SplitText, text2: SplitText) {
       text1.chars,
       { y: 80 },
       {
-        duration: 1.2,
+        duration: 0.55,
         ease: "power3.inOut",
         y: 0,
         stagger: 0.1,
@@ -130,7 +130,7 @@ function loopText(text1: SplitText, text2: SplitText) {
       { y: 0 },
       {
         y: -80,
-        duration: 1.2,
+        duration: 0.55,
         ease: "power3.inOut",
         stagger: 0.1,
         delay: delay,
@@ -141,7 +141,7 @@ function loopText(text1: SplitText, text2: SplitText) {
       text2.chars,
       {
         y: -80,
-        duration: 1.2,
+        duration: 0.55,
         ease: "power3.inOut",
         stagger: 0.1,
         delay: delay2,
