@@ -28,7 +28,7 @@ Ahtasham Aslam builds production-grade Python backends (Django, Flask), AI agent
 - Work portfolio: https://ahtasham.site/work
 - Blog: https://ahtasham.site/blog
 - Contact: https://ahtasham.site/contact
-- FAQ: https://ahtasham.site/#faq
+- FAQ: https://ahtasham.site/contact
 - Sitemap: https://ahtasham.site/sitemap.xml
 
 ## Projects

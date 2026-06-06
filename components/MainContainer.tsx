@@ -3,9 +3,8 @@
 import { lazy, PropsWithChildren, Suspense, useEffect, useRef, useState } from "react";
 import About from "./About";
 import Career from "./Career";
-import Contact from "./Contact";
 import Cursor from "./Cursor";
-import FaqSection from "./FaqSection";
+import HomeFooter from "./HomeFooter";
 import Landing from "./Landing";
 import Navbar from "./Navbar";
 import SocialIcons from "./SocialIcons";
@@ -77,8 +76,7 @@ const MainContainer = ({ children }: PropsWithChildren) => {
                 <TechStack />
               </Suspense>
             )}
-            <Contact />
-            <FaqSection />
+            <HomeFooter />
           </div>
         </div>
       </div>

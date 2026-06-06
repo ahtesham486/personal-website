@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FaLinkedinIn, FaWhatsapp } from "react-icons/fa6";
 import "./styles/SocialIcons.css";
 import { useEffect } from "react";
@@ -68,9 +69,9 @@ const SocialIcons = () => {
           </a>
         </span>
       </div>
-      <a className="resume-button" href="#contact" data-cursor="disable">
+      <Link className="resume-button" href="/contact" data-cursor="disable">
         <HoverLinks text="CONTACT" />
-      </a>
+      </Link>
     </div>
   );
 };

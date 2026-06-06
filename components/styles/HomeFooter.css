@@ -1,0 +1,37 @@
+.home-footer {
+  position: relative;
+  z-index: 100;
+  pointer-events: auto;
+  margin: 80px auto 100px;
+  padding-bottom: 40px;
+}
+
+.home-footer h2 {
+  font-weight: 400;
+  font-size: 23px;
+  margin: 0;
+}
+
+.home-footer h2 > span {
+  color: var(--accentColor);
+}
+
+.home-footer p {
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  opacity: 0.5;
+  margin: 16px 0 0;
+}
+
+@media only screen and (max-width: 900px) {
+  .home-footer {
+    margin: 50px auto 60px;
+  }
+
+  .home-footer h2 {
+    font-size: 18px;
+  }
+}

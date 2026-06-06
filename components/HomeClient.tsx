@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { Suspense, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { LoadingProvider } from "@/context/LoadingProvider";
 import MainContainer from "@/components/MainContainer";
 import ErrorBoundary from "@/components/ErrorBoundary";
@@ -11,16 +12,17 @@ const CharacterModel = dynamic(() => import("@/components/Character"), {
   loading: () => null,
 });
 
-function HomeFallback() {
-  return (
-    <div className="home-fallback">
-      <p>Loading portfolio…</p>
-    </div>
-  );
-}
-
 export default function HomeClient() {
+  const router = useRouter();
   const [showCharacter, setShowCharacter] = useState(false);
+
+  useEffect(() => {
+    const hash = window.location.hash.replace(/^#/, "");
+    if (hash === "contact" || hash === "faq") {
+      router.replace("/contact");
+      return;
+    }
+  }, [router]);
 
   useEffect(() => {
     const start = () => setShowCharacter(true);
@@ -33,18 +35,16 @@ export default function HomeClient() {
   }, []);
 
   return (
-    <ErrorBoundary fallback={<HomeFallback />}>
-      <LoadingProvider>
-        <MainContainer>
-          {showCharacter && (
-            <ErrorBoundary>
-              <Suspense fallback={null}>
-                <CharacterModel />
-              </Suspense>
-            </ErrorBoundary>
-          )}
-        </MainContainer>
-      </LoadingProvider>
-    </ErrorBoundary>
+    <LoadingProvider>
+      <MainContainer>
+        {showCharacter && (
+          <ErrorBoundary>
+            <Suspense fallback={null}>
+              <CharacterModel />
+            </Suspense>
+          </ErrorBoundary>
+        )}
+      </MainContainer>
+    </LoadingProvider>
   );
 }
