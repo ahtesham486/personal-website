@@ -21,10 +21,6 @@ const Landing = ({ children }: PropsWithChildren) => {
               <div className="landing-h2-1">Developer</div>
               <div className="landing-h2-2">Automator</div>
             </h2>
-            <h2 className="landing-info-rotate">
-              <div className="landing-h2-info">Automator</div>
-              <div className="landing-h2-info-1">Developer</div>
-            </h2>
           </div>
         </div>
         {children}

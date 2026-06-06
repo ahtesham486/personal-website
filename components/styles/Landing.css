@@ -210,8 +210,7 @@
   color: var(--accentColor);
   margin: 0;
 }
-.landing-info h2,
-.landing-info-rotate {
+.landing-info h2 {
   margin: 0;
   margin-top: -20px;
   margin-left: 20px;
@@ -220,23 +219,16 @@
   font-size: 32px;
   line-height: 40px;
   position: relative;
-  display: flex;
-  flex-wrap: nowrap;
+  display: block;
   text-transform: uppercase;
   letter-spacing: 2px;
   overflow: hidden;
 }
-.landing-h2-info,
-.landing-h2-info-1,
 .landing-h2-1,
 .landing-h2-2 {
-  display: inline-block;
+  display: block;
   white-space: nowrap;
-}
-.landing-h2-info-1 {
-  position: absolute;
-  top: 0;
-  left: 0;
+  will-change: transform, opacity;
 }
 h2.landing-info-h2 {
   color: #c481ff;
@@ -254,20 +246,7 @@ h2.landing-info-h2 {
   position: absolute;
   top: 0;
   left: 0;
-}
-.landing-info-h2::after {
-  content: "";
-  position: absolute;
   width: 100%;
-  height: 120%;
-  z-index: 3;
-  background-image: linear-gradient(
-    0deg,
-    var(--backgroundColor) 40%,
-    rgba(0, 0, 0, 0) 110%
-  );
-  top: 0;
-  left: 0;
 }
 @media screen and (min-width: 500px) {
   .landing-circle2 {
