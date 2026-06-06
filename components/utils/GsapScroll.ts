@@ -5,7 +5,8 @@ export function setCharTimeline(
   character: THREE.Object3D<THREE.Object3DEventMap> | null,
   camera: THREE.PerspectiveCamera
 ) {
-  let intensity = 0;
+  try {
+    let intensity = 0;
   gsap.ticker.add(() => {
     if (gsap.ticker.frame % 36 === 0) intensity = Math.random();
   });
@@ -150,9 +151,13 @@ export function setCharTimeline(
       tM2.to(".what-box-in", { display: "flex", duration: 0.1, delay: 0 }, 0);
     }
   }
+  } catch (err) {
+    console.warn("Character scroll timeline skipped:", err);
+  }
 }
 
 export function setAllTimeline() {
+  try {
   const careerTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: ".career-section",
@@ -206,5 +211,8 @@ export function setAllTimeline() {
       { y: 0, duration: 0.5, delay: 0.2 },
       0
     );
+  }
+  } catch (err) {
+    console.warn("Career scroll timeline skipped:", err);
   }
 }

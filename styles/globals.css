@@ -95,10 +95,10 @@ body {
 .techstack {
   width: 100%;
   position: relative;
-  height: var(--vh);
+  min-height: auto;
   margin: auto;
   margin-top: 50px;
-  margin-bottom: -100px;
+  margin-bottom: 40px;
   z-index: 12;
 }
 

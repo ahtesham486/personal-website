@@ -20,7 +20,6 @@ export default function HomeClient() {
     const hash = window.location.hash.replace(/^#/, "");
     if (hash === "contact" || hash === "faq") {
       router.replace("/contact");
-      return;
     }
   }, [router]);
 
@@ -35,16 +34,18 @@ export default function HomeClient() {
   }, []);
 
   return (
-    <LoadingProvider>
-      <MainContainer>
-        {showCharacter && (
-          <ErrorBoundary>
-            <Suspense fallback={null}>
-              <CharacterModel />
-            </Suspense>
-          </ErrorBoundary>
-        )}
-      </MainContainer>
-    </LoadingProvider>
+    <ErrorBoundary>
+      <LoadingProvider>
+        <MainContainer>
+          {showCharacter && (
+            <ErrorBoundary>
+              <Suspense fallback={null}>
+                <CharacterModel />
+              </Suspense>
+            </ErrorBoundary>
+          )}
+        </MainContainer>
+      </LoadingProvider>
+    </ErrorBoundary>
   );
 }

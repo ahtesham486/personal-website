@@ -1,42 +1,23 @@
 "use client";
 
-import { lazy, PropsWithChildren, Suspense, useEffect, useRef, useState } from "react";
+import { PropsWithChildren, Suspense, useEffect, useState } from "react";
 import About from "./About";
 import Career from "./Career";
 import Cursor from "./Cursor";
+import ErrorBoundary from "./ErrorBoundary";
 import HomeFooter from "./HomeFooter";
 import Landing from "./Landing";
 import Navbar from "./Navbar";
 import SocialIcons from "./SocialIcons";
+import TechStack from "./TechStack";
 import WhatsAppFloat from "./WhatsAppFloat";
 import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import setSplitText, { cleanupSplitText } from "./utils/splitText";
 import { gsap, ScrollTrigger } from "@/lib/gsapPlugins";
 
-const TechStack = lazy(() => import("./TechStack"));
-
 const MainContainer = ({ children }: PropsWithChildren) => {
   const [isDesktopView, setIsDesktopView] = useState(false);
-  const [showTechStack, setShowTechStack] = useState(false);
-  const techSentinelRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const sentinel = techSentinelRef.current;
-    if (!sentinel || !isDesktopView) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShowTechStack(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "400px" }
-    );
-    observer.observe(sentinel);
-    return () => observer.disconnect();
-  }, [isDesktopView]);
 
   useEffect(() => {
     const timer = setTimeout(() => setSplitText(), 400);
@@ -69,13 +50,12 @@ const MainContainer = ({ children }: PropsWithChildren) => {
             <About />
             <WhatIDo />
             <Career />
-            <Work />
-            <div ref={techSentinelRef} aria-hidden="true" style={{ height: 1 }} />
-            {isDesktopView && showTechStack && (
-              <Suspense fallback={null}>
-                <TechStack />
-              </Suspense>
-            )}
+            <ErrorBoundary>
+              <Work />
+            </ErrorBoundary>
+            <ErrorBoundary>
+              <TechStack />
+            </ErrorBoundary>
             <HomeFooter />
           </div>
         </div>

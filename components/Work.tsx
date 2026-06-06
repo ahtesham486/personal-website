@@ -2,48 +2,51 @@ import Link from "next/link";
 import "./styles/Work.css";
 import WorkImage from "./WorkImage";
 import { useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, ScrollTrigger } from "@/lib/gsapPlugins";
 import { workProjects } from "../data/siteConfig";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Work = () => {
   useEffect(() => {
-    let translateX = 0;
+    if (window.innerWidth <= 1024) return;
 
-    function setTranslateX() {
+    let timeline: gsap.core.Timeline | null = null;
+
+    try {
       const box = document.getElementsByClassName("work-box");
-      if (!box.length) return;
-      const rectLeft = document
-        .querySelector(".work-container")!
-        .getBoundingClientRect().left;
+      const container = document.querySelector(".work-container");
+      if (!box.length || !container || !box[0].parentElement) return;
+
+      const rectLeft = container.getBoundingClientRect().left;
       const rect = box[0].getBoundingClientRect();
-      const parentWidth = box[0].parentElement!.getBoundingClientRect().width;
-      const padding = parseInt(window.getComputedStyle(box[0]).padding) / 2;
-      translateX = rect.width * box.length - (rectLeft + parentWidth) + padding;
+      const parentWidth = box[0].parentElement.getBoundingClientRect().width;
+      const paddingRaw = parseInt(window.getComputedStyle(box[0]).padding, 10);
+      const padding = Number.isFinite(paddingRaw) ? paddingRaw / 2 : 0;
+      const translateX = rect.width * box.length - (rectLeft + parentWidth) + padding;
+
+      if (!Number.isFinite(translateX) || translateX <= 0) return;
+
+      timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".work-section",
+          start: "top top",
+          end: `+=${translateX}`,
+          scrub: true,
+          pin: true,
+          id: "work",
+          anticipatePin: 1,
+        },
+      });
+
+      timeline.to(".work-flex", {
+        x: -translateX,
+        ease: "none",
+      });
+    } catch (err) {
+      console.warn("Work scroll animation skipped:", err);
     }
 
-    setTranslateX();
-
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".work-section",
-        start: "top top",
-        end: `+=${translateX}`,
-        scrub: true,
-        pin: true,
-        id: "work",
-      },
-    });
-
-    timeline.to(".work-flex", {
-      x: -translateX,
-      ease: "none",
-    });
-
     return () => {
-      timeline.kill();
+      timeline?.kill();
       ScrollTrigger.getById("work")?.kill();
     };
   }, []);
