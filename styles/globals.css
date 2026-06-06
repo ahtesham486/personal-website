@@ -95,7 +95,8 @@ body {
 .techstack {
   width: 100%;
   position: relative;
-  min-height: auto;
+  height: var(--vh);
+  min-height: 520px;
   margin: auto;
   margin-top: 50px;
   margin-bottom: 40px;
