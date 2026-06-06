@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { siteConfig } from "@/data/siteConfig";
+import ContentHeader from "@/components/ContentHeader";
 import "@/styles/content-pages.css";
 
 export const metadata: Metadata = {
@@ -16,20 +17,9 @@ export default function BlogPage() {
 
   return (
     <div className="content-page">
-      <header className="content-header">
-        <Link href="/" className="content-logo">
-          AA.
-        </Link>
-        <nav className="content-nav">
-          <Link href="/">Home</Link>
-          <Link href="/services">Services</Link>
-          <Link href="/blog">Blog</Link>
-          <Link href="/work">Work</Link>
-          <Link href="/contact">Contact</Link>
-        </nav>
-      </header>
+      <ContentHeader />
 
-      <main className="content-main">
+      <main className="content-main content-main-wide">
         <h1>Blog</h1>
         <p className="content-lead">
           Python, AI agents, automation, SEO/AEO/GEO — practical guides with FAQs for business owners
@@ -39,17 +29,23 @@ export default function BlogPage() {
         <div className="blog-list">
           {posts.map((post) => (
             <article key={post.slug} className="blog-card">
-              <Link href={`/blog/${post.slug}`}>
-                {post.cover && (
+              {post.cover ? (
+                <Link href={`/blog/${post.slug}`} className="blog-card-media">
                   <img src={post.cover} alt={post.title} loading="lazy" decoding="async" />
-                )}
-                <div className="blog-card-body">
-                  <time dateTime={post.date}>{post.date}</time>
-                  <h2>{post.title}</h2>
-                  <p>{post.description}</p>
-                  <span className="content-link">Read article →</span>
-                </div>
-              </Link>
+                </Link>
+              ) : (
+                <div className="blog-card-media blog-card-media-placeholder" aria-hidden="true" />
+              )}
+              <div className="blog-card-body">
+                <time dateTime={post.date}>{post.date}</time>
+                <h2>
+                  <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                </h2>
+                <p>{post.description}</p>
+                <Link href={`/blog/${post.slug}`} className="content-link">
+                  Read article →
+                </Link>
+              </div>
             </article>
           ))}
         </div>

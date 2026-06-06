@@ -31,7 +31,7 @@
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
   align-items: stretch;
 }
@@ -122,6 +122,13 @@
 .service-price-note {
   font-size: 0.85rem;
   opacity: 0.6;
+}
+
+.service-price-period {
+  font-size: 0.42em;
+  font-weight: 700;
+  margin-left: 1px;
+  vertical-align: super;
 }
 
 .service-features {

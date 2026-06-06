@@ -9,8 +9,10 @@ Ahtasham Aslam builds production-grade Python backends (Django, Flask), AI agent
 ## Services & Pricing
 
 - Services page: https://ahtasham.site/services
+- Why Me: https://ahtasham.site/why-me
 - Ecommerce + WhatsApp Chatbot: $500 (best selling)
-- Custom Website: from $100
+- Ecommerce Website: from $100
+- SEO + AEO + GEO: $100/month
 - AI Agent Development: from $199
 - Python Automation & APIs: from $149
 
@@ -24,6 +26,7 @@ Ahtasham Aslam builds production-grade Python backends (Django, Flask), AI agent
 
 - Home: https://ahtasham.site/
 - Services: https://ahtasham.site/services
+- Why Me: https://ahtasham.site/why-me
 - Work portfolio: https://ahtasham.site/work
 - Blog: https://ahtasham.site/blog
 - Contact: https://ahtasham.site/contact

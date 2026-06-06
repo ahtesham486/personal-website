@@ -76,34 +76,71 @@
   gap: 32px;
 }
 
-.blog-card,
-.work-card {
+.content-main-wide {
+  width: min(1100px, var(--cWidth));
+}
+
+.blog-card {
   display: grid;
   grid-template-columns: 220px 1fr;
-  gap: 24px;
+  gap: 0;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.02);
+  transition: border-color 0.2s;
 }
 
-.blog-card img,
-.work-card img {
+.blog-card:hover {
+  border-color: rgba(194, 164, 255, 0.35);
+}
+
+.blog-card-media {
+  display: block;
+  height: 100%;
+  min-height: 180px;
+  overflow: hidden;
+}
+
+.blog-card-media-placeholder {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.blog-card img {
   width: 100%;
   height: 100%;
-  min-height: 160px;
+  min-height: 180px;
   object-fit: cover;
+  display: block;
 }
 
-.blog-card-body,
-.work-card-body {
-  padding: 20px 20px 20px 0;
+.blog-card-body {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.blog-card h2,
-.work-card h2 {
-  font-size: 1.5rem;
-  margin: 8px 0;
+.blog-card-body time {
+  font-size: 13px;
+  opacity: 0.55;
+}
+
+.blog-card-body h2 {
+  font-size: 1.35rem;
+  margin: 8px 0 10px;
+  line-height: 1.3;
+}
+
+.blog-card-body h2 a:hover {
+  color: var(--accentColor);
+}
+
+.blog-card-body p {
+  margin: 0 0 12px;
+  opacity: 0.82;
+  line-height: 1.55;
+  font-size: 0.95rem;
 }
 
 .blog-tags {
@@ -119,6 +156,32 @@
   border-radius: 999px;
   background: rgba(194, 164, 255, 0.15);
   border: 1px solid rgba(194, 164, 255, 0.3);
+}
+
+.work-card {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.work-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 160px;
+  object-fit: cover;
+}
+
+.work-card-body {
+  padding: 20px 20px 20px 0;
+}
+
+.work-card h2 {
+  font-size: 1.5rem;
+  margin: 8px 0;
 }
 
 .work-num {
@@ -177,7 +240,10 @@
     grid-template-columns: 1fr;
   }
 
-  .blog-card-body,
+  .blog-card-body {
+    padding: 16px 20px 20px;
+  }
+
   .work-card-body {
     padding: 0 20px 20px;
   }
@@ -235,19 +301,16 @@
 }
 
 .blog-faq-section {
-  margin-top: 48px;
-  padding-top: 32px;
+  width: 100%;
+  max-width: none;
+  margin: 48px 0 0;
+  padding: 32px 0 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.blog-faq-section h2 {
+.blog-faq-section .faq-heading {
   font-size: 1.75rem;
   margin-bottom: 24px;
-}
-
-.blog-faq-section .faq-section {
-  margin: 0;
-  padding: 0;
 }
 
 .home-fallback {

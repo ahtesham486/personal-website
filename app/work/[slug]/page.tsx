@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ContactLink from "@/components/ContactLink";
+import ContentHeader from "@/components/ContentHeader";
 import { workProjects, siteConfig } from "@/data/siteConfig";
 import { JsonLd, absoluteUrl, projectSchema } from "@/lib/seo";
 import "@/styles/content-pages.css";
@@ -39,18 +40,7 @@ export default async function WorkProjectPage({ params }: Props) {
   return (
     <div className="content-page">
       <JsonLd data={projectSchema(project)} />
-      <header className="content-header">
-        <Link href="/" className="content-logo">
-          AA.
-        </Link>
-        <nav className="content-nav">
-          <Link href="/">Home</Link>
-          <Link href="/services">Services</Link>
-          <Link href="/blog">Blog</Link>
-          <Link href="/work">Work</Link>
-          <Link href="/contact">Contact</Link>
-        </nav>
-      </header>
+      <ContentHeader />
 
       <main className="content-main article-main">
         <Link href="/work" className="content-back">

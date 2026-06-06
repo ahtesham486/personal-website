@@ -20,15 +20,14 @@ export function initialFX() {
 
     gsap.fromTo(
       landingText.chars,
-      { opacity: 0, y: 80, filter: "blur(5px)" },
+      { opacity: 0, y: 36 },
       {
         opacity: 1,
-        duration: 0.55,
-        filter: "blur(0px)",
-        ease: "power3.inOut",
+        duration: 0.38,
+        ease: "power2.out",
         y: 0,
-        stagger: 0.012,
-        delay: 0.08,
+        stagger: 0.006,
+        delay: 0,
       }
     );
 
@@ -40,15 +39,14 @@ export function initialFX() {
       if (landingText2.chars?.length) {
         gsap.fromTo(
           landingText2.chars,
-          { opacity: 0, y: 80, filter: "blur(5px)" },
+          { opacity: 0, y: 36 },
           {
             opacity: 1,
-            duration: 0.55,
-            filter: "blur(0px)",
-            ease: "power3.inOut",
+            duration: 0.38,
+            ease: "power2.out",
             y: 0,
-            stagger: 0.025,
-            delay: 0.3,
+            stagger: 0.008,
+            delay: 0.05,
           }
         );
 
@@ -69,13 +67,13 @@ export function initialFX() {
 
     gsap.fromTo(
       ".landing-info-h2",
-      { opacity: 0, y: 30 },
+      { opacity: 0, y: 20 },
       {
         opacity: 1,
-        duration: 0.5,
-        ease: "power1.inOut",
+        duration: 0.35,
+        ease: "power2.out",
         y: 0,
-        delay: 0.25,
+        delay: 0.12,
       }
     );
     gsap.fromTo(
@@ -83,9 +81,9 @@ export function initialFX() {
       { opacity: 0 },
       {
         opacity: 1,
-        duration: 0.45,
-        ease: "power1.inOut",
-        delay: 0.05,
+        duration: 0.3,
+        ease: "power2.out",
+        delay: 0,
       }
     );
   } catch (err) {
@@ -102,25 +100,25 @@ function loopText(text1: SplitText, text2: SplitText) {
 
   tl.fromTo(
     text2.chars,
-    { opacity: 0, y: 80 },
+    { opacity: 0, y: 36 },
     {
       opacity: 1,
-      duration: 0.55,
-      ease: "power3.inOut",
+      duration: 0.45,
+      ease: "power2.out",
       y: 0,
-      stagger: 0.1,
+      stagger: 0.06,
       delay: delay,
     },
     0
   )
     .fromTo(
       text1.chars,
-      { y: 80 },
+      { y: 36 },
       {
-        duration: 0.55,
-        ease: "power3.inOut",
+        duration: 0.45,
+        ease: "power2.out",
         y: 0,
-        stagger: 0.1,
+        stagger: 0.06,
         delay: delay2,
       },
       1
@@ -129,10 +127,10 @@ function loopText(text1: SplitText, text2: SplitText) {
       text1.chars,
       { y: 0 },
       {
-        y: -80,
-        duration: 0.55,
-        ease: "power3.inOut",
-        stagger: 0.1,
+        y: -36,
+        duration: 0.45,
+        ease: "power2.in",
+        stagger: 0.06,
         delay: delay,
       },
       0
@@ -140,10 +138,10 @@ function loopText(text1: SplitText, text2: SplitText) {
     .to(
       text2.chars,
       {
-        y: -80,
-        duration: 0.55,
-        ease: "power3.inOut",
-        stagger: 0.1,
+        y: -36,
+        duration: 0.45,
+        ease: "power2.in",
+        stagger: 0.06,
         delay: delay2,
       },
       1

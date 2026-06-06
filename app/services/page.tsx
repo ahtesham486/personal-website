@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { FaWhatsapp } from "react-icons/fa6";
+import ContentHeader from "@/components/ContentHeader";
 import { servicePackages, servicesPageMeta } from "@/data/services";
 import { siteConfig } from "@/data/siteConfig";
 import { JsonLd, absoluteUrl } from "@/lib/seo";
@@ -13,9 +14,9 @@ export const metadata: Metadata = {
   keywords: [
     "web development pricing Pakistan",
     "WhatsApp chatbot ecommerce",
+    "SEO AEO GEO monthly",
     "AI agent development",
     "Python automation services",
-    "affordable custom website",
   ],
   alternates: { canonical: absoluteUrl("/services") },
   openGraph: {
@@ -46,24 +47,18 @@ function servicesSchema() {
   };
 }
 
+function formatPrice(pkg: (typeof servicePackages)[number]) {
+  const suffix = pkg.billing === "monthly" ? "/mo" : "";
+  return `$${pkg.price}${suffix}`;
+}
+
 export default function ServicesPage() {
   const waBase = siteConfig.whatsappUrl;
 
   return (
     <div className="content-page services-page">
       <JsonLd data={servicesSchema()} />
-      <header className="content-header">
-        <Link href="/" className="content-logo">
-          AA.
-        </Link>
-        <nav className="content-nav">
-          <Link href="/">Home</Link>
-          <Link href="/services">Services</Link>
-          <Link href="/work">Work</Link>
-          <Link href="/blog">Blog</Link>
-          <Link href="/contact">Contact</Link>
-        </nav>
-      </header>
+      <ContentHeader />
 
       <main className="services-main">
         <div className="services-hero">
@@ -76,8 +71,9 @@ export default function ServicesPage() {
 
         <div className="services-grid">
           {servicePackages.map((pkg) => {
+            const priceLabel = formatPrice(pkg);
             const waUrl = `${waBase}?text=${encodeURIComponent(
-              `Hi Ahtasham, I'm interested in: ${pkg.title} ($${pkg.price})`
+              `Hi Ahtasham, I'm interested in: ${pkg.title} (${priceLabel})`
             )}`;
             return (
               <article
@@ -88,16 +84,28 @@ export default function ServicesPage() {
                 <h2>{pkg.title}</h2>
                 <p className="service-subtitle">{pkg.subtitle}</p>
                 <div className="service-price-row">
-                  <span className="service-price">${pkg.price}</span>
-                  <span className="service-price-old">${pkg.originalPrice}</span>
-                  <span className="service-price-note">Only</span>
+                  <span className="service-price">
+                    ${pkg.price}
+                    {pkg.billing === "monthly" && <small className="service-price-period">/mo</small>}
+                  </span>
+                  <span className="service-price-old">
+                    ${pkg.originalPrice}
+                    {pkg.billing === "monthly" ? "/mo" : ""}
+                  </span>
+                  <span className="service-price-note">
+                    {pkg.billing === "monthly" ? "Monthly" : "Only"}
+                  </span>
                 </div>
                 <ul className="service-features">
                   {pkg.features.map((f) => (
                     <li key={f}>{f}</li>
                   ))}
                 </ul>
-                <p className="service-offer-note">Limited-time pricing — lock in today.</p>
+                <p className="service-offer-note">
+                  {pkg.billing === "monthly"
+                    ? "Cancel anytime — visibility on autopilot."
+                    : "Limited-time pricing — lock in today."}
+                </p>
                 <a href={waUrl} target="_blank" rel="noopener noreferrer" className="service-cta">
                   {pkg.cta} <FaWhatsapp />
                 </a>

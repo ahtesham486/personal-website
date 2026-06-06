@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import ContentHeader from "@/components/ContentHeader";
 import { workProjects, siteConfig } from "@/data/siteConfig";
 import "@/styles/content-pages.css";
 
@@ -13,18 +14,7 @@ export const metadata: Metadata = {
 export default function WorkIndexPage() {
   return (
     <div className="content-page">
-      <header className="content-header">
-        <Link href="/" className="content-logo">
-          AA.
-        </Link>
-        <nav className="content-nav">
-          <Link href="/">Home</Link>
-          <Link href="/services">Services</Link>
-          <Link href="/blog">Blog</Link>
-          <Link href="/work">Work</Link>
-          <Link href="/contact">Contact</Link>
-        </nav>
-      </header>
+      <ContentHeader />
 
       <main className="content-main">
         <h1>My Work</h1>

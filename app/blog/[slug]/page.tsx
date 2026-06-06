@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import ContentHeader from "@/components/ContentHeader";
 import BlogFaqs from "@/components/BlogFaqs";
 import { getAllPostSlugs, getPostBySlug } from "@/lib/blog";
 import { siteConfig } from "@/data/siteConfig";
@@ -60,18 +61,7 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <div className="content-page">
       <JsonLd data={faqSchema ? [blogPostingSchema(post), faqSchema] : blogPostingSchema(post)} />
-      <header className="content-header">
-        <Link href="/" className="content-logo">
-          AA.
-        </Link>
-        <nav className="content-nav">
-          <Link href="/">Home</Link>
-          <Link href="/services">Services</Link>
-          <Link href="/blog">Blog</Link>
-          <Link href="/work">Work</Link>
-          <Link href="/contact">Contact</Link>
-        </nav>
-      </header>
+      <ContentHeader />
 
       <main className="content-main article-main">
         <Link href="/blog" className="content-back">

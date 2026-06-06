@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { MdArrowOutward, MdCopyright } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa6";
+import ContentHeader from "@/components/ContentHeader";
 import FaqSection from "@/components/FaqSection";
 import { siteConfig } from "@/data/siteConfig";
 import { absoluteUrl } from "@/lib/seo";
@@ -26,18 +27,7 @@ export default function ContactPage() {
 
   return (
     <div className="content-page contact-page">
-      <header className="content-header">
-        <Link href="/" className="content-logo">
-          AA.
-        </Link>
-        <nav className="content-nav">
-          <Link href="/">Home</Link>
-          <Link href="/services">Services</Link>
-          <Link href="/work">Work</Link>
-          <Link href="/blog">Blog</Link>
-          <Link href="/contact">Contact</Link>
-        </nav>
-      </header>
+      <ContentHeader />
 
       <main className="content-main contact-page-main" id="contact">
         <h1>Contact</h1>

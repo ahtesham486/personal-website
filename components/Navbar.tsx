@@ -24,12 +24,8 @@ const Navbar = () => {
 
   useEffect(() => {
     if (!isHome) return;
-
     document.body.style.overflowY = "auto";
-
-    requestAnimationFrame(() => {
-      setTimeout(() => initialFX(), 80);
-    });
+    requestAnimationFrame(() => initialFX());
   }, [isHome]);
 
   return (
@@ -53,6 +49,11 @@ const Navbar = () => {
           <li>
             <Link href="/services">
               <HoverLinks text="SERVICES" />
+            </Link>
+          </li>
+          <li>
+            <Link href="/why-me">
+              <HoverLinks text="WHY ME" />
             </Link>
           </li>
           <li>

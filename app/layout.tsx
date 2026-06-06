@@ -56,6 +56,10 @@ export const metadata: Metadata = {
       "text/plain": `${siteConfig.siteUrl}/llms.txt`,
     },
   },
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/icon.svg", type: "image/svg+xml" }],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
