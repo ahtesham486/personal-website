@@ -12,17 +12,16 @@ import {
 import setAnimations from "./utils/animationUtils";
 import { getRendererPixelRatio, isLowEndDevice } from "@/lib/performance";
 
-let sceneMounted = false;
-
 const Scene = () => {
   const canvasDiv = useRef<HTMLDivElement | null>(null);
   const hoverDivRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef(new THREE.Scene());
+  const mountedRef = useRef(false);
   const [, setChar] = useState<THREE.Object3D | null>(null);
 
   useEffect(() => {
-    if (sceneMounted || !canvasDiv.current) return;
-    sceneMounted = true;
+    if (mountedRef.current || !canvasDiv.current) return;
+    mountedRef.current = true;
 
     if (canvasDiv.current) {
       let rect = canvasDiv.current.getBoundingClientRect();
@@ -145,7 +144,7 @@ const Scene = () => {
       };
       animate();
       return () => {
-        sceneMounted = false;
+        mountedRef.current = false;
         cancelAnimationFrame(animId);
         viewObserver.disconnect();
         document.removeEventListener("visibilitychange", onVisibility);

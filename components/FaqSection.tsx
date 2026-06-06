@@ -1,3 +1,5 @@
+"use client";
+
 import { faqItems } from "@/data/siteConfig";
 import "@/styles/faq.css";
 
@@ -10,7 +12,7 @@ export default function FaqSection() {
       <div className="faq-grid">
         {faqItems.map((item) => (
           <details key={item.question} className="faq-item">
-            <summary>{item.question}</summary>
+            <summary data-cursor="disable">{item.question}</summary>
             <p>{item.answer}</p>
           </details>
         ))}

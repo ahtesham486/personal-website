@@ -52,6 +52,9 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: siteConfig.siteUrl,
+    types: {
+      "text/plain": `${siteConfig.siteUrl}/llms.txt`,
+    },
   },
 };
 

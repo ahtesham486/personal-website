@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import ContactLink from "@/components/ContactLink";
 import { workProjects, siteConfig } from "@/data/siteConfig";
 import { JsonLd, absoluteUrl, projectSchema } from "@/lib/seo";
 import "@/styles/content-pages.css";
@@ -69,9 +70,9 @@ export default async function WorkProjectPage({ params }: Props) {
           ))}
         </ul>
 
-        <Link href="/#contact" className="content-cta">
+        <ContactLink className="content-cta">
           Discuss a similar project →
-        </Link>
+        </ContactLink>
       </main>
     </div>
   );

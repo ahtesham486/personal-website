@@ -5,14 +5,17 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import HoverLinks from "./HoverLinks";
 import { initialFX } from "./utils/initialFX";
+import { consumeQueuedScroll, queueScrollToSection, scrollToSectionId } from "@/lib/hashScroll";
 import "./styles/Navbar.css";
 
 export const smoother = null;
 
-function scrollToSection(selector: string | null) {
-  if (!selector) return;
-  const target = document.querySelector(selector);
-  target?.scrollIntoView({ behavior: "smooth", block: "start" });
+function handleHashClick(e: React.MouseEvent<HTMLAnchorElement>) {
+  e.preventDefault();
+  const href = e.currentTarget.getAttribute("data-href");
+  if (!href) return;
+  scrollToSectionId(href);
+  window.history.replaceState(null, "", href);
 }
 
 const Navbar = () => {
@@ -23,21 +26,10 @@ const Navbar = () => {
     if (!isHome) return;
 
     document.body.style.overflowY = "auto";
+    consumeQueuedScroll(500);
 
     requestAnimationFrame(() => {
-      setTimeout(() => initialFX(), 100);
-    });
-
-    const links = document.querySelectorAll(".header ul a[data-href]");
-    links.forEach((elem) => {
-      const element = elem as HTMLAnchorElement;
-      element.addEventListener("click", (e) => {
-        if (window.innerWidth > 1024) {
-          e.preventDefault();
-          const link = e.currentTarget as HTMLAnchorElement;
-          scrollToSection(link.getAttribute("data-href"));
-        }
-      });
+      setTimeout(() => initialFX(), 150);
     });
   }, [isHome]);
 
@@ -49,9 +41,15 @@ const Navbar = () => {
         </Link>
         <ul>
           <li>
-            <a data-href="#about" href="/#about">
-              <HoverLinks text="ABOUT" />
-            </a>
+            {isHome ? (
+              <a data-href="#about" href="#about" onClick={handleHashClick} data-cursor="disable">
+                <HoverLinks text="ABOUT" />
+              </a>
+            ) : (
+              <Link href="/#about">
+                <HoverLinks text="ABOUT" />
+              </Link>
+            )}
           </li>
           <li>
             <Link href="/work">
@@ -64,9 +62,15 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <a data-href="#contact" href="/#contact">
-              <HoverLinks text="CONTACT" />
-            </a>
+            {isHome ? (
+              <a data-href="#contact" href="#contact" onClick={handleHashClick} data-cursor="disable">
+                <HoverLinks text="CONTACT" />
+              </a>
+            ) : (
+              <Link href="/" prefetch={false} onClick={() => queueScrollToSection("contact")}>
+                <HoverLinks text="CONTACT" />
+              </Link>
+            )}
           </li>
         </ul>
       </div>

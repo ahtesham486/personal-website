@@ -5,13 +5,15 @@ import About from "./About";
 import Career from "./Career";
 import Contact from "./Contact";
 import Cursor from "./Cursor";
+import FaqSection from "./FaqSection";
 import Landing from "./Landing";
 import Navbar from "./Navbar";
 import SocialIcons from "./SocialIcons";
 import WhatsAppFloat from "./WhatsAppFloat";
 import WhatIDo from "./WhatIDo";
 import Work from "./Work";
-import setSplitText from "./utils/splitText";
+import setSplitText, { cleanupSplitText } from "./utils/splitText";
+import { gsap, ScrollTrigger } from "@/lib/gsapPlugins";
 
 const TechStack = lazy(() => import("./TechStack"));
 
@@ -39,6 +41,11 @@ const MainContainer = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     setSplitText();
+    return () => {
+      cleanupSplitText();
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      gsap.globalTimeline.clear();
+    };
   }, []);
 
   useEffect(() => {
@@ -70,6 +77,7 @@ const MainContainer = ({ children }: PropsWithChildren) => {
               </Suspense>
             )}
             <Contact />
+            <FaqSection />
           </div>
         </div>
       </div>
