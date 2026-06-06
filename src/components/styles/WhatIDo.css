@@ -38,6 +38,8 @@
   margin-left: 200px;
   position: relative;
   display: none;
+  z-index: 12;
+  pointer-events: auto;
 }
 .what-content {
   width: 450px;
@@ -48,6 +50,7 @@
   position: relative;
   padding: 50px;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .what-noTouch:hover,

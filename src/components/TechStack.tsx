@@ -110,8 +110,9 @@ const TechStack = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) setShouldRender(true);
+        setIsActive(entry.isIntersecting);
       },
-      { rootMargin: "200px" }
+      { rootMargin: "200px", threshold: 0.2 }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -130,19 +131,6 @@ const TechStack = () => {
         )
       );
     });
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const work = document.getElementById("work");
-      if (!work) return;
-      const threshold = work.getBoundingClientRect().top;
-      const scrollY = window.scrollY || document.documentElement.scrollTop;
-      setIsActive(scrollY > threshold);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const sphereMaterials = useMemo(() => {

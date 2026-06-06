@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedinIn, FaWhatsapp } from "react-icons/fa6";
+import { FaLinkedinIn, FaWhatsapp } from "react-icons/fa6";
 import "./styles/SocialIcons.css";
 import { useEffect } from "react";
 import HoverLinks from "./HoverLinks";
@@ -57,11 +57,6 @@ const SocialIcons = () => {
   return (
     <div className="icons-section">
       <div className="social-icons" data-cursor="icons" id="social">
-        <span>
-          <a href={siteConfig.github} target="_blank" rel="noopener noreferrer">
-            <FaGithub />
-          </a>
-        </span>
         <span>
           <a href={siteConfig.linkedin} target="_blank" rel="noopener noreferrer">
             <FaLinkedinIn />

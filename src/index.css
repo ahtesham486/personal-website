@@ -99,6 +99,16 @@ body {
   margin: auto;
   margin-top: 50px;
   margin-bottom: -100px;
+  z-index: 12;
+}
+
+.tech-canvas {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
+  touch-action: none;
 }
 
 .techstack h2 {

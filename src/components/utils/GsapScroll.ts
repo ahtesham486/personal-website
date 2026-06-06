@@ -84,9 +84,10 @@ export function setCharTimeline(
         .fromTo(".about-me", { y: "-50%" }, { y: "0%" }, 0)
         .to(
           ".character-container",
-          { opacity: 1, visibility: "visible", pointerEvents: "auto" },
+          { opacity: 1, visibility: "visible", pointerEvents: "none" },
           0
-        );
+        )
+        .to(".character-hover", { pointerEvents: "auto" }, 0);
 
       // About — character animates with section
       tl2
