@@ -24,7 +24,7 @@ export default function BlogPage() {
           <Link href="/">Home</Link>
           <Link href="/blog">Blog</Link>
           <Link href="/work">Work</Link>
-          <Link href="/#contact">Contact</Link>
+          <Link href="/contact">Contact</Link>
         </nav>
       </header>
 

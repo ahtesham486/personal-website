@@ -40,8 +40,9 @@ const MainContainer = ({ children }: PropsWithChildren) => {
   }, [isDesktopView]);
 
   useEffect(() => {
-    setSplitText();
+    const timer = setTimeout(() => setSplitText(), 400);
     return () => {
+      clearTimeout(timer);
       cleanupSplitText();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       gsap.globalTimeline.clear();

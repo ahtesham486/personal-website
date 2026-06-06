@@ -11,30 +11,40 @@ const CharacterModel = dynamic(() => import("@/components/Character"), {
   loading: () => null,
 });
 
+function HomeFallback() {
+  return (
+    <div className="home-fallback">
+      <p>Loading portfolio…</p>
+    </div>
+  );
+}
+
 export default function HomeClient() {
   const [showCharacter, setShowCharacter] = useState(false);
 
   useEffect(() => {
     const start = () => setShowCharacter(true);
     if (typeof window.requestIdleCallback === "function") {
-      const id = window.requestIdleCallback(start, { timeout: 1500 });
+      const id = window.requestIdleCallback(start, { timeout: 2000 });
       return () => window.cancelIdleCallback(id);
     }
-    const id = setTimeout(start, 400);
+    const id = setTimeout(start, 600);
     return () => clearTimeout(id);
   }, []);
 
   return (
-    <LoadingProvider>
-      <MainContainer>
-        {showCharacter && (
-          <ErrorBoundary>
-            <Suspense fallback={null}>
-              <CharacterModel />
-            </Suspense>
-          </ErrorBoundary>
-        )}
-      </MainContainer>
-    </LoadingProvider>
+    <ErrorBoundary fallback={<HomeFallback />}>
+      <LoadingProvider>
+        <MainContainer>
+          {showCharacter && (
+            <ErrorBoundary>
+              <Suspense fallback={null}>
+                <CharacterModel />
+              </Suspense>
+            </ErrorBoundary>
+          )}
+        </MainContainer>
+      </LoadingProvider>
+    </ErrorBoundary>
   );
 }

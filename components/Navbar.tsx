@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import HoverLinks from "./HoverLinks";
 import { initialFX } from "./utils/initialFX";
-import { consumeQueuedScroll, queueScrollToSection, scrollToSectionId } from "@/lib/hashScroll";
+import { scrollToSectionId } from "@/lib/hashScroll";
 import "./styles/Navbar.css";
 
 export const smoother = null;
@@ -26,10 +26,9 @@ const Navbar = () => {
     if (!isHome) return;
 
     document.body.style.overflowY = "auto";
-    consumeQueuedScroll(500);
 
     requestAnimationFrame(() => {
-      setTimeout(() => initialFX(), 150);
+      setTimeout(() => initialFX(), 200);
     });
   }, [isHome]);
 
@@ -67,7 +66,7 @@ const Navbar = () => {
                 <HoverLinks text="CONTACT" />
               </a>
             ) : (
-              <Link href="/" prefetch={false} onClick={() => queueScrollToSection("contact")}>
+              <Link href="/contact">
                 <HoverLinks text="CONTACT" />
               </Link>
             )}

@@ -47,6 +47,7 @@ export default async function WorkProjectPage({ params }: Props) {
           <Link href="/">Home</Link>
           <Link href="/blog">Blog</Link>
           <Link href="/work">Work</Link>
+          <Link href="/contact">Contact</Link>
         </nav>
       </header>
 
