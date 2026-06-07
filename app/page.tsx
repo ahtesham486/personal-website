@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import HomeClient from "@/components/HomeClient";
 import { siteConfig } from "@/data/siteConfig";
-import { OG_IMAGE } from "@/lib/seo";
+import { JsonLd, OG_IMAGE, faqSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: `${siteConfig.name} | Python Developer & AI Automation Expert`,
@@ -23,5 +23,10 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  return <HomeClient />;
+  return (
+    <>
+      <JsonLd data={faqSchema()} />
+      <HomeClient />
+    </>
+  );
 }

@@ -6,7 +6,6 @@ import { siteConfig } from "@/data/siteConfig";
 import {
   JsonLd,
   OG_IMAGE,
-  faqSchema,
   localBusinessSchema,
   personSchema,
   professionalServiceSchema,
@@ -91,7 +90,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             websiteSchema(),
             localBusinessSchema(),
             professionalServiceSchema(),
-            faqSchema(),
           ]}
         />
         {children}
