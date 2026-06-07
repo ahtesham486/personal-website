@@ -36,15 +36,9 @@ const Navbar = () => {
         </Link>
         <ul>
           <li>
-            {isHome ? (
-              <a data-href="#about" href="#about" onClick={handleHashClick} data-cursor="disable">
-                <HoverLinks text="ABOUT" />
-              </a>
-            ) : (
-              <Link href="/#about">
-                <HoverLinks text="ABOUT" />
-              </Link>
-            )}
+            <Link href="/about">
+              <HoverLinks text="ABOUT" />
+            </Link>
           </li>
           <li>
             <Link href="/services">

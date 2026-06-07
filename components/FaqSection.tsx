@@ -1,8 +1,6 @@
-"use client";
-
 import { faqItems } from "@/data/siteConfig";
-import FaqAccordion from "./FaqAccordion";
+import FaqDetails from "./FaqDetails";
 
 export default function FaqSection() {
-  return <FaqAccordion items={faqItems} id="faq-heading" className="faq-section section-container" />;
+  return <FaqDetails items={faqItems} id="faq-heading" className="faq-section section-container" />;
 }

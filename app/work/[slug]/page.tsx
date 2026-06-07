@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import ContactLink from "@/components/ContactLink";
 import ContentHeader from "@/components/ContentHeader";
 import { workProjects, siteConfig } from "@/data/siteConfig";
+import { workCaseStudies } from "@/data/workCaseStudies";
 import { JsonLd, absoluteUrl, projectSchema } from "@/lib/seo";
 import "@/styles/content-pages.css";
 
@@ -19,11 +20,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!project) return { title: "Project Not Found" };
 
   return {
-    title: project.title,
+    title: `${project.title} — Case Study`,
     description: project.description,
     keywords: project.tools.split(", "),
     openGraph: {
-      title: project.title,
+      title: `${project.title} | ${siteConfig.name}`,
       description: project.description,
       url: absoluteUrl(`/work/${project.slug}`),
       images: [{ url: project.image }],
@@ -36,6 +37,8 @@ export default async function WorkProjectPage({ params }: Props) {
   const { slug } = await params;
   const project = workProjects.find((p) => p.slug === slug);
   if (!project) notFound();
+
+  const caseStudy = workCaseStudies[slug];
 
   return (
     <div className="content-page">
@@ -52,8 +55,36 @@ export default async function WorkProjectPage({ params }: Props) {
         <img className="article-cover" src={project.image} alt={project.title} />
         <p className="content-lead">{project.description}</p>
 
-        <h2>Tools & features</h2>
-        <p>{project.tools}</p>
+        {caseStudy && (
+          <>
+            <h2>Problem</h2>
+            <p>{caseStudy.problem}</p>
+
+            <h2>Solution</h2>
+            <p>{caseStudy.solution}</p>
+
+            {caseStudy.sections.map((section) => (
+              <section key={section.heading}>
+                <h2>{section.heading}</h2>
+                <p>{section.body}</p>
+              </section>
+            ))}
+
+            <h2>Tools used</h2>
+            <ul className="project-highlights">
+              {caseStudy.tools.map((tool) => (
+                <li key={tool}>{tool}</li>
+              ))}
+            </ul>
+
+            <h2>Results</h2>
+            <ul className="project-highlights">
+              {caseStudy.results.map((result) => (
+                <li key={result}>{result}</li>
+              ))}
+            </ul>
+          </>
+        )}
 
         <h2>Highlights</h2>
         <ul className="project-highlights">

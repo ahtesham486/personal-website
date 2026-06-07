@@ -1,22 +1,25 @@
 export const siteConfig = {
   name: "Ahtasham Aslam",
+  alternateNames: ["Ahtesham Aslam", "Ehtisham Aslam"],
   firstName: "AHTASHAM",
   lastName: "ASLAM",
   tagline: "Python Backend · AI Agents · Automation · WordPress · SEO/AEO/GEO/AIO",
   roles: ["Developer", "Automator"],
+  jobTitle: "Python Developer & AI Automation Specialist",
+  location: { city: "Lahore", country: "Pakistan", countryCode: "PK" },
   email: "ahteshamaslam0486@gmail.com",
   whatsappNumber: "923233684976",
   whatsappUrl: "https://wa.me/923233684976",
   github: "https://github.com/ahtesham486",
-  linkedin: "https://www.linkedin.com",
+  linkedin: "https://www.linkedin.com/in/ahtasham-aslam",
   siteUrl: "https://ahtasham.site",
   locale: "en_US",
   year: 2026,
 };
 
 export const aboutContent = {
-  headline: "Python developer — backends, AI agents & automation.",
-  note: "WordPress & SEO · AEO · GEO · AIO",
+  headline: "Custom website developer in Pakistan — Python & AI automation expert in Lahore.",
+  note: "Also known as Ahtesham Aslam and Ehtisham Aslam · n8n workflow automation specialist · WhatsApp chatbot developer",
   skills: [
     "Django & Flask APIs",
     "AI Agent Builder",
@@ -160,6 +163,11 @@ export const workProjects: WorkProject[] = [
 ];
 
 export const faqItems = [
+  {
+    question: "Who is Ahtasham Aslam?",
+    answer:
+      "Ahtasham Aslam (also spelled Ahtesham Aslam or Ehtisham Aslam) is a Python developer and AI automation specialist based in Lahore, Pakistan. He builds custom websites, n8n workflows, WhatsApp AI bots, AI agents, web scraping pipelines, and SEO/AEO/GEO strategies for businesses.",
+  },
   {
     question: "What services does Ahtasham Aslam offer?",
     answer:

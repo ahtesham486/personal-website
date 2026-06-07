@@ -2,9 +2,10 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { FaWhatsapp } from "react-icons/fa6";
 import ContentHeader from "@/components/ContentHeader";
-import { servicePackages, servicesPageMeta } from "@/data/services";
+import FaqDetails from "@/components/FaqDetails";
+import { servicePackages, servicesFaqItems, servicesPageMeta } from "@/data/services";
 import { siteConfig } from "@/data/siteConfig";
-import { JsonLd, absoluteUrl } from "@/lib/seo";
+import { JsonLd, absoluteUrl, faqSchema, professionalServiceSchema } from "@/lib/seo";
 import "@/styles/content-pages.css";
 import "@/styles/services.css";
 
@@ -57,7 +58,7 @@ export default function ServicesPage() {
 
   return (
     <div className="content-page services-page">
-      <JsonLd data={servicesSchema()} />
+      <JsonLd data={[servicesSchema(), professionalServiceSchema(), faqSchema(servicesFaqItems)]} />
       <ContentHeader />
 
       <main className="services-main">
@@ -113,6 +114,13 @@ export default function ServicesPage() {
             );
           })}
         </div>
+
+        <FaqDetails
+          items={servicesFaqItems}
+          heading="Services FAQ"
+          id="services-faq-heading"
+          className="faq-section services-faq-section"
+        />
 
         <section className="services-bottom-cta">
           <h2>Not sure which package fits?</h2>

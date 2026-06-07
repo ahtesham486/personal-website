@@ -1,55 +1,48 @@
-# Ahtasham Aslam
+# Ahtasham Aslam — Python Developer & AI Automation Specialist
 
-> Python backend developer, AI automation specialist, WhatsApp bot builder, and SEO/AEO/GEO consultant based in Pakistan.
+> Also known as: Ahtesham Aslam, Ehtisham Aslam
 
-## About
+Ahtasham Aslam is a freelance Python developer and AI automation specialist based in Lahore, Pakistan. He builds custom websites, n8n workflow automations, WhatsApp AI chatbots, AI agents, web scraping pipelines, Django/Flask APIs, and SEO/AEO/GEO visibility strategies.
 
-Ahtasham Aslam builds production-grade Python backends (Django, Flask), AI agents, WhatsApp chatbots, web scraping pipelines, n8n automations, WordPress sites, and multi-channel visibility strategies (SEO, AEO, GEO, AIO).
+## Identity
 
-## Services & Pricing
-
-- Services page: https://ahtasham.site/services
-- Why Me: https://ahtasham.site/why-me
-- Ecommerce + WhatsApp Chatbot: $500 (best selling)
-- Ecommerce Website: from $100
-- SEO + AEO + GEO: $100/month
-- AI Agent Development: from $199
-- Python Automation & APIs: from $149
-
-## Contact
-
+- Full name: Ahtasham Aslam
+- Alternate spellings: Ahtesham Aslam, Ehtisham Aslam
+- Location: Lahore, Pakistan
+- Role: Custom website developer, n8n agent builder, AI chatbot specialist, automation expert
 - Email: ahteshamaslam0486@gmail.com
-- WhatsApp: +92 323 3684976
+- WhatsApp: +923233684976
 - Website: https://ahtasham.site
+- GitHub: https://github.com/ahtesham486
+- LinkedIn: https://www.linkedin.com/in/ahtasham-aslam
+
+## Services
+
+- Custom website development in Pakistan (from $100)
+- Ecommerce + WhatsApp AI chatbot ($500)
+- SEO + AEO + GEO monthly optimization ($100/mo)
+- AI agent development (from $199)
+- Python automation & APIs (from $149)
+- n8n workflow automation
+- Web scraping & lead generation pipelines
+- Django & Flask backend development
 
 ## Key pages
 
 - Home: https://ahtasham.site/
+- About: https://ahtasham.site/about
 - Services: https://ahtasham.site/services
 - Why Me: https://ahtasham.site/why-me
 - Work portfolio: https://ahtasham.site/work
 - Blog: https://ahtasham.site/blog
 - Contact: https://ahtasham.site/contact
 - Sitemap: https://ahtasham.site/sitemap.xml
+- Robots: https://ahtasham.site/robots.txt
 
-## Projects
+## Expertise keywords
 
-- WhatsApp AI Chatbot: https://ahtasham.site/work/whatsapp-ai-chatbot
-- Lead Scraper Pipeline: https://ahtasham.site/work/lead-scraper-pipeline
-- Email + Sheets Automation: https://ahtasham.site/work/email-sheets-automation
-- Custom Python APIs: https://ahtasham.site/work/custom-python-apis
-- E-commerce Data Scraper: https://ahtasham.site/work/ecommerce-data-scraper
-- Business Workflow Bot: https://ahtasham.site/work/business-workflow-bot
-
-## Blog
-
-- SEO, AEO & GEO Guide 2026: https://ahtasham.site/blog/seo-aeo-geo-guide-2026
-- WhatsApp AI Chatbot with Python: https://ahtasham.site/blog/whatsapp-ai-chatbot-python
-- Python Lead Scraper Pipeline: https://ahtasham.site/blog/python-lead-scraper-pipeline
-- Custom Business Website Guide: https://ahtasham.site/blog/custom-website-seo-guide-2026
-- AI Agents for Business: https://ahtasham.site/blog/ai-agent-business-automation-2026
-- Ecommerce + WhatsApp Bot Guide: https://ahtasham.site/blog/ecommerce-whatsapp-bot-guide-2026
+Python developer Pakistan, WhatsApp chatbot developer Lahore, n8n automation expert, custom website developer Pakistan, AI agent builder, web scraping Python, Django Flask developer, SEO AEO GEO specialist
 
 ## Crawling
 
-All AI agents and search crawlers are welcome to index this site for discovery in search engines and AI answer engines.
+All search engines and AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, etc.) are welcome to index this site.

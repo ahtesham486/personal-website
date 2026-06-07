@@ -39,8 +39,25 @@
   font-weight: 300;
   line-height: 1.5;
   letter-spacing: 0.5px;
-  margin: 0 0 1.25rem;
+  margin: 0 0 1rem;
   color: rgba(234, 229, 236, 0.55);
+}
+
+.about-seo-intro {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 1.25rem;
+  color: rgba(234, 229, 236, 0.75);
+}
+
+.about-full-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accentColor);
 }
 
 .about-skills {

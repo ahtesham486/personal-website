@@ -5,7 +5,8 @@ import { FaWhatsapp } from "react-icons/fa6";
 import ContentHeader from "@/components/ContentHeader";
 import FaqSection from "@/components/FaqSection";
 import { siteConfig } from "@/data/siteConfig";
-import { absoluteUrl } from "@/lib/seo";
+import { JsonLd, absoluteUrl, faqSchema } from "@/lib/seo";
+import { faqItems } from "@/data/siteConfig";
 import "@/styles/content-pages.css";
 import "@/styles/faq.css";
 
@@ -27,6 +28,7 @@ export default function ContactPage() {
 
   return (
     <div className="content-page contact-page">
+      <JsonLd data={faqSchema(faqItems)} />
       <ContentHeader />
 
       <main className="content-main contact-page-main" id="contact">

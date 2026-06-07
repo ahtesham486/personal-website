@@ -1,5 +1,5 @@
 import type { BlogFaq } from "@/lib/blog";
-import FaqAccordion from "@/components/FaqAccordion";
+import FaqDetails from "@/components/FaqDetails";
 
 type Props = {
   faqs: BlogFaq[];
@@ -8,7 +8,7 @@ type Props = {
 
 export default function BlogFaqs({ faqs, heading = "Frequently Asked Questions" }: Props) {
   return (
-    <FaqAccordion
+    <FaqDetails
       items={faqs}
       heading={heading}
       id="blog-faq-heading"

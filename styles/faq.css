@@ -30,8 +30,12 @@
   overflow: hidden;
 }
 
-.faq-item-open {
+.faq-item[open] {
   border-color: rgba(194, 164, 255, 0.45);
+}
+
+.faq-item[open] .faq-toggle::before {
+  content: "−";
 }
 
 .faq-question {
@@ -48,6 +52,11 @@
   font-weight: 600;
   text-align: left;
   cursor: pointer;
+  list-style: none;
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
 }
 
 .faq-question:hover {
@@ -59,6 +68,10 @@
   font-size: 1.25rem;
   line-height: 1;
   opacity: 0.7;
+}
+
+.faq-toggle::before {
+  content: "+";
 }
 
 .faq-answer {

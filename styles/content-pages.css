@@ -313,6 +313,44 @@
   margin-bottom: 24px;
 }
 
+.about-aliases {
+  margin: 20px 0 32px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: rgba(194, 164, 255, 0.08);
+  border: 1px solid rgba(194, 164, 255, 0.2);
+  font-size: 15px;
+}
+
+.about-section-block {
+  margin-bottom: 32px;
+}
+
+.about-section-block h2 {
+  font-size: 1.5rem;
+  margin: 28px 0 12px;
+}
+
+.about-section-block p {
+  line-height: 1.7;
+  margin: 0 0 14px;
+  opacity: 0.9;
+}
+
+.about-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  margin: 40px 0 0;
+}
+
+.services-faq-section {
+  width: min(1100px, var(--cWidth));
+  margin: 64px auto 0;
+  padding-bottom: 0;
+}
+
 .home-fallback {
   min-height: 100vh;
   display: grid;
