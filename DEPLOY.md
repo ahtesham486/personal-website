@@ -140,7 +140,7 @@ The repo ships discovery files for AI agents:
 3. Optional TXT on `_index._agents`: `v=aid1; url=https://ahtasham.site/llms.txt`
 4. Enable **DNSSEC** under DNS → Settings (recommended for DNS-AID validators)
 
-**Markdown negotiation** uses `functions/_middleware.js` (Cloudflare Pages) and `worker/index.js` (Wrangler deploy). After push, confirm GitHub → Cloudflare Pages build includes the `functions/` folder.
+**Markdown negotiation** uses `public/_worker.js` (copied to `out/_worker.js` on build — Cloudflare Pages Advanced mode), `functions/_middleware.js` (Pages Functions fallback), and `worker/index.js` (Wrangler CLI deploy). After push, confirm `out/_worker.js` exists in the build output.
 
 After deploy, re-run the Cloudflare Agent-Ready test on `https://ahtasham.site/`.
 

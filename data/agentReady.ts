@@ -93,7 +93,7 @@ export const oauthProtectedResource = {
   authorization_servers: [`${base}/.well-known/oauth-authorization-server`],
   scopes_supported: ["public:read"],
   resource_documentation: `${base}/llms.txt`,
-  bearer_methods_supported: [],
+  bearer_methods_supported: ["header"],
 };
 
 export const mcpServerCard = {
