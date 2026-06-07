@@ -10,15 +10,15 @@
   max-width: 1920px;
   margin: auto;
   z-index: 20;
-  isolation: isolate;
-  background-color: var(--backgroundColor);
+  pointer-events: none;
 }
 .what-box {
   width: 50%;
   display: flex;
   justify-content: center;
   position: relative;
-  z-index: 9;
+  z-index: 22;
+  pointer-events: none;
 }
 .what-box h2 {
   font-size: calc(4vw + 25px);
@@ -26,6 +26,10 @@
   font-weight: 600;
   margin-right: 10%;
   margin-bottom: 100px;
+  position: relative;
+  z-index: 22;
+  pointer-events: none;
+  text-shadow: 0 2px 24px rgba(11, 8, 12, 0.85);
 }
 
 .hat-h2 {
@@ -40,7 +44,7 @@
   margin-left: 200px;
   position: relative;
   display: flex;
-  z-index: 21;
+  z-index: 23;
   pointer-events: auto;
 }
 .what-content {

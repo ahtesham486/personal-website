@@ -122,9 +122,8 @@ export function setCharTimeline(
           0.3
         );
 
-      // What I Do — character moves up behind section content
+      // What I Do — character moves up behind cards (section stays transparent)
       tl3
-        .to(".character-container", { zIndex: 5, duration: 0.1 }, 0)
         .fromTo(
           ".character-model",
           { y: "0%" },
