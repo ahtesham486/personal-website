@@ -1,7 +1,25 @@
+import { useEffect } from "react";
 import { careerItems } from "../data/siteConfig";
+import { ScrollTrigger } from "@/lib/gsapPlugins";
+import { setCareerTimeline } from "../utils/GsapScroll";
 import "./styles/Career.css";
 
 const Career = () => {
+  useEffect(() => {
+    setCareerTimeline();
+    ScrollTrigger.refresh();
+
+    const onResize = () => {
+      setCareerTimeline();
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      ScrollTrigger.getById("career")?.kill();
+    };
+  }, []);
+
   return (
     <div className="career-section section-container">
       <div className="career-container">

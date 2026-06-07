@@ -143,63 +143,53 @@ export function setCharTimeline(
   }
 }
 
-export function setAllTimeline() {
+export function setCareerTimeline() {
   try {
-  const careerTimeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".career-section",
-      start: "top 30%",
-      end: "100% center",
-      scrub: true,
-      invalidateOnRefresh: true,
-    },
-  });
-  careerTimeline
-    .fromTo(
-      ".career-timeline",
-      { maxHeight: "10%" },
-      { maxHeight: "100%", duration: 0.5 },
-      0
-    )
-    .fromTo(
-      ".career-timeline",
-      { opacity: 0 },
-      { opacity: 1, duration: 0.1 },
-      0
-    )
-    .fromTo(
-      ".career-info-box",
-      { opacity: 0 },
-      { opacity: 1, stagger: 0.1, duration: 0.5 },
-      0
-    )
-    .fromTo(
-      ".career-dot",
-      { animationIterationCount: "infinite" },
-      {
-        animationIterationCount: "1",
-        delay: 0.3,
-        duration: 0.1,
-      },
-      0
-    );
+    const section = document.querySelector(".career-section");
+    if (!section) return;
 
-  if (window.innerWidth > 1024) {
-    careerTimeline.fromTo(
-      ".career-section",
-      { y: 0 },
-      { y: "20%", duration: 0.5, delay: 0.2 },
-      0
-    );
-  } else {
-    careerTimeline.fromTo(
-      ".career-section",
-      { y: 0 },
-      { y: 0, duration: 0.5, delay: 0.2 },
-      0
-    );
-  }
+    ScrollTrigger.getById("career")?.kill();
+
+    const careerTimeline = gsap.timeline({
+      scrollTrigger: {
+        id: "career",
+        trigger: section,
+        start: "top 75%",
+        end: "bottom center",
+        scrub: 0.6,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    careerTimeline
+      .fromTo(
+        ".career-timeline",
+        { maxHeight: "8%" },
+        { maxHeight: "100%", duration: 1, ease: "none" },
+        0
+      )
+      .fromTo(".career-timeline", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 0)
+      .fromTo(
+        ".career-info-box",
+        { opacity: 0 },
+        { opacity: 1, stagger: 0.12, duration: 0.4 },
+        0
+      )
+      .fromTo(
+        ".career-dot",
+        { animationIterationCount: "infinite" },
+        { animationIterationCount: "1", duration: 0.1 },
+        0.85
+      );
+
+    if (window.innerWidth > 1024) {
+      careerTimeline.fromTo(section, { y: 0 }, { y: "12%", duration: 1, ease: "none" }, 0);
+    }
   } catch (err) {
     console.warn("Career scroll timeline skipped:", err);
   }
+}
+
+export function setAllTimeline() {
+  setCareerTimeline();
 }
