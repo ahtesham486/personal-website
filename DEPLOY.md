@@ -194,15 +194,50 @@ When DNSSEC is active, DoH responses should show `"AD":true` instead of `"AD":fa
 
 ### Cloudflare Speed (safe for this site)
 
-Enable in dashboard — **do not** turn on Rocket Loader (breaks GSAP + Three.js animations):
+**Important:** This portfolio uses **Three.js + GSAP**. Cloudflare Speed Test score is limited by heavy JS (~2MB). Target **75–85** with 3D, not 100. LCP/FCP can still be excellent.
 
-| Setting | Where | Recommendation |
-|---------|--------|----------------|
-| **Polish** | Speed → Optimization → Image Optimization → **Lossy** or Lossless | Compresses images at edge |
-| **Auto Minify** | Speed → Optimization → JS/CSS/HTML minify | ON |
+**Rocket Loader → OFF (required)**  
+You enabled it — **turn it OFF now**. It breaks React hydration, GSAP timelines, and Three.js. Score may look similar but the site can glitch.
+
+**Zaraz → Skip**  
+Zaraz only helps if you load third-party scripts (Google Analytics, Facebook Pixel, Hotjar). This site has **none** — nothing to configure in Zaraz.
+
+Enable in dashboard:
+
+| Setting | Where | Action |
+|---------|--------|--------|
+| **Polish** | Speed → Optimization → Image Optimization | **Lossy** ON |
+| **Auto Minify** | Speed → Optimization | JS, CSS, HTML **ON** |
 | **Brotli** | Speed → Optimization | ON |
+| **Early Hints** | Speed → Optimization | ON |
+| **HTTP/2 + HTTP/3** | Network | ON |
 | **Crawler Hints** | Caching → Configuration | ON |
-| **Always Online** | Caching → Configuration | ON (optional backup) |
-| **Rocket Loader** | Speed → Optimization | **OFF** — breaks animations |
+| **Always Online** | Caching → Configuration | ON (optional) |
+| **Rocket Loader** | Speed → Optimization | **OFF** |
 
-Static assets already cache via `public/_headers` (`/_next/static/*` = 1 year).
+#### Cache Rules (Cloudflare dashboard)
+
+Go to **Caching** → **Cache Rules** → **Create rule** (repeat for each):
+
+**Rule 1 — Next.js static assets (1 year)**
+- Rule name: `Cache Next static`
+- When: URI Path **starts with** `/_next/static/`
+- Then: Cache eligibility **Eligible for cache**, Edge TTL **Ignore cache-control and use 1 year**, Browser TTL **respect origin**
+
+**Rule 2 — Images**
+- When: URI Path **starts with** `/images/`
+- Then: Edge TTL **1 month**, Browser TTL **respect origin**
+
+**Rule 3 — 3D assets**
+- When: URI Path **starts with** `/models/` OR `/draco/`
+- Then: Edge TTL **1 year**
+
+**Rule 4 — HTML (short cache)**
+- When: URI Path **equals** `/` OR ends with `.html`
+- Then: Edge TTL **2 hours**, Browser TTL **respect origin**
+
+Static assets already ship with `public/_headers` cache headers; Cache Rules enforce the same at Cloudflare edge.
+
+**Argo Smart Routing** — paid add-on; skip unless you want faster global routing.
+
+After changes: **Caching → Purge Everything**, wait 2 min, re-run Speed Test.

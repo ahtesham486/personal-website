@@ -109,22 +109,17 @@ const Scene = () => {
       let animId = 0;
       let isVisible = true;
       let isInView = true;
-      const onVisibility = () => {
-        isVisible = document.visibilityState === "visible";
-      };
-      document.addEventListener("visibilitychange", onVisibility);
+      let loopRunning = false;
 
-      const viewObserver = new IntersectionObserver(
-        ([entry]) => {
-          isInView = entry.isIntersecting;
-        },
-        { threshold: 0.05 }
-      );
-      if (canvasDiv.current) viewObserver.observe(canvasDiv.current);
+      function animate() {
+        if (!isVisible || !isInView) {
+          loopRunning = false;
+          animId = 0;
+          return;
+        }
 
-      const animate = () => {
         animId = requestAnimationFrame(animate);
-        if (!isVisible || !isInView) return;
+
         if (headBone) {
           handleHeadRotation(
             headBone,
@@ -141,11 +136,34 @@ const Scene = () => {
           mixer.update(delta);
         }
         renderer.render(scene, camera);
+      }
+
+      function ensureLoop() {
+        if (loopRunning || !isVisible || !isInView) return;
+        loopRunning = true;
+        animId = requestAnimationFrame(animate);
+      }
+
+      const onVisibility = () => {
+        isVisible = document.visibilityState === "visible";
+        ensureLoop();
       };
-      animate();
+      document.addEventListener("visibilitychange", onVisibility);
+
+      const viewObserver = new IntersectionObserver(
+        ([entry]) => {
+          isInView = entry.isIntersecting;
+          ensureLoop();
+        },
+        { threshold: 0.05 }
+      );
+      if (canvasDiv.current) viewObserver.observe(canvasDiv.current);
+
+      ensureLoop();
       return () => {
         mountedRef.current = false;
-        cancelAnimationFrame(animId);
+        loopRunning = false;
+        if (animId) cancelAnimationFrame(animId);
         viewObserver.disconnect();
         document.removeEventListener("visibilitychange", onVisibility);
         clearTimeout(debounce);

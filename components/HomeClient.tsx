@@ -28,31 +28,37 @@ export default function HomeClient() {
     if (window.innerWidth <= 1024) return;
 
     let cancelled = false;
+    let revealed = false;
     const reveal = () => {
-      if (!cancelled) setShowCharacter(true);
+      if (cancelled || revealed) return;
+      revealed = true;
+      setShowCharacter(true);
     };
+
+    const landing = document.getElementById("landingDiv");
+    const onIntent = () => reveal();
+
+    landing?.addEventListener("mousemove", onIntent, { once: true, passive: true });
+    landing?.addEventListener("click", onIntent, { once: true });
+    window.addEventListener("keydown", onIntent, { once: true });
 
     let idleId: number | undefined;
     if (typeof window.requestIdleCallback === "function") {
-      idleId = window.requestIdleCallback(reveal, { timeout: 3500 });
+      idleId = window.requestIdleCallback(reveal, { timeout: 8000 });
     } else {
-      idleId = window.setTimeout(reveal, 1200);
+      idleId = window.setTimeout(reveal, 8000) as unknown as number;
     }
-
-    const onScroll = () => {
-      reveal();
-      window.removeEventListener("scroll", onScroll, { capture: true });
-    };
-    window.addEventListener("scroll", onScroll, { passive: true, capture: true });
 
     return () => {
       cancelled = true;
+      landing?.removeEventListener("mousemove", onIntent);
+      landing?.removeEventListener("click", onIntent);
+      window.removeEventListener("keydown", onIntent);
       if (typeof window.cancelIdleCallback === "function" && idleId !== undefined) {
         window.cancelIdleCallback(idleId);
       } else if (idleId !== undefined) {
         clearTimeout(idleId);
       }
-      window.removeEventListener("scroll", onScroll, { capture: true });
     };
   }, []);
 
