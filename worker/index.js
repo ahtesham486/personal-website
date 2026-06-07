@@ -52,6 +52,7 @@ export default {
         headers: {
           "Content-Type": "text/markdown; charset=utf-8",
           Link: LINK_HEADER,
+          Vary: "Accept",
           "Cache-Control": "public, max-age=3600",
         },
       });
@@ -64,6 +65,7 @@ export default {
       if (!headers.has("Link")) {
         headers.set("Link", LINK_HEADER);
       }
+      headers.set("Vary", "Accept");
       return new Response(response.body, {
         status: response.status,
         statusText: response.statusText,

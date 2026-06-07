@@ -140,11 +140,12 @@ The repo ships discovery files for AI agents:
 3. Optional TXT on `_index._agents`: `v=aid1; url=https://ahtasham.site/llms.txt`
 4. Enable **DNSSEC** under DNS → Settings (recommended for DNS-AID validators)
 
-**Markdown negotiation** uses `public/_worker.js` (copied to `out/_worker.js` on build — Cloudflare Pages Advanced mode), `functions/_middleware.js` (Pages Functions fallback), and `worker/index.js` (Wrangler CLI deploy). After push, confirm `out/_worker.js` exists in the build output.
+**Markdown negotiation** — pick one:
 
-After deploy, re-run the Cloudflare Agent-Ready test on `https://ahtasham.site/`.
+1. **Cloudflare dashboard (fastest):** [AI Crawl Control](https://dash.cloudflare.com/?to=/:account/:zone/ai) → enable **Markdown for Agents** (Pro/Business plan). No code needed — Cloudflare converts HTML → markdown when `Accept: text/markdown` is sent.
+2. **Worker (this repo):** `worker/index.js` + `run_worker_first: true` in `wrangler.jsonc`. After push, Cloudflare CI must run `npx wrangler deploy` successfully. Purge cache if needed.
 
-**Deploy command:** `npm run build` then `npx wrangler deploy` — uses `worker/index.js` for markdown negotiation (`Accept: text/markdown` → `text/markdown` on `/`). `wrangler.jsonc` sets `run_worker_first: ["/"]` so the worker runs before static `index.html` is served.
+**Deploy command:** `npm run build` then `npx wrangler deploy` — uses `worker/index.js` for markdown negotiation (`Accept: text/markdown` → `text/markdown` on `/`). `wrangler.jsonc` sets `run_worker_first: true` so the worker runs before static `index.html` is served.
 
 ### Google Search Console (manual — required for indexing)
 
