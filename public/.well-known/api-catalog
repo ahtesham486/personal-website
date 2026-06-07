@@ -1,0 +1,14 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://ahtasham.site/",
+      "item": [
+        { "href": "https://ahtasham.site/llms.txt", "rel": "service-desc" },
+        { "href": "https://ahtasham.site/llms-full.txt", "rel": "service-desc" },
+        { "href": "https://ahtasham.site/services", "rel": "service-doc" },
+        { "href": "https://ahtasham.site/about", "rel": "service-doc" },
+        { "href": "https://ahtasham.site/contact", "rel": "status" }
+      ]
+    }
+  ]
+}

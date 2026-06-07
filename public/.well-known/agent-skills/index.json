@@ -1,0 +1,26 @@
+{
+  "$schema": "https://agentskills.io/schemas/discovery/v0.2.0",
+  "skills": [
+    {
+      "name": "ahtasham-portfolio-full",
+      "type": "knowledge",
+      "description": "Complete profile, services, pricing, and contact for Ahtasham Aslam (Python & AI automation)",
+      "url": "https://ahtasham.site/llms-full.txt",
+      "sha256": "3794cd8b0185b0a3c78f4661d90b75d71ccf083b0dec94bd8b4e0b52c08f20eb"
+    },
+    {
+      "name": "ahtasham-services-pricing",
+      "type": "knowledge",
+      "description": "Service packages and pricing — ecommerce, WhatsApp bots, SEO/AEO/GEO",
+      "url": "https://ahtasham.site/services",
+      "sha256": ""
+    },
+    {
+      "name": "ahtasham-contact",
+      "type": "action",
+      "description": "Contact for project quotes via email or WhatsApp",
+      "url": "https://ahtasham.site/contact",
+      "sha256": ""
+    }
+  ]
+}

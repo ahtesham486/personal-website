@@ -1,0 +1,16 @@
+{
+  "issuer": "https://ahtasham.site",
+  "authorization_endpoint": "https://ahtasham.site/contact",
+  "registration_endpoint": "https://ahtasham.site/auth.md",
+  "scopes_supported": ["public:read"],
+  "response_types_supported": ["none"],
+  "grant_types_supported": [],
+  "token_endpoint_auth_methods_supported": [],
+  "service_documentation": "https://ahtasham.site/llms.txt",
+  "agent_auth": {
+    "register_uri": "https://ahtasham.site/auth.md",
+    "supported_identity_types": ["email", "whatsapp"],
+    "credential_types": ["human_contact"],
+    "documentation": "https://ahtasham.site/llms-full.txt"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "issuer": "https://ahtasham.site",
+  "authorization_endpoint": "https://ahtasham.site/contact",
+  "registration_endpoint": "https://ahtasham.site/auth.md",
+  "scopes_supported": ["public:read", "openid"],
+  "response_types_supported": ["none"],
+  "grant_types_supported": [],
+  "subject_types_supported": ["public"],
+  "id_token_signing_alg_values_supported": []
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "2024-11-05",
+  "serverInfo": {
+    "name": "ahtasham-portfolio",
+    "title": "Ahtasham Aslam Portfolio",
+    "version": "1.0.0"
+  },
+  "description": "Informational discovery for Ahtasham Aslam — Python developer, WhatsApp bots, n8n automation, SEO/AEO/GEO in Pakistan.",
+  "documentation": "https://ahtasham.site/llms-full.txt",
+  "capabilities": {
+    "tools": { "listChanged": false },
+    "resources": { "subscribe": false, "listChanged": false },
+    "prompts": { "listChanged": false }
+  },
+  "transports": [
+    {
+      "type": "documentation",
+      "url": "https://ahtasham.site/llms.txt"
+    }
+  ]
+}

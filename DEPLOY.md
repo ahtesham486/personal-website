@@ -100,6 +100,39 @@ Sitemap: https://ahtasham.site/sitemap.xml
 
 > **Note:** “Allow on all pages” alone does **not** fix the conflict if managed robots.txt is still ON. You must **disable** “Instruct AI bot traffic with robots.txt”.
 
+### Agent-Ready audit (Cloudflare "Is Your Site Agent-Ready?")
+
+The repo ships discovery files for AI agents:
+
+| Path | Purpose |
+|------|---------|
+| `/.well-known/api-catalog` | RFC 9727 API catalog (linkset) |
+| `/.well-known/oauth-authorization-server` | OAuth discovery (public site) |
+| `/.well-known/openid-configuration` | OIDC discovery stub |
+| `/.well-known/oauth-protected-resource` | Protected resource metadata |
+| `/auth.md` | Agent registration / contact instructions |
+| `/.well-known/mcp/server-card.json` | MCP server card |
+| `/.well-known/agent-skills/index.json` | Agent skills index |
+| `/llms.txt` / `/llms-full.txt` | LLM grounding context |
+| `functions/_middleware.js` | `Accept: text/markdown` → markdown homepage |
+| `Link` response header on `/` | RFC 8288 agent discovery |
+
+**DNS for AI Discovery (DNS-AID)** — add manually in Cloudflare DNS:
+
+1. Cloudflare → **DNS** → **Records** → **Add record**
+2. Add **HTTPS** records (repeat for each name):
+
+| Name | Type | Content / Target |
+|------|------|----------------|
+| `_index._agents` | HTTPS | `1 ahtasham.site alpn=h2,h3` |
+| `_a2a._agents` | HTTPS | `1 ahtasham.site alpn=h2,h3` |
+| `_mcp._agents` | HTTPS | `1 ahtasham.site alpn=h2,h3` |
+
+3. Optional TXT on `_index._agents`: `v=aid1; url=https://ahtasham.site/llms.txt`
+4. Enable **DNSSEC** under DNS → Settings (recommended for DNS-AID validators)
+
+After deploy, re-run the Cloudflare Agent-Ready test on `https://ahtasham.site/`.
+
 ### Google Search Console (manual — required for indexing)
 
 1. https://search.google.com/search-console → Add property `ahtasham.site`
