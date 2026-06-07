@@ -3,33 +3,10 @@ import { siteConfig } from "@/data/siteConfig";
 
 export const dynamic = "force-static";
 
-const aiCrawlers = [
-  "GPTBot",
-  "ChatGPT-User",
-  "OAI-SearchBot",
-  "ClaudeBot",
-  "Claude-Web",
-  "anthropic-ai",
-  "PerplexityBot",
-  "Google-Extended",
-  "Applebot-Extended",
-  "Bytespider",
-  "CCBot",
-  "cohere-ai",
-  "FacebookBot",
-  "meta-externalagent",
-];
-
+/** Single clean ruleset — avoid duplicate User-agent blocks (Cloudflare may prepend its own block; disable AI blocks in CF dashboard → Security → Bots). */
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [
-      { userAgent: "*", allow: "/" },
-      ...aiCrawlers.map((bot) => ({
-        userAgent: bot,
-        allow: "/",
-      })),
-    ],
+    rules: { userAgent: "*", allow: "/" },
     sitemap: `${siteConfig.siteUrl}/sitemap.xml`,
-    host: siteConfig.siteUrl,
   };
 }

@@ -3,6 +3,14 @@ import type { BlogPostMeta } from "@/lib/blog";
 
 export type FaqSchemaItem = { question: string; answer: string };
 
+export const OG_IMAGE_PATH = "/opengraph-image";
+export const OG_IMAGE = {
+  url: OG_IMAGE_PATH,
+  width: 1200,
+  height: 630,
+  alt: `${siteConfig.name} — Python Developer & AI Automation Expert`,
+};
+
 export function absoluteUrl(path: string) {
   return `${siteConfig.siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
 }
@@ -52,6 +60,33 @@ export function websiteSchema() {
   };
 }
 
+export function localBusinessSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: `${siteConfig.name} — Python & AI Development`,
+    description:
+      "Custom websites, WhatsApp AI chatbots, n8n automation, Python APIs, and SEO/AEO/GEO services in Pakistan.",
+    url: siteConfig.siteUrl,
+    email: siteConfig.email,
+    telephone: `+${siteConfig.whatsappNumber}`,
+    priceRange: "$$",
+    areaServed: ["Pakistan", "Gulf", "Europe", "North America"],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: siteConfig.location.city,
+      addressCountry: siteConfig.location.countryCode,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: siteConfig.location.latitude,
+      longitude: siteConfig.location.longitude,
+    },
+    sameAs: [siteConfig.linkedin, siteConfig.github],
+    founder: { "@type": "Person", name: siteConfig.name },
+  };
+}
+
 export function faqSchema(items: FaqSchemaItem[] = faqItems) {
   return {
     "@context": "https://schema.org",
@@ -75,20 +110,37 @@ export function professionalServiceSchema() {
     url: absoluteUrl("/services"),
     description:
       "Custom website development, WhatsApp AI chatbots, n8n automation, AI agents, Python APIs, and SEO/AEO/GEO in Pakistan.",
-    areaServed: { "@type": "Country", name: "Pakistan" },
+    serviceType: [
+      "Custom Website Development",
+      "WhatsApp Chatbot Development",
+      "n8n Workflow Automation",
+      "Python Backend Development",
+      "SEO AEO GEO Optimization",
+    ],
+    areaServed: ["Pakistan", "Gulf", "Europe", "North America"],
     address: {
       "@type": "PostalAddress",
       addressLocality: siteConfig.location.city,
       addressCountry: siteConfig.location.countryCode,
     },
-    provider: personSchema(),
-    knowsAbout: [
-      "Custom website development",
-      "WhatsApp chatbot development",
-      "n8n workflow automation",
-      "Python backend development",
-      "SEO AEO GEO optimization",
-    ],
+    provider: {
+      "@type": "Person",
+      name: siteConfig.name,
+      url: siteConfig.siteUrl,
+    },
+  };
+}
+
+export function breadcrumbSchema(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: absoluteUrl(item.path),
+    })),
   };
 }
 
@@ -99,9 +151,12 @@ export function blogPostingSchema(post: BlogPostMeta) {
     headline: post.title,
     description: post.description,
     datePublished: post.date,
-    author: { "@type": "Person", name: siteConfig.name },
+    dateModified: post.date,
+    author: { "@type": "Person", name: siteConfig.name, url: siteConfig.siteUrl },
+    publisher: { "@type": "Person", name: siteConfig.name },
+    mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
     url: absoluteUrl(`/blog/${post.slug}`),
-    image: post.cover ? absoluteUrl(post.cover) : absoluteUrl("/images/og-brand.svg"),
+    image: post.cover ? absoluteUrl(post.cover) : absoluteUrl(OG_IMAGE_PATH),
   };
 }
 
@@ -114,15 +169,21 @@ export function projectSchema(project: (typeof workProjects)[number]) {
     url: absoluteUrl(`/work/${project.slug}`),
     image: absoluteUrl(project.image),
     keywords: project.tools,
-    author: { "@type": "Person", name: siteConfig.name },
+    author: { "@type": "Person", name: siteConfig.name, url: siteConfig.siteUrl },
   };
 }
 
 export function JsonLd({ data }: { data: Record<string, unknown> | Record<string, unknown>[] }) {
+  const items = Array.isArray(data) ? data : [data];
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
+    <>
+      {items.map((item, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(item) }}
+        />
+      ))}
+    </>
   );
 }

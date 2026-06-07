@@ -82,3 +82,9 @@ My [AI Agent Development service](/services) ($199 intro pricing) includes archi
 - [WhatsApp AI chatbot guide](/blog/whatsapp-ai-chatbot-python)
 - [Python automation services](/services)
 - [Contact for a scoped quote](/contact)
+
+## References
+
+- [OpenAI API — Agents overview](https://platform.openai.com/docs/guides/agents) — LLM agent patterns
+- [n8n documentation](https://docs.n8n.io/) — workflow automation platform
+- [Anthropic Claude documentation](https://docs.anthropic.com/) — alternative LLM provider

@@ -5,7 +5,15 @@ import ContentHeader from "@/components/ContentHeader";
 import FaqDetails from "@/components/FaqDetails";
 import { servicePackages, servicesFaqItems, servicesPageMeta } from "@/data/services";
 import { siteConfig } from "@/data/siteConfig";
-import { JsonLd, absoluteUrl, faqSchema, professionalServiceSchema } from "@/lib/seo";
+import {
+  JsonLd,
+  OG_IMAGE,
+  absoluteUrl,
+  breadcrumbSchema,
+  faqSchema,
+  localBusinessSchema,
+  professionalServiceSchema,
+} from "@/lib/seo";
 import "@/styles/content-pages.css";
 import "@/styles/services.css";
 
@@ -24,6 +32,13 @@ export const metadata: Metadata = {
     title: `${servicesPageMeta.title} | ${siteConfig.name}`,
     description: servicesPageMeta.description,
     url: absoluteUrl("/services"),
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: servicesPageMeta.title,
+    description: servicesPageMeta.description,
+    images: [OG_IMAGE.url],
   },
 };
 
@@ -58,7 +73,18 @@ export default function ServicesPage() {
 
   return (
     <div className="content-page services-page">
-      <JsonLd data={[servicesSchema(), professionalServiceSchema(), faqSchema(servicesFaqItems)]} />
+      <JsonLd
+        data={[
+          servicesSchema(),
+          localBusinessSchema(),
+          professionalServiceSchema(),
+          faqSchema(servicesFaqItems),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+          ]),
+        ]}
+      />
       <ContentHeader />
 
       <main className="services-main">

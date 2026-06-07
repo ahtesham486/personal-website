@@ -50,6 +50,31 @@ Domain: **ahtasham.site** — connected via Cloudflare nameservers + Worker cust
 
 ## SEO files (auto-generated at build)
 
-- `/sitemap.xml` — all pages + blog + projects
-- `/robots.txt` — allows indexing
-- JSON-LD schema in `app/layout.tsx` and per-page metadata
+- `/sitemap.xml` — all pages + blog + projects (submit in Google Search Console)
+- `/robots.txt` — single `Allow: /` rule (see Cloudflare note below)
+- `/llms.txt` and `/llms-full.txt` — AI crawler context
+- JSON-LD schema on every page (Person, LocalBusiness, Service, FAQ, BlogPosting, Breadcrumbs)
+- `/opengraph-image` — PNG social preview (1200×630)
+
+### Fix robots.txt conflict (Cloudflare)
+
+If audit tools show **"BEGIN Cloudflare Managed content"** blocking GPTBot/ClaudeBot **before** your Allow rules:
+
+1. Cloudflare Dashboard → **Security** → **Bots** (or **Scrape Shield**)
+2. Find **AI Crawlers** / **Manage robots.txt** settings
+3. Set AI bots to **Allow** (not Block)
+4. Purge cache and re-check `https://ahtasham.site/robots.txt`
+
+Your repo only ships a clean robots file:
+```
+User-agent: *
+Allow: /
+Sitemap: https://ahtasham.site/sitemap.xml
+```
+
+### Google Search Console (manual — required for indexing)
+
+1. https://search.google.com/search-console → Add property `ahtasham.site`
+2. Verify via DNS TXT (easy on Cloudflare) or HTML tag
+3. Submit sitemap: `https://ahtasham.site/sitemap.xml`
+4. URL Inspection → Request indexing for `/`, `/about`, `/services`, `/blog`, `/contact`

@@ -3,13 +3,28 @@ import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { siteConfig } from "@/data/siteConfig";
 import ContentHeader from "@/components/ContentHeader";
+import { JsonLd, OG_IMAGE, absoluteUrl, breadcrumbSchema, websiteSchema } from "@/lib/seo";
 import "@/styles/content-pages.css";
 
 export const metadata: Metadata = {
   title: "Blog — Python, AI & Automation",
   description:
     "SEO guides, WhatsApp bot tutorials, Python automation, AI agents, and web development articles by Ahtasham Aslam.",
-  alternates: { canonical: `${siteConfig.siteUrl}/blog` },
+  alternates: { canonical: absoluteUrl("/blog") },
+  openGraph: {
+    title: "Blog — Python, AI & Automation",
+    description:
+      "Practical guides on WhatsApp bots, SEO/AEO/GEO, Python automation, and AI agents by Ahtasham Aslam.",
+    url: absoluteUrl("/blog"),
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog — Python, AI & Automation",
+    description:
+      "Practical guides on WhatsApp bots, SEO/AEO/GEO, Python automation, and AI agents.",
+    images: [OG_IMAGE.url],
+  },
 };
 
 export default function BlogPage() {
@@ -17,6 +32,15 @@ export default function BlogPage() {
 
   return (
     <div className="content-page">
+      <JsonLd
+        data={[
+          websiteSchema(),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Blog", path: "/blog" },
+          ]),
+        ]}
+      />
       <ContentHeader />
 
       <main className="content-main content-main-wide">

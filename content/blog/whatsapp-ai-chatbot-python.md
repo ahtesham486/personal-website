@@ -114,3 +114,9 @@ This is our most requested package — see [Ecommerce + WhatsApp pricing](/servi
 ## Get help building yours
 
 Building alone takes weeks if you're new to APIs and LLMs. I deliver **ready-to-deploy WhatsApp AI bots** with Python backends — [view the project case study](/work/whatsapp-ai-chatbot) or [message on WhatsApp](https://wa.me/923233684976).
+
+## References
+
+- [WhatsApp Business Platform documentation](https://developers.facebook.com/docs/whatsapp/) — official Meta API guides
+- [OpenAI API documentation](https://platform.openai.com/docs) — LLM integration reference
+- [Flask documentation](https://flask.palletsprojects.com/) — Python webhook server framework

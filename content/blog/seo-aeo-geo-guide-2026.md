@@ -94,3 +94,9 @@ Link blog posts to relevant services. Example: a WhatsApp bot article should lin
 SEO gets you found on Google. AEO gets you into direct answers. GEO gets you cited by AI assistants. Together they cover how people **actually search in 2026**.
 
 Need help implementing this on your site? See [services & pricing](/services) or [contact](/contact) to discuss a custom SEO-ready build.
+
+## References
+
+- [Google Search Central — Structured data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data) — JSON-LD guidelines
+- [Schema.org FAQPage](https://schema.org/FAQPage) — FAQ markup specification
+- [Google Search Console](https://search.google.com/search-console) — indexing and performance monitoring

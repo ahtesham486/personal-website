@@ -5,7 +5,7 @@ import ContentHeader from "@/components/ContentHeader";
 import FaqDetails from "@/components/FaqDetails";
 import { aboutPageContent, aboutPageMeta } from "@/data/aboutPage";
 import { siteConfig, faqItems } from "@/data/siteConfig";
-import { JsonLd, absoluteUrl, faqSchema, personSchema } from "@/lib/seo";
+import { JsonLd, OG_IMAGE, absoluteUrl, breadcrumbSchema, faqSchema, personSchema } from "@/lib/seo";
 import "@/styles/content-pages.css";
 import "@/styles/faq.css";
 
@@ -26,16 +26,31 @@ export const metadata: Metadata = {
     title: aboutPageMeta.title,
     description: aboutPageMeta.description,
     url: absoluteUrl("/about"),
-    images: [{ url: "/images/og-brand.svg", width: 1200, height: 630, alt: siteConfig.name }],
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: aboutPageMeta.title,
+    description: aboutPageMeta.description,
+    images: [OG_IMAGE.url],
   },
 };
 
-const aboutFaqs = faqItems.slice(0, 4);
+const aboutFaqs = faqItems.slice(0, 5);
 
 export default function AboutPage() {
   return (
     <div className="content-page about-page">
-      <JsonLd data={[personSchema(), faqSchema(aboutFaqs)]} />
+      <JsonLd
+        data={[
+          personSchema(),
+          faqSchema(aboutFaqs),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "About", path: "/about" },
+          ]),
+        ]}
+      />
       <ContentHeader />
 
       <main className="content-main article-main">

@@ -80,3 +80,9 @@ I built a [lead scraper pipeline](/work/lead-scraper-pipeline) that pulls target
 ## Pricing and custom builds
 
 Need a scraper for your niche (real estate, B2B directories, ecommerce sellers)? [Python automation starts at $149](/services) — message with your target sites and fields needed.
+
+## References
+
+- [Playwright Python documentation](https://playwright.dev/python/) — browser automation for dynamic sites
+- [Beautiful Soup documentation](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) — HTML parsing library
+- [pandas documentation](https://pandas.pydata.org/docs/) — data cleaning and CSV export

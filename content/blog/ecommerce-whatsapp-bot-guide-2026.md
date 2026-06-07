@@ -89,3 +89,9 @@ Compare to hiring part-time support or losing leads who message after hours.
 4. Launch in ~2 weeks depending on catalog size
 
 Also read: [WhatsApp AI chatbot technical guide](/blog/whatsapp-ai-chatbot-python) and [view ecommerce project work](/work/ecommerce-data-scraper).
+
+## References
+
+- [WooCommerce documentation](https://woocommerce.com/documentation/) — ecommerce store setup
+- [WhatsApp Business Platform](https://developers.facebook.com/docs/whatsapp/) — official Meta messaging API
+- [Google Merchant Center](https://support.google.com/merchants/) — product listing guidelines

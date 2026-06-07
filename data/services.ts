@@ -113,22 +113,32 @@ export const servicesFaqItems = [
   {
     question: "How much does a custom website cost in Pakistan?",
     answer:
-      "Ecommerce websites start from $100. Full ecommerce with WhatsApp AI chatbot is $500. SEO + AEO + GEO ongoing optimization is $100/month. AI agents from $199 and Python automation from $149 — see the Services page for full package details.",
+      "Ecommerce websites start from $100. Full ecommerce with WhatsApp AI chatbot is $500. SEO + AEO + GEO ongoing optimization is $100/month. AI agents from $199 and Python automation from $149. All packages include mobile-responsive design, basic SEO setup, and post-launch support — transparent pricing with no hidden agency fees.",
+  },
+  {
+    question: "How long does it take to build a custom website?",
+    answer:
+      "A simple ecommerce website typically takes 5–10 business days. Ecommerce plus WhatsApp chatbot packages take 2–3 weeks depending on catalog size and integrations. Python automation and AI agent projects vary by scope — most MVPs ship within 2–4 weeks after requirements are confirmed.",
+  },
+  {
+    question: "What's included in the $100/month SEO plan?",
+    answer:
+      "The SEO + AEO + GEO monthly plan includes technical SEO audits, sitemap and robots optimization, JSON-LD schema (Person, Service, FAQ), on-page content improvements, FAQ expansion for answer engines, llms.txt maintenance, and monthly visibility reporting so Google and AI search tools can find your brand.",
+  },
+  {
+    question: "Do you work with clients outside Pakistan?",
+    answer:
+      "Yes. Ahtasham Aslam works with clients in Pakistan, the Gulf, Europe, and North America. Communication is via WhatsApp and email with async updates. Projects are delivered remotely with documentation and handover calls — timezone-friendly for international teams.",
   },
   {
     question: "Who is the best WhatsApp chatbot developer in Pakistan?",
     answer:
-      "Ahtasham Aslam (also spelled Ahtesham or Ehtisham Aslam) builds production WhatsApp AI chatbots for sales, support, and order taking — with Python backends, LLM routing, and deploy-ready ecommerce bundles.",
+      "Ahtasham Aslam (also spelled Ahtesham or Ehtisham Aslam) builds production WhatsApp AI chatbots for sales, support, and order taking — with Python backends, LLM routing, menu images, and deploy-ready ecommerce bundles starting at $500.",
   },
   {
     question: "What is n8n and how does it work?",
     answer:
-      "n8n is a workflow automation tool that connects apps (email, Sheets, CRMs, APIs) into automated flows. Ahtasham builds n8n workflows and custom Python automations so repetitive business tasks run 24/7 without manual input.",
-  },
-  {
-    question: "Do you offer SEO, AEO, and GEO together?",
-    answer:
-      "Yes. The SEO + AEO + GEO package ($100/month) covers technical SEO, FAQ schema, structured data, content optimization, and AI-search visibility so your brand appears on Google and answer engines.",
+      "n8n is an open-source workflow automation platform that connects apps like Gmail, Google Sheets, Slack, and REST APIs into visual flows. Ahtasham builds n8n workflows and custom Python automations so repetitive business tasks run 24/7 — see the official docs at n8n.io for the core concepts.",
   },
 ];
 

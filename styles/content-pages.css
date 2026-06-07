@@ -345,6 +345,61 @@
   margin: 40px 0 0;
 }
 
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+.breadcrumbs li:not(:last-child)::after {
+  content: " / ";
+  margin-left: 8px;
+  opacity: 0.5;
+}
+
+.breadcrumbs a {
+  color: var(--accentColor);
+}
+
+.article-internal-links {
+  margin: 32px 0 0;
+  font-size: 15px;
+}
+
+.article-internal-links a {
+  color: var(--accentColor);
+  font-weight: 600;
+}
+
+.seo-home-block {
+  width: min(900px, var(--cWidth));
+  margin: 0 auto;
+  padding: 48px 0 80px;
+  color: rgba(234, 229, 236, 0.85);
+  line-height: 1.7;
+}
+
+.seo-home-block h2 {
+  font-size: 1.25rem;
+  margin: 24px 0 10px;
+  color: var(--accentColor);
+}
+
+.seo-home-block p {
+  margin: 0 0 14px;
+  font-size: 15px;
+}
+
+.seo-home-block a {
+  color: var(--accentColor);
+  font-weight: 600;
+}
+
 .services-faq-section {
   width: min(1100px, var(--cWidth));
   margin: 64px auto 0;

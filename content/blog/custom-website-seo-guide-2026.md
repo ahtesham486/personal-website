@@ -94,3 +94,9 @@ Perfect for portfolios, local shops, and consultants launching online.
 ## Ready to go live?
 
 [Contact me](/contact) or WhatsApp with your business name and industry — I'll suggest the right package and timeline.
+
+## References
+
+- [Google PageSpeed Insights](https://pagespeed.web.dev/) — Core Web Vitals testing
+- [Schema.org WebSite](https://schema.org/WebSite) — structured data for sites
+- [WordPress.org](https://wordpress.org/) — CMS platform documentation
