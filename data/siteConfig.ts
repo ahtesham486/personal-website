@@ -10,7 +10,7 @@ export const siteConfig = {
     city: "Lahore",
     country: "Pakistan",
     countryCode: "PK",
-    streetAddress: "Lahore, Punjab",
+    streetAddress: "Street 1, Khawaja Bungalows, Gulberg Town, Lahore",
     postalCode: "54000",
     latitude: 31.5204,
     longitude: 74.3587,
