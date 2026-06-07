@@ -2,7 +2,21 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import ContentHeader from "@/components/ContentHeader";
 import { workProjects, siteConfig } from "@/data/siteConfig";
+import { JsonLd, absoluteUrl, breadcrumbSchema, projectSchema } from "@/lib/seo";
 import "@/styles/content-pages.css";
+
+function workListSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Ahtasham Aslam — Portfolio Projects",
+    itemListElement: workProjects.map((project, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: absoluteUrl(`/work/${project.slug}`),
+    })),
+  };
+}
 
 export const metadata: Metadata = {
   title: "Work — Projects & Case Studies",
@@ -14,6 +28,16 @@ export const metadata: Metadata = {
 export default function WorkIndexPage() {
   return (
     <div className="content-page">
+      <JsonLd
+        data={[
+          workListSchema(),
+          ...workProjects.map((project) => projectSchema(project)),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Work", path: "/work" },
+          ]),
+        ]}
+      />
       <ContentHeader />
 
       <main className="content-main">

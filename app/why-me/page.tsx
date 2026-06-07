@@ -4,7 +4,7 @@ import { FaWhatsapp } from "react-icons/fa6";
 import ContentHeader from "@/components/ContentHeader";
 import { servicePackages, servicesPageMeta, whyMeContent } from "@/data/services";
 import { siteConfig } from "@/data/siteConfig";
-import { JsonLd, absoluteUrl } from "@/lib/seo";
+import { JsonLd, absoluteUrl, breadcrumbSchema, personSchema, professionalServiceSchema } from "@/lib/seo";
 import "@/styles/content-pages.css";
 import "@/styles/services.css";
 import "@/styles/why-me.css";
@@ -27,6 +27,16 @@ export default function WhyMePage() {
 
   return (
     <div className="content-page why-me-page">
+      <JsonLd
+        data={[
+          personSchema(),
+          professionalServiceSchema(),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Why Me", path: "/why-me" },
+          ]),
+        ]}
+      />
       <ContentHeader />
 
       <main className="why-me-main">
