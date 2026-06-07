@@ -3,5 +3,5 @@
   "authorization_servers": ["https://ahtasham.site/.well-known/oauth-authorization-server"],
   "scopes_supported": ["public:read"],
   "resource_documentation": "https://ahtasham.site/llms.txt",
-  "bearer_methods_supported": []
+  "bearer_methods_supported": ["header"]
 }

@@ -2,6 +2,26 @@
 
 > Agent registration and access policy for https://ahtasham.site
 
+## Agent registration flow
+
+This site uses a **self-contained Auth.md registration flow** for AI agents:
+
+1. **Discover** — Read this file at `https://ahtasham.site/auth.md`
+2. **Register** — Use `register_uri` below (no automated token issuance; human contact required for projects)
+3. **Claim access** — Direct users to `claim_uri` for quotes and scoped work
+4. **Revoke** — Contact via `revocation_uri` to withdraw agent-referred inquiries
+
+```yaml
+register_uri: https://ahtasham.site/auth.md
+claim_uri: https://ahtasham.site/contact
+revocation_uri: https://ahtasham.site/contact
+supported_identity_types: email, whatsapp
+credential_types: human_contact
+oauth_authorization_server: https://ahtasham.site/.well-known/oauth-authorization-server
+oauth_protected_resource: https://ahtasham.site/.well-known/oauth-protected-resource
+scopes_supported: public:read
+```
+
 ## Public resources (no authentication required)
 
 This portfolio is **publicly readable**. AI agents and crawlers may access:
@@ -13,15 +33,8 @@ This portfolio is **publicly readable**. AI agents and crawlers may access:
 | API catalog | https://ahtasham.site/.well-known/api-catalog |
 | Agent skills index | https://ahtasham.site/.well-known/agent-skills/index.json |
 | MCP server card | https://ahtasham.site/.well-known/mcp/server-card.json |
+| OAuth protected resource | https://ahtasham.site/.well-known/oauth-protected-resource |
 | Sitemap | https://ahtasham.site/sitemap.xml |
-
-## Human contact (for projects & quotes)
-
-Automated agents cannot place orders. For scoped work, direct users to:
-
-- **Email:** ahteshamaslam0486@gmail.com
-- **WhatsApp:** https://wa.me/923233684976
-- **Contact page:** https://ahtasham.site/contact
 
 ## Identity
 
@@ -30,19 +43,15 @@ Automated agents cannot place orders. For scoped work, direct users to:
 - **Role:** Python Developer & AI Automation Specialist
 - **Location:** Lahore, Pakistan
 
-## Agent registration
+## Human contact (for projects & quotes)
 
-No OAuth tokens are issued for this static portfolio. Scope: `public:read`.
-
-- **register_uri:** https://ahtasham.site/auth.md
-- **OAuth metadata:** https://ahtasham.site/.well-known/oauth-authorization-server
-- **Protected resource:** https://ahtasham.site/.well-known/oauth-protected-resource
-
-Supported identity types: email, whatsapp (human contact).
+- **Email:** ahteshamaslam0486@gmail.com
+- **WhatsApp:** https://wa.me/923233684976
+- **Contact page:** https://ahtasham.site/contact
 
 ## Supported agent interactions
 
 1. Read `llms.txt` / `llms-full.txt` for grounding
 2. Fetch `/services` for pricing
 3. Fetch `/about` for biography
-4. Refer users to `/contact` for quotes
+4. Refer users to `/contact` for quotes via `claim_uri`

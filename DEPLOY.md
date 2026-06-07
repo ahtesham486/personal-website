@@ -128,8 +128,19 @@ The repo ships discovery files for AI agents:
 | `_a2a._agents` | HTTPS | `1 ahtasham.site alpn=h2,h3` |
 | `_mcp._agents` | HTTPS | `1 ahtasham.site alpn=h2,h3` |
 
+**Cloudflare DNS UI steps (exact):**
+
+1. DNS → **Add record**
+2. Type: **HTTPS** (if not listed, use **SVCB**)
+3. Name: `_index._agents` (only this part — Cloudflare adds `.ahtasham.site`)
+4. Target / Value: `1 ahtasham.site alpn=h2,h3`
+5. Proxy: **DNS only** (grey cloud)
+6. Save, then repeat for `_a2a._agents` and `_mcp._agents`
+
 3. Optional TXT on `_index._agents`: `v=aid1; url=https://ahtasham.site/llms.txt`
 4. Enable **DNSSEC** under DNS → Settings (recommended for DNS-AID validators)
+
+**Markdown negotiation** uses `functions/_middleware.js` (Cloudflare Pages) and `worker/index.js` (Wrangler deploy). After push, confirm GitHub → Cloudflare Pages build includes the `functions/` folder.
 
 After deploy, re-run the Cloudflare Agent-Ready test on `https://ahtasham.site/`.
 

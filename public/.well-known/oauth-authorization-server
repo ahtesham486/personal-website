@@ -11,6 +11,8 @@
     "register_uri": "https://ahtasham.site/auth.md",
     "supported_identity_types": ["email", "whatsapp"],
     "credential_types": ["human_contact"],
+    "claim_uri": "https://ahtasham.site/contact",
+    "revocation_uri": "https://ahtasham.site/contact",
     "documentation": "https://ahtasham.site/llms-full.txt"
   }
 }
