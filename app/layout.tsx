@@ -26,14 +26,15 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description:
-    "Ahtasham Aslam — Python backend developer, AI agents, WhatsApp bots, web scraping, n8n automation, WordPress & SEO/AEO/GEO specialist in Lahore, Pakistan.",
+    `Ahtasham Aslam — Python backend developer, AI agents, WhatsApp bots, web scraping, n8n automation, WordPress & SEO/AEO/GEO specialist in ${siteConfig.location.city}, ${siteConfig.location.country}.`,
   keywords: [
     "Python developer Pakistan",
     "Ahtasham Aslam",
     "Ahtesham Aslam",
     "Ehtisham Aslam",
     "custom website developer Pakistan",
-    "WhatsApp chatbot developer Lahore",
+    `WhatsApp chatbot developer ${siteConfig.location.city}`,
+    `Python developer ${siteConfig.location.city}`,
     "n8n automation expert",
     "AI automation",
     "web scraping Python",
@@ -74,9 +75,9 @@ export const metadata: Metadata = {
   },
   other: {
     "geo.region": "PK-PB",
-    "geo.placename": "Lahore, Pakistan",
-    "geo.position": "31.5204;74.3587",
-    ICBM: "31.5204, 74.3587",
+    "geo.placename": `${siteConfig.location.city}, ${siteConfig.location.country}`,
+    "geo.position": `${siteConfig.location.latitude};${siteConfig.location.longitude}`,
+    ICBM: `${siteConfig.location.latitude}, ${siteConfig.location.longitude}`,
   },
 };
 

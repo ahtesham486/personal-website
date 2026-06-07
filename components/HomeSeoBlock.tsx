@@ -8,7 +8,7 @@ export default function HomeSeoBlock() {
       <p>
         {siteConfig.name}, also known as {siteConfig.alternateNames.join(" and ")}, is a Python
         &amp; AI automation expert based in {siteConfig.location.city}. Services include custom
-        ecommerce websites, WhatsApp chatbot development for Lahore and international clients, n8n
+        ecommerce websites, WhatsApp chatbot development for {siteConfig.location.city} and international clients, n8n
         workflow automation, AI agents, web scraping, and SEO/AEO/GEO visibility.
       </p>
       <h2>WhatsApp chatbot developer · n8n automation specialist</h2>

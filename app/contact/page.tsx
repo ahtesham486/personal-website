@@ -4,9 +4,8 @@ import { MdArrowOutward, MdCopyright } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa6";
 import ContentHeader from "@/components/ContentHeader";
 import FaqSection from "@/components/FaqSection";
-import { siteConfig } from "@/data/siteConfig";
+import { siteConfig, faqItems, locationFull } from "@/data/siteConfig";
 import { JsonLd, absoluteUrl, faqSchema } from "@/lib/seo";
-import { faqItems } from "@/data/siteConfig";
 import "@/styles/content-pages.css";
 import "@/styles/faq.css";
 
@@ -49,6 +48,11 @@ export default function ContactPage() {
             <a href={waUrl} target="_blank" rel="noopener noreferrer">
               Products &amp; quotes <FaWhatsapp />
             </a>
+          </section>
+
+          <section className="contact-page-card">
+            <h2>Address</h2>
+            <p>{locationFull}</p>
           </section>
 
           <section className="contact-page-card">

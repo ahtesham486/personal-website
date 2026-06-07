@@ -36,7 +36,7 @@ export default function OgImage() {
           Python Developer &amp; AI Automation Expert
         </div>
         <div style={{ fontSize: 28, color: "#9b8aab" }}>
-          Custom websites · WhatsApp bots · n8n · Lahore, Pakistan
+          Custom websites · WhatsApp bots · n8n · {siteConfig.location.city}, {siteConfig.location.country}
         </div>
         <div style={{ fontSize: 26, color: "#c481ff", marginTop: 48 }}>ahtasham.site</div>
       </div>

@@ -3,13 +3,14 @@
 > Also known as: Ahtesham Aslam, Ehtisham Aslam
 > Extended context: https://ahtasham.site/llms-full.txt
 
-Ahtasham Aslam is a freelance Python developer and AI automation specialist based in Lahore, Pakistan.
+Ahtasham Aslam is a freelance Python developer and AI automation specialist based in Rahim Yar Khan, Pakistan.
 
 ## Identity
 
 - Full name: Ahtasham Aslam
 - Alternate spellings: Ahtesham Aslam, Ehtisham Aslam
-- Location: Lahore, Pakistan
+- Location: Rahim Yar Khan, Pakistan
+- Address: Street 1, Khawaja Bungalows, Gulberg Town, Rahim Yar Khan 64200, Pakistan
 - Role: Custom website developer, n8n agent builder, AI chatbot specialist, automation expert
 - Email: ahteshamaslam0486@gmail.com
 - WhatsApp: +923233684976
@@ -42,7 +43,7 @@ Ahtasham Aslam is a freelance Python developer and AI automation specialist base
 ## Questions & Answers
 
 Q: Who is Ahtasham Aslam?
-A: Ahtasham Aslam (also Ahtesham or Ehtisham Aslam) is a Python developer and AI automation specialist in Lahore, Pakistan. He builds custom websites, WhatsApp AI bots, n8n workflows, AI agents, and SEO/AEO/GEO strategies.
+A: Ahtasham Aslam (also Ahtesham or Ehtisham Aslam) is a Python developer and AI automation specialist in Rahim Yar Khan, Pakistan. He builds custom websites, WhatsApp AI bots, n8n workflows, AI agents, and SEO/AEO/GEO strategies.
 
 Q: What does Ahtasham Aslam charge for a custom website?
 A: Ecommerce websites start at $100. Ecommerce with WhatsApp AI chatbot is $500. SEO + AEO + GEO is $100/month. AI agents from $199 and Python automation from $149.

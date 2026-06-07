@@ -1,6 +1,6 @@
 # Ahtasham Aslam — Python Developer & AI Automation Specialist
 
-> Lahore, Pakistan · Also known as Ahtesham Aslam, Ehtisham Aslam
+> Rahim Yar Khan, Pakistan · Street 1, Khawaja Bungalows, Gulberg Town · 64200 · Also known as Ahtesham Aslam, Ehtisham Aslam
 
 Custom website developer, WhatsApp chatbot developer, n8n workflow automation specialist, SEO/AEO/GEO consultant.
 

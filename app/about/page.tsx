@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "Ahtasham Aslam",
     "Ahtesham Aslam",
     "Ehtisham Aslam",
-    "Python developer Lahore",
+    `Python developer ${siteConfig.location.city}`,
     "WhatsApp chatbot developer Pakistan",
     "custom website developer Pakistan",
     "n8n automation expert",

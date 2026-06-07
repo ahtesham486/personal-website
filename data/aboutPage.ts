@@ -2,7 +2,7 @@ import { siteConfig } from "./siteConfig";
 
 export const aboutPageMeta = {
   title: "About Ahtasham Aslam",
-  description: `About ${siteConfig.name} (also Ahtesham Aslam, Ehtisham Aslam) — Python developer, n8n automation expert, and WhatsApp chatbot specialist in Lahore, Pakistan.`,
+  description: `About ${siteConfig.name} (also Ahtesham Aslam, Ehtisham Aslam) — Python developer, n8n automation expert, and WhatsApp chatbot specialist in ${siteConfig.location.city}, ${siteConfig.location.country}.`,
 };
 
 export const aboutPageContent = {

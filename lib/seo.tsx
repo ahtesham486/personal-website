@@ -20,6 +20,7 @@ function postalAddressSchema() {
     "@type": "PostalAddress",
     streetAddress: siteConfig.location.streetAddress,
     addressLocality: siteConfig.location.city,
+    addressRegion: siteConfig.location.region,
     postalCode: siteConfig.location.postalCode,
     addressCountry: siteConfig.location.countryCode,
   };

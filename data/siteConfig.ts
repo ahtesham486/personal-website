@@ -7,13 +7,14 @@ export const siteConfig = {
   roles: ["Developer", "Automator"],
   jobTitle: "Python Developer & AI Automation Specialist",
   location: {
-    city: "Lahore",
+    city: "Rahim Yar Khan",
+    region: "Punjab",
     country: "Pakistan",
     countryCode: "PK",
-    streetAddress: "Street 1, Khawaja Bungalows, Gulberg Town, Lahore",
-    postalCode: "54000",
-    latitude: 31.5204,
-    longitude: 74.3587,
+    streetAddress: "Street 1, Khawaja Bungalows, Gulberg Town",
+    postalCode: "64200",
+    latitude: 28.4199,
+    longitude: 70.3039,
   },
   email: "ahteshamaslam0486@gmail.com",
   whatsappNumber: "923233684976",
@@ -25,8 +26,11 @@ export const siteConfig = {
   year: 2026,
 };
 
+export const locationShort = `${siteConfig.location.city}, ${siteConfig.location.country}`;
+export const locationFull = `${siteConfig.location.streetAddress}, ${siteConfig.location.city} ${siteConfig.location.postalCode}, ${siteConfig.location.country}`;
+
 export const aboutContent = {
-  headline: "Custom website developer in Pakistan — Python & AI automation expert in Lahore.",
+  headline: `Custom website developer in Pakistan — Python & AI automation expert in ${siteConfig.location.city}.`,
   note: "Also known as Ahtesham Aslam and Ehtisham Aslam · n8n workflow automation specialist · WhatsApp chatbot developer",
   skills: [
     "Django & Flask APIs",
@@ -174,7 +178,7 @@ export const faqItems = [
   {
     question: "Who is Ahtasham Aslam?",
     answer:
-      "Ahtasham Aslam (also spelled Ahtesham Aslam or Ehtisham Aslam) is a Python developer and AI automation specialist based in Lahore, Pakistan. He builds custom websites, n8n workflows, WhatsApp AI bots, AI agents, web scraping pipelines, and SEO/AEO/GEO strategies for businesses.",
+      `${siteConfig.name} (also spelled Ahtesham Aslam or Ehtisham Aslam) is a Python developer and AI automation specialist based in ${siteConfig.location.city}, ${siteConfig.location.country}. He builds custom websites, n8n workflows, WhatsApp AI bots, AI agents, web scraping pipelines, and SEO/AEO/GEO strategies for businesses.`,
   },
   {
     question: "What services does Ahtasham Aslam offer?",

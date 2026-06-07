@@ -1,6 +1,6 @@
 const HOME_MARKDOWN = `# Ahtasham Aslam
 
-> Python Developer & AI Automation Specialist · Lahore, Pakistan
+> Python Developer & AI Automation Specialist · Rahim Yar Khan, Pakistan
 
 Also known as: Ahtesham Aslam, Ehtisham Aslam
 

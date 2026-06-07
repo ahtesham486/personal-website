@@ -16,7 +16,8 @@ description: Use when you need full identity, bio, services overview, and contac
 - **Name:** Ahtasham Aslam
 - **Alternate names:** Ahtesham Aslam, Ehtisham Aslam
 - **Role:** Python Developer & AI Automation Specialist
-- **Location:** Lahore, Pakistan
+- **Location:** Rahim Yar Khan, Pakistan
+- **Address:** Street 1, Khawaja Bungalows, Gulberg Town, Rahim Yar Khan 64200, Pakistan
 
 ## Services (starting prices)
 

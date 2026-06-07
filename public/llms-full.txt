@@ -4,7 +4,7 @@ Canonical short file: https://ahtasham.site/llms.txt
 
 ## About
 
-Ahtasham Aslam (alternate names: Ahtesham Aslam, Ehtisham Aslam) is a freelance Python developer and AI automation specialist based in Lahore, Punjab, Pakistan. He specializes in custom website development, WhatsApp AI chatbots, n8n workflow automation, AI agent building, web scraping pipelines, Django/Flask APIs, and SEO/AEO/GEO/AIO visibility strategy.
+Ahtasham Aslam (alternate names: Ahtesham Aslam, Ehtisham Aslam) is a freelance Python developer and AI automation specialist based in Rahim Yar Khan, Punjab, Pakistan. He specializes in custom website development, WhatsApp AI chatbots, n8n workflow automation, AI agent building, web scraping pipelines, Django/Flask APIs, and SEO/AEO/GEO/AIO visibility strategy.
 
 ## Service packages (2026 pricing)
 
@@ -53,7 +53,7 @@ Q: Does Ahtasham build n8n automations?
 A: Yes. n8n workflows plus custom Python for email parsing, Sheets sync, CRM hooks, and scheduled jobs — see https://n8n.io for the platform overview.
 
 Q: Where is Ahtasham Aslam located?
-A: Lahore, Pakistan (PK-PB). Serves clients remotely worldwide.
+A: Street 1, Khawaja Bungalows, Gulberg Town, Rahim Yar Khan 64200, Pakistan (PK-PB). Serves clients remotely worldwide.
 
 ## Contact
 
@@ -64,4 +64,4 @@ A: Lahore, Pakistan (PK-PB). Serves clients remotely worldwide.
 
 ## Expertise keywords
 
-Python developer Pakistan, WhatsApp chatbot developer Lahore, n8n automation expert, custom website developer Pakistan, AI agent builder, web scraping Python, Django Flask developer, SEO AEO GEO specialist, Ahtasham Aslam, Ahtesham Aslam, Ehtisham Aslam
+Python developer Pakistan, WhatsApp chatbot developer Rahim Yar Khan, n8n automation expert, custom website developer Pakistan, AI agent builder, web scraping Python, Django Flask developer, SEO AEO GEO specialist, Ahtasham Aslam, Ahtesham Aslam, Ehtisham Aslam

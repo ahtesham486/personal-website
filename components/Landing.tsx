@@ -12,7 +12,7 @@ const Landing = ({ children }: PropsWithChildren) => {
             <h1>
               <span className="sr-only">
                 {siteConfig.name} — custom website developer in Pakistan, Python &amp; AI automation
-                expert in Lahore
+                expert in {siteConfig.location.city}
               </span>
               {siteConfig.firstName}
               <br />

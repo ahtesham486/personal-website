@@ -1,6 +1,6 @@
 import { MdArrowOutward, MdCopyright } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa6";
-import { siteConfig } from "../data/siteConfig";
+import { siteConfig, locationFull } from "../data/siteConfig";
 import "./styles/Contact.css";
 
 const Contact = () => {
@@ -26,6 +26,8 @@ const Contact = () => {
                 Products &amp; quotes
               </a>
             </p>
+            <h4>Address</h4>
+            <p>{locationFull}</p>
           </div>
           <div className="contact-box">
             <h4>Social</h4>
