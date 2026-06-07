@@ -68,6 +68,8 @@ export function localBusinessSchema() {
     description:
       "Custom websites, WhatsApp AI chatbots, n8n automation, Python APIs, and SEO/AEO/GEO services in Pakistan.",
     url: siteConfig.siteUrl,
+    image: absoluteUrl(OG_IMAGE_PATH),
+    logo: absoluteUrl("/icon.svg"),
     email: siteConfig.email,
     telephone: `+${siteConfig.whatsappNumber}`,
     priceRange: "$$",
@@ -110,6 +112,10 @@ export function professionalServiceSchema() {
     url: absoluteUrl("/services"),
     description:
       "Custom website development, WhatsApp AI chatbots, n8n automation, AI agents, Python APIs, and SEO/AEO/GEO in Pakistan.",
+    image: absoluteUrl(OG_IMAGE_PATH),
+    logo: absoluteUrl("/icon.svg"),
+    telephone: `+${siteConfig.whatsappNumber}`,
+    priceRange: "$$",
     serviceType: [
       "Custom Website Development",
       "WhatsApp Chatbot Development",
