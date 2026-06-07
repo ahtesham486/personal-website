@@ -25,7 +25,13 @@ const Navbar = () => {
   useEffect(() => {
     if (!isHome) return;
     document.body.style.overflowY = "auto";
-    requestAnimationFrame(() => initialFX());
+    const run = () => initialFX();
+    if (typeof window.requestIdleCallback === "function") {
+      const id = window.requestIdleCallback(run, { timeout: 1200 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = window.setTimeout(run, 150);
+    return () => clearTimeout(id);
   }, [isHome]);
 
   return (

@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   experimental: {
-    optimizePackageImports: ["react-icons", "three"],
+    optimizePackageImports: ["react-icons", "three", "gsap", "three-stdlib"],
   },
 };
 

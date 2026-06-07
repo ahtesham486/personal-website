@@ -140,7 +140,43 @@ The repo ships discovery files for AI agents:
 6. Save, then repeat for `_a2a._agents` and `_mcp._agents`
 
 3. Optional TXT on `_index._agents`: `v=aid1; url=https://ahtasham.site/llms.txt`
-4. Enable **DNSSEC** under DNS → Settings (recommended for DNS-AID validators)
+4. **Enable DNSSEC (required for DNS-AID pass)** — see below
+
+#### DNSSEC — required (fixes “DNSSEC was not validated” / AD=false)
+
+Your HTTPS records are correct. The audit also requires **DNSSEC-signed** DNS so resolvers return `AD=true` (Authenticated Data).
+
+**Step 1 — Enable in Cloudflare**
+
+1. Cloudflare → **ahtasham.site** → **DNS** → **Settings** (or **DNSSEC** tab)
+2. Find **DNSSEC** → click **Enable DNSSEC**
+3. Cloudflare shows a **DS record** (Digest, Key tag, Algorithm, Digest type) — **copy it**
+
+**Step 2 — Add DS record at your domain registrar**
+
+Where you bought `ahtasham.site` (Namecheap, GoDaddy, Cloudflare Registrar, etc.):
+
+1. Open domain → **DNSSEC** / **DS Records**
+2. **Add DS record** — paste the values Cloudflare gave you
+3. Save
+
+> If the domain is on **Cloudflare Registrar**, DS is often added automatically after you enable DNSSEC in Step 1.
+
+**Step 3 — Wait and verify**
+
+- Propagation: **15 minutes to 24 hours** (usually ~1 hour)
+- Verify at [Cloudflare DNSSEC debugger](https://dnssec-debugger.verisignlabs.com/ahtasham.site) — chain should be **Secure**
+- Or run: `dig +dnssec _index._agents.ahtasham.site HTTPS` — look for `ad` flag in response
+
+**Step 4 — Re-scan Agent-Ready**
+
+When DNSSEC is active, DoH responses should show `"AD":true` instead of `"AD":false`.
+
+| Check | Your status |
+|-------|-------------|
+| 3× HTTPS records | Done |
+| DNSSEC enabled | **You must do this in dashboard** |
+| DS at registrar | **Required if registrar ≠ Cloudflare auto** |
 
 **Markdown negotiation** — pick one:
 
@@ -155,3 +191,18 @@ The repo ships discovery files for AI agents:
 2. Verify via DNS TXT (easy on Cloudflare) or HTML tag
 3. Submit sitemap: `https://ahtasham.site/sitemap.xml`
 4. URL Inspection → Request indexing for `/`, `/about`, `/services`, `/blog`, `/contact`
+
+### Cloudflare Speed (safe for this site)
+
+Enable in dashboard — **do not** turn on Rocket Loader (breaks GSAP + Three.js animations):
+
+| Setting | Where | Recommendation |
+|---------|--------|----------------|
+| **Polish** | Speed → Optimization → Image Optimization → **Lossy** or Lossless | Compresses images at edge |
+| **Auto Minify** | Speed → Optimization → JS/CSS/HTML minify | ON |
+| **Brotli** | Speed → Optimization | ON |
+| **Crawler Hints** | Caching → Configuration | ON |
+| **Always Online** | Caching → Configuration | ON (optional backup) |
+| **Rocket Loader** | Speed → Optimization | **OFF** — breaks animations |
+
+Static assets already cache via `public/_headers` (`/_next/static/*` = 1 year).

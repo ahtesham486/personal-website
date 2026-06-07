@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { MdCopyright } from "react-icons/md";
 import { siteConfig } from "@/data/siteConfig";
+import HomeSeoBlock from "./HomeSeoBlock";
 import "./styles/HomeFooter.css";
 
 export default function HomeFooter() {
@@ -11,6 +13,7 @@ export default function HomeFooter() {
       <p>
         <MdCopyright /> {siteConfig.year}
       </p>
+      <HomeSeoBlock />
     </footer>
   );
 }

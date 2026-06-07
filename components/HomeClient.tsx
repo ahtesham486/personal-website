@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { LoadingProvider } from "@/context/LoadingProvider";
 import MainContainer from "@/components/MainContainer";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import AgentWebMCP from "@/components/AgentWebMCP";
 
 const CharacterModel = dynamic(() => import("@/components/Character"), {
   ssr: false,
@@ -24,17 +25,40 @@ export default function HomeClient() {
   }, [router]);
 
   useEffect(() => {
-    const start = () => setShowCharacter(true);
+    if (window.innerWidth <= 1024) return;
+
+    let cancelled = false;
+    const reveal = () => {
+      if (!cancelled) setShowCharacter(true);
+    };
+
+    let idleId: number | undefined;
     if (typeof window.requestIdleCallback === "function") {
-      const id = window.requestIdleCallback(start, { timeout: 2000 });
-      return () => window.cancelIdleCallback(id);
+      idleId = window.requestIdleCallback(reveal, { timeout: 3500 });
+    } else {
+      idleId = window.setTimeout(reveal, 1200);
     }
-    const id = setTimeout(start, 600);
-    return () => clearTimeout(id);
+
+    const onScroll = () => {
+      reveal();
+      window.removeEventListener("scroll", onScroll, { capture: true });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true, capture: true });
+
+    return () => {
+      cancelled = true;
+      if (typeof window.cancelIdleCallback === "function" && idleId !== undefined) {
+        window.cancelIdleCallback(idleId);
+      } else if (idleId !== undefined) {
+        clearTimeout(idleId);
+      }
+      window.removeEventListener("scroll", onScroll, { capture: true });
+    };
   }, []);
 
   return (
     <ErrorBoundary>
+      <AgentWebMCP />
       <LoadingProvider>
         <MainContainer>
           {showCharacter && (
