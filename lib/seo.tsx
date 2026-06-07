@@ -15,6 +15,16 @@ export function absoluteUrl(path: string) {
   return `${siteConfig.siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
+function postalAddressSchema() {
+  return {
+    "@type": "PostalAddress",
+    streetAddress: siteConfig.location.streetAddress,
+    addressLocality: siteConfig.location.city,
+    postalCode: siteConfig.location.postalCode,
+    addressCountry: siteConfig.location.countryCode,
+  };
+}
+
 export function personSchema() {
   return {
     "@context": "https://schema.org",
@@ -25,11 +35,7 @@ export function personSchema() {
     email: siteConfig.email,
     jobTitle: siteConfig.jobTitle,
     worksFor: { "@type": "Organization", name: "Freelance" },
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: siteConfig.location.city,
-      addressCountry: siteConfig.location.countryCode,
-    },
+    address: postalAddressSchema(),
     knowsAbout: [
       "Python",
       "Django",
@@ -74,11 +80,7 @@ export function localBusinessSchema() {
     telephone: `+${siteConfig.whatsappNumber}`,
     priceRange: "$$",
     areaServed: ["Pakistan", "Gulf", "Europe", "North America"],
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: siteConfig.location.city,
-      addressCountry: siteConfig.location.countryCode,
-    },
+    address: postalAddressSchema(),
     geo: {
       "@type": "GeoCoordinates",
       latitude: siteConfig.location.latitude,
@@ -124,11 +126,7 @@ export function professionalServiceSchema() {
       "SEO AEO GEO Optimization",
     ],
     areaServed: ["Pakistan", "Gulf", "Europe", "North America"],
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: siteConfig.location.city,
-      addressCountry: siteConfig.location.countryCode,
-    },
+    address: postalAddressSchema(),
     provider: {
       "@type": "Person",
       name: siteConfig.name,
