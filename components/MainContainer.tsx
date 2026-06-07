@@ -72,9 +72,7 @@ const MainContainer = ({ children }: PropsWithChildren) => {
           <div className="container-main">
             <Landing>{!isDesktopView && children}</Landing>
             <About />
-            <LazyWhenVisible minHeight={420}>
-              <WhatIDo />
-            </LazyWhenVisible>
+            <WhatIDo />
             <LazyWhenVisible minHeight={360}>
               <Career />
             </LazyWhenVisible>

@@ -9,7 +9,9 @@
   width: var(--cWidth);
   max-width: 1920px;
   margin: auto;
-  z-index: 9;
+  z-index: 20;
+  isolation: isolate;
+  background-color: var(--backgroundColor);
 }
 .what-box {
   width: 50%;
@@ -37,8 +39,8 @@
   height: 650px;
   margin-left: 200px;
   position: relative;
-  display: none;
-  z-index: 12;
+  display: flex;
+  z-index: 21;
   pointer-events: auto;
 }
 .what-content {
