@@ -8,11 +8,18 @@
   "token_endpoint_auth_methods_supported": [],
   "service_documentation": "https://ahtasham.site/llms.txt",
   "agent_auth": {
+    "skill": "https://workos.com/auth.md",
     "register_uri": "https://ahtasham.site/auth.md",
-    "supported_identity_types": ["email", "whatsapp"],
-    "credential_types": ["human_contact"],
     "claim_uri": "https://ahtasham.site/contact",
     "revocation_uri": "https://ahtasham.site/contact",
-    "documentation": "https://ahtasham.site/llms-full.txt"
+    "identity_types_supported": ["anonymous", "identity_assertion"],
+    "anonymous": {
+      "credential_types_supported": ["human_contact"]
+    },
+    "identity_assertion": {
+      "assertion_types_supported": ["verified_email"],
+      "credential_types_supported": ["human_contact"]
+    },
+    "events_supported": []
   }
 }

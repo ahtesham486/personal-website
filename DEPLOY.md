@@ -95,6 +95,8 @@ Docs: [Cloudflare managed robots.txt](https://developers.cloudflare.com/bots/add
 User-agent: *
 Allow: /
 
+Content-Signal: ai-train=no, search=yes, ai-input=yes
+
 Sitemap: https://ahtasham.site/sitemap.xml
 ```
 

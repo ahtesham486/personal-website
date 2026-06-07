@@ -70,10 +70,19 @@ export const oauthAuthorizationServer = {
   token_endpoint_auth_methods_supported: [],
   service_documentation: `${base}/llms.txt`,
   agent_auth: {
+    skill: "https://workos.com/auth.md",
     register_uri: `${base}/auth.md`,
-    supported_identity_types: ["email", "whatsapp"],
-    credential_types: ["human_contact"],
-    documentation: `${base}/llms-full.txt`,
+    claim_uri: `${base}/contact`,
+    revocation_uri: `${base}/contact`,
+    identity_types_supported: ["anonymous", "identity_assertion"],
+    anonymous: {
+      credential_types_supported: ["human_contact"],
+    },
+    identity_assertion: {
+      assertion_types_supported: ["verified_email"],
+      credential_types_supported: ["human_contact"],
+    },
+    events_supported: [],
   },
 };
 
@@ -90,7 +99,8 @@ export const openIdConfiguration = {
 
 export const oauthProtectedResource = {
   resource: `${base}/`,
-  authorization_servers: [`${base}/.well-known/oauth-authorization-server`],
+  resource_name: `${siteConfig.name} Portfolio`,
+  authorization_servers: [base],
   scopes_supported: ["public:read"],
   resource_documentation: `${base}/llms.txt`,
   bearer_methods_supported: ["header"],
