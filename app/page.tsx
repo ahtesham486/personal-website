@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import HomeClient from "@/components/HomeClient";
+import AgentWebMCP from "@/components/AgentWebMCP";
 import { siteConfig } from "@/data/siteConfig";
 import { JsonLd, OG_IMAGE, absoluteUrl, faqSchema, personSchema, websiteSchema } from "@/lib/seo";
 
@@ -26,6 +27,7 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={[personSchema(), websiteSchema(), faqSchema()]} />
+      <AgentWebMCP />
       <HomeClient />
       <section className="seo-home-block" aria-label="Services overview">
         <h2>Custom website developer in Pakistan</h2>

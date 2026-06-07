@@ -133,6 +133,8 @@ The repo ships discovery files for AI agents:
 
 After deploy, re-run the Cloudflare Agent-Ready test on `https://ahtasham.site/`.
 
+**Deploy command:** `npm run build` then `npx wrangler deploy` — uses `worker/index.js` for markdown negotiation (`Accept: text/markdown` → `text/markdown` on `/`).
+
 ### Google Search Console (manual — required for indexing)
 
 1. https://search.google.com/search-console → Add property `ahtasham.site`

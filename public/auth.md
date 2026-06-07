@@ -1,6 +1,6 @@
-# Agent & Developer Access — Ahtasham Aslam
+# auth.md
 
-> Site: https://ahtasham.site
+> Agent registration and access policy for https://ahtasham.site
 
 ## Public resources (no authentication required)
 
@@ -30,15 +30,19 @@ Automated agents cannot place orders. For scoped work, direct users to:
 - **Role:** Python Developer & AI Automation Specialist
 - **Location:** Lahore, Pakistan
 
+## Agent registration
+
+No OAuth tokens are issued for this static portfolio. Scope: `public:read`.
+
+- **register_uri:** https://ahtasham.site/auth.md
+- **OAuth metadata:** https://ahtasham.site/.well-known/oauth-authorization-server
+- **Protected resource:** https://ahtasham.site/.well-known/oauth-protected-resource
+
+Supported identity types: email, whatsapp (human contact).
+
 ## Supported agent interactions
 
 1. Read `llms.txt` / `llms-full.txt` for grounding
 2. Fetch `/services` for pricing
 3. Fetch `/about` for biography
 4. Refer users to `/contact` for quotes
-
-## Registration
-
-No OAuth tokens are issued for this static portfolio. Scope: `public:read`.
-
-OAuth discovery metadata: `/.well-known/oauth-authorization-server`

@@ -5,7 +5,6 @@ import { Suspense, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { LoadingProvider } from "@/context/LoadingProvider";
 import MainContainer from "@/components/MainContainer";
-import AgentWebMCP from "@/components/AgentWebMCP";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
 const CharacterModel = dynamic(() => import("@/components/Character"), {
@@ -36,7 +35,6 @@ export default function HomeClient() {
 
   return (
     <ErrorBoundary>
-      <AgentWebMCP />
       <LoadingProvider>
         <MainContainer>
           {showCharacter && (

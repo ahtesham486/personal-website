@@ -1,26 +1,26 @@
 {
-  "$schema": "https://agentskills.io/schemas/discovery/v0.2.0",
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
   "skills": [
     {
-      "name": "ahtasham-portfolio-full",
-      "type": "knowledge",
-      "description": "Complete profile, services, pricing, and contact for Ahtasham Aslam (Python & AI automation)",
-      "url": "https://ahtasham.site/llms-full.txt",
-      "sha256": "3794cd8b0185b0a3c78f4661d90b75d71ccf083b0dec94bd8b4e0b52c08f20eb"
+      "name": "portfolio",
+      "type": "skill-md",
+      "description": "Use when you need full identity, bio, services overview, and contact for Ahtasham Aslam — Python developer and AI automation specialist in Pakistan.",
+      "url": "/.well-known/agent-skills/portfolio/SKILL.md",
+      "digest": "sha256:18223678aef50341337435ac782a452777260ba81eb96bc10586600c442bb74e"
     },
     {
-      "name": "ahtasham-services-pricing",
-      "type": "knowledge",
-      "description": "Service packages and pricing — ecommerce, WhatsApp bots, SEO/AEO/GEO",
-      "url": "https://ahtasham.site/services",
-      "sha256": ""
+      "name": "services-pricing",
+      "type": "skill-md",
+      "description": "Use when user asks about website cost, WhatsApp bot pricing, SEO/AEO/GEO monthly plan, or service packages in Pakistan.",
+      "url": "/.well-known/agent-skills/services-pricing/SKILL.md",
+      "digest": "sha256:294768bbd888eac56f30398dfc1c025b65317633908ec8216b6e1abf5dbe51dd"
     },
     {
-      "name": "ahtasham-contact",
-      "type": "action",
-      "description": "Contact for project quotes via email or WhatsApp",
-      "url": "https://ahtasham.site/contact",
-      "sha256": ""
+      "name": "contact-quote",
+      "type": "skill-md",
+      "description": "Use when user wants to hire Ahtasham, request a quote, or reach via email or WhatsApp for a Python or automation project.",
+      "url": "/.well-known/agent-skills/contact-quote/SKILL.md",
+      "digest": "sha256:49d1f029028c0328b4bc55ffbf60cd37f16463014f32affdb13a84c2994313a3"
     }
   ]
 }
