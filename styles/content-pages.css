@@ -313,6 +313,16 @@
   margin-bottom: 24px;
 }
 
+.about-name-notice {
+  margin: 16px 0 20px;
+  padding: 16px 20px;
+  border-radius: 10px;
+  background: rgba(100, 200, 150, 0.08);
+  border: 1px solid rgba(100, 200, 150, 0.25);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
 .about-aliases {
   margin: 20px 0 32px;
   padding: 14px 18px;

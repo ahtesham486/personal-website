@@ -15,7 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     { url: `${base}/work`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${base}/404`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.2 },
+    { url: `${base}/privacy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.5 },
   ];
 
   const blogRoutes = getAllPostSlugs().map((slug) => ({

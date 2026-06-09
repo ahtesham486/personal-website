@@ -5,7 +5,15 @@ import ContentHeader from "@/components/ContentHeader";
 import FaqDetails from "@/components/FaqDetails";
 import { aboutPageContent, aboutPageMeta } from "@/data/aboutPage";
 import { siteConfig, faqItems } from "@/data/siteConfig";
-import { JsonLd, OG_IMAGE, absoluteUrl, breadcrumbSchema, faqSchema, personSchema } from "@/lib/seo";
+import {
+  JsonLd,
+  OG_IMAGE,
+  absoluteUrl,
+  breadcrumbSchema,
+  faqSchema,
+  personSchema,
+  profilePageSchema,
+} from "@/lib/seo";
 import "@/styles/content-pages.css";
 import "@/styles/faq.css";
 
@@ -16,6 +24,9 @@ export const metadata: Metadata = {
     "Ahtasham Aslam",
     "Ahtesham Aslam",
     "Ehtisham Aslam",
+    "Ahtsham Aslam",
+    "Ahtasham Python developer",
+    "Ahtasham developer",
     `Python developer ${siteConfig.location.city}`,
     "WhatsApp chatbot developer Pakistan",
     "custom website developer Pakistan",
@@ -44,6 +55,7 @@ export default function AboutPage() {
       <JsonLd
         data={[
           personSchema(),
+          profilePageSchema(),
           faqSchema(aboutFaqs),
           breadcrumbSchema([
             { name: "Home", path: "/" },
@@ -57,8 +69,13 @@ export default function AboutPage() {
         <h1>About {siteConfig.name}</h1>
         <p className="content-lead">{aboutPageContent.intro}</p>
 
+        <p className="about-name-notice">{aboutPageContent.nameNotice}</p>
+
         <p className="about-aliases">
-          <strong>Also known as:</strong> {siteConfig.alternateNames.join(" · ")}
+          <strong>Also known as:</strong>{" "}
+          {siteConfig.alternateNames
+            .filter((n) => n.includes(" "))
+            .join(" · ")}
         </p>
 
         {aboutPageContent.sections.map((section) => (

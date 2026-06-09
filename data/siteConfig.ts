@@ -1,6 +1,17 @@
+/** Full-name and short spelling variants — used in schema, about copy, and LLM files. */
+export const nameVariants = {
+  full: ["Ahtesham Aslam", "Ehtisham Aslam", "Ahtsham Aslam"] as const,
+  short: ["Ahtasham", "Ahtesham", "Ehtisham", "Ahtsham"] as const,
+};
+
+export const alternateNames = [
+  ...nameVariants.full,
+  ...nameVariants.short,
+];
+
 export const siteConfig = {
   name: "Ahtasham Aslam",
-  alternateNames: ["Ahtesham Aslam", "Ehtisham Aslam"],
+  alternateNames,
   firstName: "AHTASHAM",
   lastName: "ASLAM",
   tagline: "Python Backend · AI Agents · Automation · WordPress · SEO/AEO/GEO/AIO",
@@ -8,6 +19,7 @@ export const siteConfig = {
   jobTitle: "Python Developer & AI Automation Specialist",
   location: {
     city: "Rahim Yar Khan",
+    secondaryCity: "Lahore",
     region: "Punjab",
     country: "Pakistan",
     countryCode: "PK",
@@ -20,7 +32,9 @@ export const siteConfig = {
   whatsappNumber: "923233684976",
   whatsappUrl: "https://wa.me/923233684976",
   github: "https://github.com/ahtesham486",
-  linkedin: "https://www.linkedin.com/in/ahtesham-aslam/",
+  linkedin: "https://www.linkedin.com/in/ahtesham-aslam",
+  wikidata: "https://www.wikidata.org/wiki/Q140135865",
+  profileImage: "/images/ahtesham-aslam.jpg",
   siteUrl: "https://ahtasham.site",
   locale: "en_US",
   year: 2026,
@@ -29,9 +43,11 @@ export const siteConfig = {
 export const locationShort = `${siteConfig.location.city}, ${siteConfig.location.country}`;
 export const locationFull = `${siteConfig.location.streetAddress}, ${siteConfig.location.city} ${siteConfig.location.postalCode}, ${siteConfig.location.country}`;
 
+export const nameSpellingNotice = `My name is sometimes spelled differently online — you may find me as Ahtesham Aslam, Ehtisham Aslam, or Ahtsham Aslam. All spellings refer to the same person: a Python developer, n8n automation specialist, and custom website builder in Pakistan.`;
+
 export const aboutContent = {
   headline: `Custom website developer in Pakistan — Python & AI automation expert in ${siteConfig.location.city}.`,
-  note: "Also known as Ahtesham Aslam and Ehtisham Aslam · n8n workflow automation specialist · WhatsApp chatbot developer",
+  note: "Also known as Ahtesham Aslam, Ehtisham Aslam, and Ahtsham Aslam · n8n workflow automation specialist · WhatsApp chatbot developer",
   skills: [
     "Django & Flask APIs",
     "AI Agent Builder",
@@ -178,7 +194,7 @@ export const faqItems = [
   {
     question: "Who is Ahtasham Aslam?",
     answer:
-      `${siteConfig.name} (also spelled Ahtesham Aslam or Ehtisham Aslam) is a Python developer and AI automation specialist based in ${siteConfig.location.city}, ${siteConfig.location.country}. He builds custom websites, n8n workflows, WhatsApp AI bots, AI agents, web scraping pipelines, and SEO/AEO/GEO strategies for businesses.`,
+      `${siteConfig.name} (also spelled Ahtesham Aslam, Ehtisham Aslam, or Ahtsham Aslam) is a Python developer and AI automation specialist based in ${siteConfig.location.city} and ${siteConfig.location.secondaryCity}, ${siteConfig.location.country}. He builds custom websites, n8n workflows, WhatsApp AI bots, AI agents, web scraping pipelines, and SEO/AEO/GEO strategies for businesses.`,
   },
   {
     question: "What services does Ahtasham Aslam offer?",

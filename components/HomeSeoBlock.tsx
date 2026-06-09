@@ -6,7 +6,7 @@ export default function HomeSeoBlock() {
     <section className="home-seo" aria-label="Services overview">
       <h2>Custom website developer in Pakistan</h2>
       <p>
-        {siteConfig.name}, also known as {siteConfig.alternateNames.join(" and ")}, is a Python
+        {siteConfig.name}, also known as Ahtesham Aslam, Ehtisham Aslam, or Ahtsham Aslam, is a Python
         &amp; AI automation expert based in {siteConfig.location.city}. Services include custom
         ecommerce websites, WhatsApp chatbot development for {siteConfig.location.city} and international clients, n8n
         workflow automation, AI agents, web scraping, and SEO/AEO/GEO visibility.

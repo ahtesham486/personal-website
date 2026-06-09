@@ -3,11 +3,11 @@ import { Geist } from "next/font/google";
 import "@/styles/globals.css";
 import "@/styles/app.css";
 import { siteConfig } from "@/data/siteConfig";
+import PersonJsonLd from "@/components/PersonJsonLd";
 import {
   JsonLd,
   OG_IMAGE,
   localBusinessSchema,
-  personSchema,
   professionalServiceSchema,
   websiteSchema,
 } from "@/lib/seo";
@@ -21,16 +21,19 @@ const geist = Geist({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
   title: {
-    default: `${siteConfig.name} | Python Developer & AI Automation Expert`,
+    default: `${siteConfig.name} | Python Developer & AI Automation Specialist`,
     template: `%s | ${siteConfig.name}`,
   },
   description:
-    `Ahtasham Aslam — Python backend developer, AI agents, WhatsApp bots, web scraping, n8n automation, WordPress & SEO/AEO/GEO specialist in ${siteConfig.location.city}, ${siteConfig.location.country}.`,
+    "Pakistani Python developer and AI automation specialist. Expert in WhatsApp chatbots, n8n workflows, Django, FastAPI and LLM integration.",
   keywords: [
     "Python developer Pakistan",
     "Ahtasham Aslam",
     "Ahtesham Aslam",
     "Ehtisham Aslam",
+    "Ahtsham Aslam",
+    "Ahtasham Python developer",
+    "Ahtasham developer",
     "custom website developer Pakistan",
     `WhatsApp chatbot developer ${siteConfig.location.city}`,
     `Python developer ${siteConfig.location.city}`,
@@ -46,15 +49,17 @@ export const metadata: Metadata = {
     type: "website",
     locale: siteConfig.locale,
     url: siteConfig.siteUrl,
-    siteName: siteConfig.name,
-    title: `${siteConfig.name} | Python & AI Automation Expert`,
-    description: siteConfig.tagline,
+    siteName: `${siteConfig.name} Portfolio`,
+    title: `${siteConfig.name} | Python Developer & AI Automation Specialist`,
+    description:
+      "Pakistani Python developer and AI automation specialist.",
     images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} | Python Developer & AI Automation Expert`,
-    description: siteConfig.tagline,
+    title: `${siteConfig.name} | Python Developer`,
+    description:
+      "Pakistani Python developer and AI automation specialist.",
     images: [OG_IMAGE.url],
   },
   robots: {
@@ -72,6 +77,10 @@ export const metadata: Metadata = {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
     apple: [{ url: "/icon.svg", type: "image/svg+xml" }],
   },
+  verification: {
+    google: "googlebc723ae048b0eb7f",
+    other: { "msvalidate.01": "0460475F067698B5E6733EC9653BE28D" },
+  },
   other: {
     "geo.region": "PK-PB",
     "geo.placename": `${siteConfig.location.city}, ${siteConfig.location.country}`,
@@ -83,14 +92,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={geist.variable}>
+      <head>
+        <PersonJsonLd />
+      </head>
       <body>
         <JsonLd
-          data={[
-            personSchema(),
-            websiteSchema(),
-            localBusinessSchema(),
-            professionalServiceSchema(),
-          ]}
+          data={[websiteSchema(), localBusinessSchema(), professionalServiceSchema()]}
         />
         {children}
       </body>

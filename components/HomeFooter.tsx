@@ -12,6 +12,8 @@ export default function HomeFooter() {
       </h2>
       <p>
         <MdCopyright /> {siteConfig.year}
+        {" · "}
+        <Link href="/privacy">Privacy Policy</Link>
       </p>
       <HomeSeoBlock />
     </footer>

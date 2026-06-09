@@ -4,6 +4,7 @@ import type { BlogPostMeta } from "@/lib/blog";
 export type FaqSchemaItem = { question: string; answer: string };
 
 export const OG_IMAGE_PATH = "/opengraph-image";
+export const PROFILE_IMAGE_PATH = siteConfig.profileImage;
 export const OG_IMAGE = {
   url: OG_IMAGE_PATH,
   width: 1200,
@@ -26,32 +27,55 @@ function postalAddressSchema() {
   };
 }
 
+const PERSON_ID = `${siteConfig.siteUrl}/#person`;
+
+function personSchemaCore() {
+  const { city, secondaryCity, country } = siteConfig.location;
+  return {
+    "@type": "Person",
+    "@id": PERSON_ID,
+    name: siteConfig.name,
+    alternateName: ["Ahtesham Aslam", "Ahtsham Aslam", "Ehtisham Aslam"],
+    url: siteConfig.siteUrl,
+    image: absoluteUrl(PROFILE_IMAGE_PATH),
+    email: siteConfig.email,
+    telephone: `+${siteConfig.whatsappNumber}`,
+    jobTitle: siteConfig.jobTitle,
+    description:
+      "Pakistani Python developer and AI automation specialist. Also known as Ahtesham Aslam, Ehtisham Aslam, or Ahtsham Aslam.",
+    worksFor: { "@type": "Organization", name: "Freelance" },
+    address: postalAddressSchema(),
+    nationality: { "@type": "Country", name: country },
+    knowsAbout: [
+      "Python Automation",
+      "AI Integration",
+      "n8n Workflow Automation",
+      "WhatsApp Chatbot Development",
+      "Django",
+      "FastAPI",
+      "LLM Integration",
+    ],
+    sameAs: [siteConfig.wikidata, siteConfig.linkedin, siteConfig.github],
+  };
+}
+
 export function personSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: siteConfig.name,
-    alternateName: siteConfig.alternateNames,
-    url: siteConfig.siteUrl,
-    email: siteConfig.email,
-    jobTitle: siteConfig.jobTitle,
-    worksFor: { "@type": "Organization", name: "Freelance" },
-    address: postalAddressSchema(),
-    knowsAbout: [
-      "Python",
-      "Django",
-      "Flask",
-      "n8n",
-      "AI Agents",
-      "WhatsApp Bots",
-      "Web Scraping",
-      "SEO",
-      "AEO",
-      "GEO",
-      "WordPress",
-      "Custom Website Development",
-    ],
-    sameAs: [siteConfig.linkedin, siteConfig.github],
+    ...personSchemaCore(),
+  };
+}
+
+export function profilePageSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": absoluteUrl("/about"),
+    url: absoluteUrl("/about"),
+    name: `About ${siteConfig.name}`,
+    description: `Profile of ${siteConfig.name} — Python developer and AI automation specialist in ${siteConfig.location.country}.`,
+    mainEntity: { "@id": PERSON_ID },
+    isPartOf: { "@type": "WebSite", url: siteConfig.siteUrl, name: `${siteConfig.name} Portfolio` },
   };
 }
 
@@ -63,7 +87,7 @@ export function websiteSchema() {
     url: siteConfig.siteUrl,
     description: siteConfig.tagline,
     inLanguage: "en",
-    author: { "@type": "Person", name: siteConfig.name },
+    author: { "@id": PERSON_ID },
   };
 }
 
@@ -87,8 +111,8 @@ export function localBusinessSchema() {
       latitude: siteConfig.location.latitude,
       longitude: siteConfig.location.longitude,
     },
-    sameAs: [siteConfig.linkedin, siteConfig.github],
-    founder: { "@type": "Person", name: siteConfig.name },
+    sameAs: [siteConfig.wikidata, siteConfig.linkedin, siteConfig.github],
+    founder: { "@id": PERSON_ID },
   };
 }
 
@@ -128,11 +152,7 @@ export function professionalServiceSchema() {
     ],
     areaServed: ["Pakistan", "Gulf", "Europe", "North America"],
     address: postalAddressSchema(),
-    provider: {
-      "@type": "Person",
-      name: siteConfig.name,
-      url: siteConfig.siteUrl,
-    },
+    provider: { "@id": PERSON_ID },
   };
 }
 
