@@ -3,11 +3,11 @@ import { Geist } from "next/font/google";
 import "@/styles/globals.css";
 import "@/styles/app.css";
 import { siteConfig } from "@/data/siteConfig";
-import PersonJsonLd from "@/components/PersonJsonLd";
 import {
   JsonLd,
   OG_IMAGE,
   localBusinessSchema,
+  personSchema,
   professionalServiceSchema,
   websiteSchema,
 } from "@/lib/seo";
@@ -93,9 +93,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={geist.variable}>
       <body>
-        <PersonJsonLd />
         <JsonLd
-          data={[websiteSchema(), localBusinessSchema(), professionalServiceSchema()]}
+          data={[
+            personSchema(),
+            websiteSchema(),
+            localBusinessSchema(),
+            professionalServiceSchema(),
+          ]}
         />
         {children}
       </body>

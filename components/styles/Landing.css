@@ -82,6 +82,17 @@
   z-index: 2;
   position: relative;
 }
+/* Always mount 3D character in DOM; hide below desktop breakpoint */
+.character-mount {
+  display: none;
+}
+
+@media screen and (min-width: 1025px) {
+  .character-mount {
+    display: block;
+  }
+}
+
 .character-container {
   position: absolute;
   inset: 0;
