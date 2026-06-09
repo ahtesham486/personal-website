@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { PropsWithChildren, useEffect, useState } from "react";
+import { PropsWithChildren, useEffect, useLayoutEffect, useState } from "react";
 import About from "./About";
 import Cursor from "./Cursor";
 import ErrorBoundary from "./ErrorBoundary";
@@ -53,7 +53,7 @@ const MainContainer = ({ children }: PropsWithChildren) => {
     };
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const onResize = () => setIsDesktopView(window.innerWidth > 1024);
     onResize();
     window.addEventListener("resize", onResize);
