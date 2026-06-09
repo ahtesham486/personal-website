@@ -14,6 +14,12 @@ import WhatsAppFloat from "./WhatsAppFloat";
 import setSplitText, { cleanupSplitText } from "./utils/splitText";
 import { gsap, ScrollTrigger } from "@/lib/gsapPlugins";
 
+const DESKTOP_MQ = "(min-width: 1025px)";
+
+function isDesktop() {
+  return typeof window !== "undefined" && window.matchMedia(DESKTOP_MQ).matches;
+}
+
 const WhatIDo = dynamic(() => import("./WhatIDo"), { ssr: false });
 const Career = dynamic(() => import("./Career"), { ssr: false });
 const Work = dynamic(() => import("./Work"), {
@@ -24,7 +30,17 @@ const Work = dynamic(() => import("./Work"), {
 const MainContainer = ({ children }: PropsWithChildren) => {
   const [isDesktopView, setIsDesktopView] = useState(false);
 
+  useLayoutEffect(() => {
+    const mq = window.matchMedia(DESKTOP_MQ);
+    const update = () => setIsDesktopView(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
   useEffect(() => {
+    if (!isDesktop()) return;
+
     let cancelled = false;
     const run = () => {
       if (!cancelled) setSplitText();
@@ -51,15 +67,7 @@ const MainContainer = ({ children }: PropsWithChildren) => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       gsap.globalTimeline.clear();
     };
-  }, []);
-
-  useLayoutEffect(() => {
-    const mq = window.matchMedia("(min-width: 1025px)");
-    const update = () => setIsDesktopView(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
+  }, [isDesktopView]);
 
   return (
     <div className="container-main">
@@ -67,11 +75,11 @@ const MainContainer = ({ children }: PropsWithChildren) => {
       <Navbar />
       <SocialIcons />
       <WhatsAppFloat />
-      {isDesktopView && children}
+      {isDesktopView ? children : null}
       <div id="smooth-wrapper">
         <div id="smooth-content">
           <div className="container-main">
-            <Landing>{!isDesktopView && children}</Landing>
+            <Landing />
             <About />
             <WhatIDo />
             <Career />

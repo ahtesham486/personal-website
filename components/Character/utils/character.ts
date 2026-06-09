@@ -8,14 +8,16 @@ const setCharacter = (
 ) => {
   const loader = new GLTFLoader();
   const dracoLoader = new DRACOLoader();
-  dracoLoader.setDecoderPath("/draco/");
+  const assetBase =
+    typeof window !== "undefined" ? window.location.origin : "";
+  dracoLoader.setDecoderPath(`${assetBase}/draco/`);
   loader.setDRACOLoader(dracoLoader);
 
   const loadCharacter = () => {
     return new Promise<GLTF | null>((resolve, reject) => {
       try {
         loader.load(
-          "/models/character.glb",
+          `${assetBase}/models/character.glb`,
           async (gltf) => {
             const character = gltf.scene;
             await renderer.compileAsync(character, camera, scene);

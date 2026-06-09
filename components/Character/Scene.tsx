@@ -56,24 +56,28 @@ const Scene = () => {
       const light = setLighting(scene);
       const { loadCharacter } = setCharacter(renderer, scene, camera);
 
-      loadCharacter().then((gltf) => {
-        if (gltf) {
-          const animations = setAnimations(gltf);
-          hoverDivRef.current && animations.hover(gltf, hoverDivRef.current);
-          mixer = animations.mixer;
-          character = gltf.scene;
-          setChar(character);
-          scene.add(character);
-          headBone = character.getObjectByName("spine006") || null;
-          screenLight = character.getObjectByName("screenlight") || null;
-          light.turnOnLights();
-          animations.startIntro();
-          document.querySelector(".character-container")?.classList.add("character-loaded");
-          window.addEventListener("resize", () =>
-            handleResize(renderer, camera, canvasDiv, character!)
-          );
-        }
-      });
+      loadCharacter()
+        .then((gltf) => {
+          if (gltf) {
+            const animations = setAnimations(gltf);
+            hoverDivRef.current && animations.hover(gltf, hoverDivRef.current);
+            mixer = animations.mixer;
+            character = gltf.scene;
+            setChar(character);
+            scene.add(character);
+            headBone = character.getObjectByName("spine006") || null;
+            screenLight = character.getObjectByName("screenlight") || null;
+            light.turnOnLights();
+            animations.startIntro();
+            document.querySelector(".character-container")?.classList.add("character-loaded");
+            window.addEventListener("resize", () =>
+              handleResize(renderer, camera, canvasDiv, character!)
+            );
+          }
+        })
+        .catch((err) => {
+          console.error("[Character] Failed to load 3D model:", err);
+        });
 
       let mouse = { x: 0, y: 0 },
         interpolation = { x: 0.1, y: 0.2 };

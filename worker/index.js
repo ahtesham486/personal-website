@@ -39,11 +39,22 @@ const LINK_HEADER =
   '</auth.md>; rel="author"; type="text/markdown", ' +
   '</sitemap.xml>; rel="sitemap"; type="application/xml"';
 
+/** Static assets must bypass worker logic (WASM/GLB/JS chunks break if streamed wrong). */
+const STATIC_PREFIXES = ["/_next/", "/models/", "/draco/", "/images/", "/icon.svg"];
+
+function isStaticAsset(pathname) {
+  return STATIC_PREFIXES.some((prefix) => pathname.startsWith(prefix));
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     const accept = (request.headers.get("Accept") || "").toLowerCase();
     const pathname = url.pathname === "/index.html" ? "/" : url.pathname;
+
+    if (isStaticAsset(pathname)) {
+      return env.ASSETS.fetch(request);
+    }
 
     if (pathname === "/" && accept.includes("text/markdown")) {
       const asset = await env.ASSETS.fetch(new URL("/home.md", url));
