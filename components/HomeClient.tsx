@@ -15,7 +15,7 @@ const CharacterModel = dynamic(() => import("@/components/Character"), {
 
 export default function HomeClient() {
   const router = useRouter();
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [showCharacter, setShowCharacter] = useState(false);
 
   useEffect(() => {
     const hash = window.location.hash.replace(/^#/, "");
@@ -25,10 +25,11 @@ export default function HomeClient() {
   }, [router]);
 
   useLayoutEffect(() => {
-    const update = () => setIsDesktop(window.innerWidth > 1024);
+    const mq = window.matchMedia("(min-width: 1025px)");
+    const update = () => setShowCharacter(mq.matches);
     update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
   }, []);
 
   return (
@@ -36,13 +37,13 @@ export default function HomeClient() {
       <AgentWebMCP />
       <LoadingProvider>
         <MainContainer>
-          {isDesktop ? (
+          {showCharacter && (
             <ErrorBoundary>
               <Suspense fallback={null}>
                 <CharacterModel />
               </Suspense>
             </ErrorBoundary>
-          ) : null}
+          )}
         </MainContainer>
       </LoadingProvider>
     </ErrorBoundary>

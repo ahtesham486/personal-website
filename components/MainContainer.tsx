@@ -54,10 +54,11 @@ const MainContainer = ({ children }: PropsWithChildren) => {
   }, []);
 
   useLayoutEffect(() => {
-    const onResize = () => setIsDesktopView(window.innerWidth > 1024);
-    onResize();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    const mq = window.matchMedia("(min-width: 1025px)");
+    const update = () => setIsDesktopView(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
   }, []);
 
   return (
@@ -66,11 +67,11 @@ const MainContainer = ({ children }: PropsWithChildren) => {
       <Navbar />
       <SocialIcons />
       <WhatsAppFloat />
-      {isDesktopView ? children : null}
+      {isDesktopView && children}
       <div id="smooth-wrapper">
         <div id="smooth-content">
           <div className="container-main">
-            <Landing />
+            <Landing>{!isDesktopView && children}</Landing>
             <About />
             <WhatIDo />
             <Career />
