@@ -1,10 +1,11 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useLayoutEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { LoadingProvider } from "@/context/LoadingProvider";
 import MainContainer from "@/components/MainContainer";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import AgentWebMCP from "@/components/AgentWebMCP";
 
 const CharacterModel = dynamic(() => import("@/components/Character"), {
@@ -14,6 +15,7 @@ const CharacterModel = dynamic(() => import("@/components/Character"), {
 
 export default function HomeClient() {
   const router = useRouter();
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
     const hash = window.location.hash.replace(/^#/, "");
@@ -22,16 +24,27 @@ export default function HomeClient() {
     }
   }, [router]);
 
+  useLayoutEffect(() => {
+    const update = () => setIsDesktop(window.innerWidth > 1024);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
   return (
-    <>
+    <ErrorBoundary>
       <AgentWebMCP />
       <LoadingProvider>
         <MainContainer>
-          <Suspense fallback={null}>
-            <CharacterModel />
-          </Suspense>
+          {isDesktop ? (
+            <ErrorBoundary>
+              <Suspense fallback={null}>
+                <CharacterModel />
+              </Suspense>
+            </ErrorBoundary>
+          ) : null}
         </MainContainer>
       </LoadingProvider>
-    </>
+    </ErrorBoundary>
   );
 }

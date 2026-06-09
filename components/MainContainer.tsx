@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { PropsWithChildren, useEffect } from "react";
+import { PropsWithChildren, useEffect, useLayoutEffect, useState } from "react";
 import About from "./About";
 import Cursor from "./Cursor";
 import ErrorBoundary from "./ErrorBoundary";
@@ -22,6 +22,8 @@ const Work = dynamic(() => import("./Work"), {
 });
 
 const MainContainer = ({ children }: PropsWithChildren) => {
+  const [isDesktopView, setIsDesktopView] = useState(false);
+
   useEffect(() => {
     let cancelled = false;
     const run = () => {
@@ -51,13 +53,20 @@ const MainContainer = ({ children }: PropsWithChildren) => {
     };
   }, []);
 
+  useLayoutEffect(() => {
+    const onResize = () => setIsDesktopView(window.innerWidth > 1024);
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   return (
     <div className="container-main">
       <Cursor />
       <Navbar />
       <SocialIcons />
       <WhatsAppFloat />
-      <div className="character-mount">{children}</div>
+      {isDesktopView ? children : null}
       <div id="smooth-wrapper">
         <div id="smooth-content">
           <div className="container-main">
