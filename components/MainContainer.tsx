@@ -14,7 +14,8 @@ import WhatsAppFloat from "./WhatsAppFloat";
 import setSplitText, { cleanupSplitText } from "./utils/splitText";
 import { gsap, ScrollTrigger } from "@/lib/gsapPlugins";
 
-const DESKTOP_MQ = "(min-width: 1025px)";
+/** Match Landing.css desktop layout; 768+ shows character (works with DevTools open). */
+const DESKTOP_MQ = "(min-width: 768px)";
 
 function isDesktop() {
   return typeof window !== "undefined" && window.matchMedia(DESKTOP_MQ).matches;

@@ -11,6 +11,7 @@ import {
 } from "./utils/mouseUtils";
 import setAnimations from "./utils/animationUtils";
 import { getRendererPixelRatio, isLowEndDevice } from "@/lib/performance";
+import { createWebGLRenderer } from "@/lib/webgl";
 
 const Scene = () => {
   const canvasDiv = useRef<HTMLDivElement | null>(null);
@@ -18,27 +19,41 @@ const Scene = () => {
   const sceneRef = useRef(new THREE.Scene());
   const mountedRef = useRef(false);
   const [, setChar] = useState<THREE.Object3D | null>(null);
+  const [webglFailed, setWebglFailed] = useState(false);
 
   useEffect(() => {
     if (mountedRef.current || !canvasDiv.current) return;
     mountedRef.current = true;
 
-    if (canvasDiv.current) {
-      let rect = canvasDiv.current.getBoundingClientRect();
-      let container = { width: rect.width, height: rect.height };
-      const aspect = container.width / container.height;
+    const markFallback = () => {
+      setWebglFailed(true);
+      document.querySelector(".character-container")?.classList.add("character-loaded");
+    };
+
+    try {
+      const containerEl = canvasDiv.current;
+      const rect = containerEl.getBoundingClientRect();
+      const container = { width: rect.width, height: rect.height };
+      const aspect = container.width / container.height || 1;
       const scene = sceneRef.current;
 
-      const renderer = new THREE.WebGLRenderer({
-        alpha: true,
+      const renderer = createWebGLRenderer({
         antialias: !isLowEndDevice(),
-        powerPreference: "high-performance",
       });
-      renderer.setSize(container.width, container.height);
-      renderer.setPixelRatio(getRendererPixelRatio());
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1;
-      canvasDiv.current.appendChild(renderer.domElement);
+
+      if (!renderer) {
+        console.warn("[Character] WebGL renderer could not be created — showing fallback.");
+        markFallback();
+        return;
+      }
+
+      const gl = renderer;
+
+      gl.setSize(container.width, container.height);
+      gl.setPixelRatio(getRendererPixelRatio());
+      gl.toneMapping = THREE.ACESFilmicToneMapping;
+      gl.toneMappingExposure = 1;
+      containerEl.appendChild(gl.domElement);
 
       const camera = new THREE.PerspectiveCamera(14.5, aspect, 0.1, 1000);
       camera.position.z = 10;
@@ -54,7 +69,7 @@ const Scene = () => {
       const clock = new THREE.Clock();
 
       const light = setLighting(scene);
-      const { loadCharacter } = setCharacter(renderer, scene, camera);
+      const { loadCharacter } = setCharacter(gl, scene, camera);
 
       loadCharacter()
         .then((gltf) => {
@@ -71,12 +86,13 @@ const Scene = () => {
             animations.startIntro();
             document.querySelector(".character-container")?.classList.add("character-loaded");
             window.addEventListener("resize", () =>
-              handleResize(renderer, camera, canvasDiv, character!)
+              handleResize(gl, camera, canvasDiv, character!)
             );
           }
         })
         .catch((err) => {
           console.error("[Character] Failed to load 3D model:", err);
+          markFallback();
         });
 
       let mouse = { x: 0, y: 0 },
@@ -102,9 +118,7 @@ const Scene = () => {
         });
       };
 
-      document.addEventListener("mousemove", (event) => {
-        onMouseMove(event);
-      });
+      document.addEventListener("mousemove", onMouseMove);
       const landingDiv = document.getElementById("landingDiv");
       if (landingDiv) {
         landingDiv.addEventListener("touchstart", onTouchStart);
@@ -139,7 +153,7 @@ const Scene = () => {
         if (mixer) {
           mixer.update(delta);
         }
-        renderer.render(scene, camera);
+        gl.render(scene, camera);
       }
 
       function ensureLoop() {
@@ -161,7 +175,7 @@ const Scene = () => {
         },
         { threshold: 0.05 }
       );
-      if (canvasDiv.current) viewObserver.observe(canvasDiv.current);
+      viewObserver.observe(containerEl);
 
       ensureLoop();
       return () => {
@@ -172,12 +186,12 @@ const Scene = () => {
         document.removeEventListener("visibilitychange", onVisibility);
         clearTimeout(debounce);
         scene.clear();
-        renderer.dispose();
+        gl.dispose();
         window.removeEventListener("resize", () =>
-          handleResize(renderer, camera, canvasDiv, character!)
+          handleResize(gl, camera, canvasDiv, character!)
         );
-        if (canvasDiv.current) {
-          canvasDiv.current.removeChild(renderer.domElement);
+        if (containerEl.contains(gl.domElement)) {
+          containerEl.removeChild(gl.domElement);
         }
         if (landingDiv) {
           document.removeEventListener("mousemove", onMouseMove);
@@ -185,18 +199,22 @@ const Scene = () => {
           landingDiv.removeEventListener("touchend", onTouchEnd);
         }
       };
+    } catch (err) {
+      console.warn("[Character] WebGL setup failed:", err);
+      markFallback();
     }
   }, []);
 
   return (
-    <>
-      <div className="character-container">
-        <div className="character-model" ref={canvasDiv}>
-          <div className="character-rim"></div>
-          <div className="character-hover" ref={hoverDivRef}></div>
-        </div>
+    <div className="character-container">
+      <div
+        className={`character-model${webglFailed ? " character-fallback" : ""}`}
+        ref={canvasDiv}
+      >
+        <div className="character-rim"></div>
+        <div className="character-hover" ref={hoverDivRef}></div>
       </div>
-    </>
+    </div>
   );
 };
 

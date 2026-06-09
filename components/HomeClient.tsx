@@ -28,11 +28,9 @@ export default function HomeClient() {
       <AgentWebMCP />
       <LoadingProvider>
         <MainContainer>
-          <ErrorBoundary>
-            <Suspense fallback={null}>
-              <CharacterModel />
-            </Suspense>
-          </ErrorBoundary>
+          <Suspense fallback={null}>
+            <CharacterModel />
+          </Suspense>
         </MainContainer>
       </LoadingProvider>
     </ErrorBoundary>

@@ -152,6 +152,11 @@
   animation-delay: 0.3s;
   opacity: 0;
 }
+
+.character-fallback .character-rim {
+  opacity: 1;
+  transform: translate(-50%, 50%) scale(1.4);
+}
 .character-model canvas {
   position: relative;
   pointer-events: none;
