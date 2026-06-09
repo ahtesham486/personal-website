@@ -25,9 +25,33 @@ export default function HomeClient() {
   }, [router]);
 
   useEffect(() => {
-    if (window.innerWidth > 1024) {
+    if (window.innerWidth <= 1024) return;
+
+    let cancelled = false;
+    let revealed = false;
+    const reveal = () => {
+      if (cancelled || revealed) return;
+      revealed = true;
       setShowCharacter(true);
-    }
+    };
+
+    const landing = document.getElementById("landingDiv");
+    const onIntent = () => reveal();
+
+    landing?.addEventListener("mousemove", onIntent, { once: true, passive: true });
+    landing?.addEventListener("click", onIntent, { once: true });
+    window.addEventListener("keydown", onIntent, { once: true });
+
+    // Fast fallback — show within 1.5s if no interaction (was 8s before)
+    const fallbackId = window.setTimeout(reveal, 1500);
+
+    return () => {
+      cancelled = true;
+      landing?.removeEventListener("mousemove", onIntent);
+      landing?.removeEventListener("click", onIntent);
+      window.removeEventListener("keydown", onIntent);
+      clearTimeout(fallbackId);
+    };
   }, []);
 
   return (
